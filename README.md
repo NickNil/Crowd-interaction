@@ -44,7 +44,7 @@ Skype:
 
 Phone: 976 06 087
 
-#Harry Nystad#
+##Harry Nystad##
 Email: Harryjnystad@gmail.com/harry.nystad@hig.no
 
 Skype: harry_nystad
