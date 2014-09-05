@@ -40,4 +40,4 @@ Simon McCallum
 <h4>Harry Nystad</h4>
 <br>Email: Harryjnystad@gmail.com/harry.nystad@hig.no
 <br>Skype: harry_nystad
-<br>Phone: 952 82 564	
+<br>Phone: 952 82 564
