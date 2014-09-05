@@ -1,31 +1,28 @@
 # Group #
-#Group members#
+##Group members##
+*Anders Hagebakken
+*Mimozë Lladrovci
+*Nicklas Løkkeberg Nilsen
+*Harry Johan Nystad
+
+##Scrum Master#
 Anders Hagebakken
 
-Mimozë Lladrovci
-
-Nicklas Løkkeberg Nilsen
-
-Harry Johan Nystad
-
-#Scrum Master#
-Anders Hagebakken
-
-#Build Master#
+##Build Master##
 TBD
 
-#Other roles#
+##Other roles##
 TBD
 
-#Supervisor#
+##Supervisor##
 Terje Krogstad
 
-#Product Owner#
+##Product Owner##
 Simon McCallum
 
 
 #Contact information#
-#Anders Hagebakken#
+##Anders Hagebakken##
 
 Email: anders.hagebakken@hig.no
 
@@ -33,14 +30,14 @@ Skype: andershagebakken
 
 Phone: 417 60 732
 
-#Mimozë Lladrovci#
+##Mimozë Lladrovci##
 Email: mimoze.lladrovci@hig.no
 
 Skype: mimozall
 
 Phone: +386 49 525 662
 
-#Nicklas Løkkeberg Nilsen#
+##Nicklas Løkkeberg Nilsen##
 Email: nicklas.nilsen@hig.no
 
 Skype: 
