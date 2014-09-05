@@ -1,12 +1,9 @@
 # Group #
 ##Group members##
-*Anders Hagebakken
-
-*Mimozë Lladrovci
-
-*Nicklas Løkkeberg Nilsen
-
-*Harry Johan Nystad
+* Anders Hagebakken
+* Mimozë Lladrovci
+* Nicklas Løkkeberg Nilsen
+* Harry Johan Nystad
 
 ##Scrum Master#
 Anders Hagebakken
