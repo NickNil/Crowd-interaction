@@ -17,7 +17,7 @@ TBD
 #Other roles#
 TBD
 
-#Supervisor# 
+#Supervisor#
 Terje Krogstad
 
 #Product Owner#
@@ -53,4 +53,3 @@ Email: Harryjnystad@gmail.com/harry.nystad@hig.no
 Skype: harry_nystad
 
 Phone: 952 82 564
-```
