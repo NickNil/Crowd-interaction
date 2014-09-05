@@ -1,24 +1,24 @@
 <h1>Group</h1>
 <br>
 <h4>Group members</h4>
-Anders Hagebakken
-Mimozë Lladrovci
-Nicklas Løkkeberg Nilsen
-Harry Johan Nystad
+<br>Anders Hagebakken
+<br>Mimozë Lladrovci
+<br>Nicklas Løkkeberg Nilsen
+<br>Harry Johan Nystad
 <br>
-<h3>Scrum Master</h3>
+<h4>Scrum Master</h4>
 Anders Hagebakken
 <br>
-<h3>Build Master</h3>
+<h4>Build Master</h4>
 TBD
 <br>
-<h3>Other roles</h3>
+<h4>Other roles</h4>
 TBD
 <br>
-<h3>Supervisor</h3> 
+<h4>Supervisor</h4> 
 Terje Krogstad
 <br>
-<h3>Product Owner</h3>
+<h4>Product Owner</h4>
 Simon McCallum
 <br>
 
