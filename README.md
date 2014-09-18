@@ -4,15 +4,13 @@
 * Mimozë Lladrovci
 * Nicklas Løkkeberg Nilsen
 * Harry Johan Nystad
+* Jon Arild Nygård
 
 ##Scrum Master#
 Anders Hagebakken
 
 ##Build Master##
-TBD
-
-##Other roles##
-TBD
+Nicklas Løkkeberg Nilsen
 
 ##Supervisor##
 Terje Krogstad
@@ -50,3 +48,11 @@ Email: Harryjnystad@gmail.com/harry.nystad@hig.no
 Skype: harry_nystad
 
 Phone: 952 82 564
+
+##Jon Arild Nygård##
+Email: MIA
+
+Skype: jon.arild.nygaard@gmail.com
+
+Phone: MIA
+
