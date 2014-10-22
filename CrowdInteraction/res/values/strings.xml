@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Crowd Interaction</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="Sports">
+        <item >Biathlon</item>
+        <item >Bobsleigh</item>
+        <item >Curling</item>
+        <item >Ice Hockey</item>
+        <item >Luge</item>
+        <item >Skating</item>
+        <item >Skiing</item>
+    </string-array>
+    <string-array name="Events">
+        <item >Men\'s</item>
+        <item >Women\'s</item>
+        <item >Mixed</item>
+    </string-array>
+    <string-array name="Athletes">
+        <item>Ole Einar BJOERNDALEN</item>
+        <item>Ricco GROß</item>
+        <item>Sven FISCHER</item>
+    </string-array>
+
+</resources>
