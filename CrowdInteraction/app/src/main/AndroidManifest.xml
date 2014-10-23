@@ -32,6 +32,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hig.no.crowdinteraction.LoginForm" />
         </activity>
+        <activity
+            android:name=".EventList"
+            android:label="@string/title_activity_event_list"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hig.no.crowdinteraction.MainActivity" />
+        </activity>
+        <activity
+            android:name=".VoteActivity"
+            android:label="@string/title_activity_vote"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hig.no.crowdinteraction.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
