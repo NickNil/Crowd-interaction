@@ -1,7 +1,10 @@
 package hig.no.crowdinteraction;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,10 +14,17 @@ import android.widget.EditText;
 
 public class Register_user extends Activity {
 
+
+    public static final String PROPERTY_REG_ID = "registration_id";
+    Context context;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
+
+        context = getApplicationContext();
 
         Button register = (Button) findViewById(R.id.registerButton);
         final EditText firstname = (EditText) findViewById(R.id.registerFirstname);
@@ -27,11 +37,16 @@ public class Register_user extends Activity {
         {
             public void onClick(View v)
             {
-                PostDataJSON json = new PostDataJSON();
+                String regid;
+                regid = getRegistrationId(context);
+                if (regid.isEmpty())
+                {
+                    PostDataJSON json = new PostDataJSON();
 
-                json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
-                        nationality.getText().toString(), phoneNumber.getText().toString(),
-                        code.getText().toString());
+                    json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
+                            nationality.getText().toString(), phoneNumber.getText().toString(),
+                            code.getText().toString());
+                }
             }
         });
 
@@ -56,4 +71,26 @@ public class Register_user extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private String getRegistrationId(Context context) {
+        final SharedPreferences prefs = getGCMPreferences(context);
+        String registrationId = prefs.getString(PROPERTY_REG_ID, "");
+        if (registrationId.isEmpty()) {
+            Log.i("RegForm", "Registration not found.");
+            return "";
+        }
+        return registrationId;
+    }
+
+    /**
+     * @return Application's {@code SharedPreferences}.
+     */
+    private SharedPreferences getGCMPreferences(Context context) {
+        // This sample app persists the registration ID in shared preferences, but
+        // how you store the regID in your app is up to you.
+        return getSharedPreferences(Register_user.class.getSimpleName(),
+                Context.MODE_PRIVATE);
+    }
+
+
 }
