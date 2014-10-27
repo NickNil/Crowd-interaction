@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class Register_user extends Activity {
@@ -41,11 +42,17 @@ public class Register_user extends Activity {
                 regid = getRegistrationId(context);
                 if (regid.isEmpty())
                 {
-                    PostDataJSON json = new PostDataJSON();
+                    PostDataJSON json = new PostDataJSON(getApplicationContext());
 
                     json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
                             nationality.getText().toString(), phoneNumber.getText().toString(),
                             code.getText().toString());
+                }
+                else
+                {
+                    Toast toast = Toast.makeText(context, "You are already registered",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
         });

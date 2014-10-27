@@ -4,17 +4,19 @@ package hig.no.crowdinteraction;
  * Created by Harnys on 26.10.2014.
  */
 
+import android.app.IntentService;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gcm.GCMBaseIntentService;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-public class GCMIntentService extends GCMBaseIntentService
+public class GCMIntentService extends IntentService
 {
     public static final String PROPERTY_REG_ID = "registration_id";
 
@@ -22,14 +24,16 @@ public class GCMIntentService extends GCMBaseIntentService
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
 
-    public GcmIntentService() {
+    public GCMIntentService()
+    {
         super("GcmIntentService");
     }
 
-    protected void onMessage(Context context, Intent intent)
+    protected void onHandleIntent(Intent intent)
     {
-        Log.i("On Messasge", "Received message. Extras: " + intent.getExtras());
-        String message = (R.string.gcm_message);
+        Bundle message = intent.getExtras();
+        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
+
         String Response = intent.getStringExtra("param");
 
         switch (Response.charAt(0))
@@ -55,6 +59,11 @@ public class GCMIntentService extends GCMBaseIntentService
                 toast.show();
                 break;
             }
+            case 'e':
+            {
+                EventList.populateEventList(intent);
+            }
+
         }
     }
 
