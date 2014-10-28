@@ -40,12 +40,21 @@ public class EventList extends Activity
         return super.onOptionsItemSelected(item);
     }
 
+
     public static void populateEventList(Intent events)
     {
         Map <String, String> eventMap;
+        Bundle bundle;
         Set <String> keys;
+        String [] eventKeys;
 
-        keys = events.keySet();
-        eventMap = events.getExtras();
+
+        bundle = events.getExtras();
+        keys = bundle.keySet();
+        eventKeys = new String[keys.size()];
+        eventKeys =  keys.toArray(eventKeys);
+
+
+
     }
 }

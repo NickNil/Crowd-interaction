@@ -57,11 +57,14 @@ public class GCMIntentService extends IntentService
                 editor.putString(PROPERTY_REG_ID, regId);
                 editor.commit();
 
+                Toast toast = Toast.makeText(context, "User registration is done", Toast.LENGTH_SHORT);
+                toast.show();
+
                 break;
             }
             case'x':
             {
-                CharSequence text = "User is already rregistered";
+                CharSequence text = "User is already registered";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
