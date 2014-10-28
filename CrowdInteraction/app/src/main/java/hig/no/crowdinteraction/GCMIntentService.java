@@ -41,6 +41,11 @@ public class GCMIntentService extends IntentService
 
         String Response = intent.getStringExtra("param");
 
+
+        /* The server gives JSON like responses like param:x.
+         * Requires: param
+         *
+        */
         switch (Response.charAt(0))
         {
             case'r':

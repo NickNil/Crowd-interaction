@@ -64,14 +64,14 @@ public class PostDataJSON
                 JSONObject json = new JSONObject();
                 JSONObject register = new JSONObject();
                 try {
-                    HttpPost post = new HttpPost("http://213.162.246.215/api/register");
+                    HttpPost post = new HttpPost(SERVER_URL + "/api/register");
 
                     register.put("phone_number", phoneNumber);
                     register.put("passcode", passcode);
                     register.put("firstname", firstname);
                     register.put("lastname", lastname);
                     register.put("nationality", nationality);
-                    register.put("regid", regID);
+                    register.put("token", regID);
 
                     json.put("REGISTER", register);
 
