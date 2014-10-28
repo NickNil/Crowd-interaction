@@ -6,69 +6,61 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="hig.no.crowdinteraction.VoteActivity">
+    tools:context="hig.no.crowdinteraction.VoteActivity"
+    android:id="@+id/">
 
     <Button
         android:id="@+id/Votebutton"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scorePicker"
-        android:layout_centerHorizontal="true"
-        android:text="Vote" />
+        android:text="Vote"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" /><![CDATA[
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/TextView02"
-        android:layout_below="@+id/athleteSpinner"
-        android:layout_marginTop="25dp"
-        android:text="Score:" />
-
-    <NumberPicker
-        android:id="@+id/scorePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/athleteSpinner" />
-
-    <Spinner
+    TextView
         android:id="@+id/eventsSpinner"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sportsSpinner"
-        android:layout_marginTop="15dp"
-        android:layout_toRightOf="@+id/TextView02" />
+        android:text="_athleat_"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/athleteSpinner"
+        android:layout_alignStart="@+id/athleteSpinner"
+        android:layout_marginTop="18dp" />
+
+    ]]>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/sportsSpinner"
-        android:layout_marginTop="14dp"
+        android:text="Sport:"
+        android:layout_toStartOf="@+id/Votebutton"
+        android:layout_below="@+id/Title"
         android:layout_toLeftOf="@+id/Votebutton"
-        android:text="Sport:" />
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:id="@+id/TextView01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Event:"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textView2"
         android:layout_alignLeft="@+id/textView2"
-        android:layout_alignTop="@+id/eventsSpinner"
-        android:layout_marginTop="15dp"
-        android:text="Event:" />
+        android:layout_alignStart="@+id/textView2" />
 
     <TextView
         android:id="@+id/TextView02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Athlete:"
+        android:layout_below="@+id/TextView01"
         android:layout_alignRight="@+id/textView2"
-        android:layout_alignTop="@+id/athleteSpinner"
-        android:layout_marginTop="14dp"
-        android:text="Athlete:" />
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginTop="30dp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -77,20 +69,58 @@
         android:text="Voting"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Spinner
+    TextView
         android:id="@+id/sportsSpinner"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="17dp"
-        android:layout_toRightOf="@+id/TextView01" />
+        android:layout_marginTop="29dp"
+        android:text="_event_"
+        android:layout_below="@+id/Title"
+        android:layout_alignLeft="@+id/eventsSpinner"
+        android:layout_alignStart="@+id/eventsSpinner" />
 
-    <Spinner
+    TextView
         android:id="@+id/athleteSpinner"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/eventsSpinner"
-        android:layout_marginTop="16dp"
-        android:layout_toRightOf="@+id/TextView01" />
+        android:text="_Sport_"
+        android:layout_below="@+id/TextView01"
+        android:layout_alignLeft="@+id/scorePicker"
+        android:layout_alignStart="@+id/scorePicker"
+        android:layout_marginTop="16dp" />
+
+    <NumberPicker
+        android:id="@+id/scorePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Votebutton"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/TextView02"
+        android:layout_alignLeft="@+id/scorePicker"
+        android:layout_alignStart="@+id/scorePicker" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView4"
+        android:layout_alignBottom="@+id/TextView02"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
 
 </RelativeLayout>

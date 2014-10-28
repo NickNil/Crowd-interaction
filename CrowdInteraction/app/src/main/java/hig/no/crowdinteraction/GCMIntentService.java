@@ -4,33 +4,41 @@ package hig.no.crowdinteraction;
  * Created by Harnys on 26.10.2014.
  */
 
+
 import android.app.Activity;
+import android.app.IntentService;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gcm.GCMBaseIntentService;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-public class GCMIntentService extends GCMBaseIntentService
+public class GCMIntentService extends IntentService
 {
     public static final String PROPERTY_REG_ID = "registration_id";
+    Context context;
 
     public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
 
-    public GcmIntentService() {
+    public GCMIntentService()
+    {
         super("GcmIntentService");
+        context = getApplicationContext();
+
     }
 
-    protected void onMessage(Context context, Intent intent)
+    protected void onHandleIntent(Intent intent)
     {
-        Log.i("On Messasge", "Received message. Extras: " + intent.getExtras());
-        String message = (R.string.gcm_message);
+        Bundle message = intent.getExtras();
+        GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
+
         String Response = intent.getStringExtra("param");
 
         switch (Response.charAt(0))
@@ -40,7 +48,10 @@ public class GCMIntentService extends GCMBaseIntentService
                 String regId = intent.getStringExtra("regid");
 
                 Activity activity = (Activity) context;
-                final SharedPreferences prefs = activity.getGCMPreferences(context);
+                final SharedPreferences prefs = getSharedPreferences(MainActivity.class.getSimpleName(),
+                        Context.MODE_PRIVATE);
+
+
                 Log.i("add regID", "Saving regId on app version ");
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(PROPERTY_REG_ID, regId);
@@ -57,6 +68,11 @@ public class GCMIntentService extends GCMBaseIntentService
                 toast.show();
                 break;
             }
+            case 'e':
+            {
+                EventList.populateEventList(intent);
+            }
+
         }
     }
 

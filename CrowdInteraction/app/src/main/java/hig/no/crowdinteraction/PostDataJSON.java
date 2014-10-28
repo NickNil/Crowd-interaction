@@ -1,7 +1,10 @@
 package hig.no.crowdinteraction;
 
 
+import android.content.Context;
 import android.util.Log;
+
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -12,10 +15,19 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 public class PostDataJSON
 {
+    Context context;
+
+    PostDataJSON(Context appContext)
+    {
+        context = appContext;
+    }
+
+    String SENDER_ID = "914623768180";
 
     String SERVER_URL ="ci.harnys.net";
 
@@ -23,13 +35,30 @@ public class PostDataJSON
                             final String phoneNumber, final String passcode)
     {
 
+       final GoogleCloudMessaging  gcm = GoogleCloudMessaging.getInstance(context);
+
+
         Thread t = new Thread()
         {
 
             public void run()
             {
 
+
+                String regID = null;
+
+                try
+                {
+                    regID = gcm.register(SENDER_ID);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
                 HttpClient client = new DefaultHttpClient();
+
+
+
 
                 HttpResponse response;
                 JSONObject json = new JSONObject();
@@ -42,6 +71,7 @@ public class PostDataJSON
                     register.put("firstname", firstname);
                     register.put("lastname", lastname);
                     register.put("nationality", nationality);
+                    register.put("regid", regID);
 
                     json.put("REGISTER", register);
 

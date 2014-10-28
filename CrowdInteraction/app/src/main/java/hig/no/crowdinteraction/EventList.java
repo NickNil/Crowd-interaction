@@ -1,12 +1,17 @@
 package hig.no.crowdinteraction;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.Map;
+import java.util.Set;
 
-public class EventList extends Activity {
+
+public class EventList extends Activity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +28,8 @@ public class EventList extends Activity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -32,5 +38,14 @@ public class EventList extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void populateEventList(Intent events)
+    {
+        Map <String, String> eventMap;
+        Set <String> keys;
+
+        keys = events.keySet();
+        eventMap = events.getExtras();
     }
 }
