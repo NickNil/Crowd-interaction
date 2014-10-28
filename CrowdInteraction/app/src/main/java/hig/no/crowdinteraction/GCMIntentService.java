@@ -4,6 +4,7 @@ package hig.no.crowdinteraction;
  * Created by Harnys on 26.10.2014.
  */
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -38,7 +39,8 @@ public class GCMIntentService extends GCMBaseIntentService
             {
                 String regId = intent.getStringExtra("regid");
 
-                final SharedPreferences prefs = MainActivity.getGCMPreferences(context);
+                Activity activity = (Activity) context;
+                final SharedPreferences prefs = activity.getGCMPreferences(context);
                 Log.i("add regID", "Saving regId on app version ");
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putString(PROPERTY_REG_ID, regId);
