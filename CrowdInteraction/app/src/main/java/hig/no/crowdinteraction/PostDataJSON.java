@@ -3,6 +3,7 @@ package hig.no.crowdinteraction;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -28,8 +29,9 @@ public class PostDataJSON
     }
 
     String SENDER_ID = "914623768180";
-
+    String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL ="ci.harnys.net";
+    Toast toast;
 
     protected void sendJson(final String firstname, final String lastname, final String nationality,
                             final String phoneNumber, final String passcode)
@@ -50,55 +52,55 @@ public class PostDataJSON
                 try
                 {
                     regID = gcm.register(SENDER_ID);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-
-                HttpClient client = new DefaultHttpClient();
-
-
-
-
-                HttpResponse response;
-                JSONObject json = new JSONObject();
-                JSONObject register = new JSONObject();
-                try {
-                    HttpPost post = new HttpPost(SERVER_URL + "/api/register");
-
-                    register.put("phone_number", phoneNumber);
-                    register.put("passcode", passcode);
-                    register.put("firstname", firstname);
-                    register.put("lastname", lastname);
-                    register.put("nationality", nationality);
-                    register.put("token", regID);
-
-                    json.put("REGISTER", register);
-
-                    StringEntity se = new StringEntity(json.toString());
-                    se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-                    post.setEntity(se);
-                    response = client.execute(post);
-
-                    if(response != null)
-                    {
-
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                        in.close();
-                        Log.i(in.toString(), "xx");
-
-                    }
-
-                }
-                catch(Exception e)
+                } catch (IOException e)
                 {
                     e.printStackTrace();
                 }
 
+                Log.i("regID in regthred",regID);
+
+                if (regID !="")
+                {
+                    HttpClient client = new DefaultHttpClient();
+
+                    HttpResponse response;
+                    JSONObject json = new JSONObject();
+                    JSONObject register = new JSONObject();
+                    try {
+                        HttpPost post = new HttpPost(SERVER_URL + "/api/register");
+
+                        register.put("api_key", SERVER_API_KEY);
+                        register.put("phone_number", phoneNumber);
+                        register.put("passcode", passcode);
+                        register.put("firstname", firstname);
+                        register.put("lastname", lastname);
+                        register.put("nationality", nationality);
+                        register.put("regid", regID);
+
+                        json.put("REGISTER", register);
+
+                        StringEntity se = new StringEntity(json.toString());
+                        se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+                        post.setEntity(se);
+                        response = client.execute(post);
+
+                        if (response != null) {
+
+                            InputStream in = response.getEntity().getContent(); //Get the data in the entity
+                            in.close();
+                            Log.i(in.toString(), "xx");
+
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         };
 
         t.start();
+
     }
 
 

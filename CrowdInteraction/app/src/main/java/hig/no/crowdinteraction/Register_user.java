@@ -2,6 +2,7 @@ package hig.no.crowdinteraction;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,13 +19,14 @@ public class Register_user extends Activity {
 
     public static final String PROPERTY_REG_ID = "registration_id";
     Context context;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-
+        intent = new Intent(this, LoginForm.class);
         context = getApplicationContext();
 
         Button register = (Button) findViewById(R.id.registerButton);
@@ -47,6 +49,14 @@ public class Register_user extends Activity {
                     json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
                             nationality.getText().toString(), phoneNumber.getText().toString(),
                             code.getText().toString());
+
+                    Toast toast = Toast.makeText(context, "Good job, Sending you back!",
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+
+
+                    startActivity(intent);
+
                 }
                 else
                 {

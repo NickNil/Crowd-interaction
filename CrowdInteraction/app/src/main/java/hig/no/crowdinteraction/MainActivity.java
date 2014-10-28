@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
                 intent = new Intent(this, LoginForm.class);
             }
 
+            //stops the activity to let the user see the "logo"
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
