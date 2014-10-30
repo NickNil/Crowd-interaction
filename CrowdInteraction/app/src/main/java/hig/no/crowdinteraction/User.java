@@ -36,18 +36,33 @@ public class User
         context = appContext;
     }
 
+    protected void logout()
+    {
+        gmcID = "";
+        mongoID = "";
+        name = new String[] {"", ""};
+        nationality = "";
+        phoneNumber = "";
 
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        editor.putString("GMC_ID",gmcID);
+        editor.putString("MONGO_ID",mongoID);
+        editor.putString("firstName","");
+        editor.putString("lastName","");
+        editor.putString("Nationality",nationality);
+        editor.putString("PhoneNumber",phoneNumber);
+        editor.commit();
+    }
 
     protected String GetGmcId()
     {
         return gmcID;
     }
-
     protected String GetMongoId()
     {
       return mongoID;
     }
-
     protected String[] GetName()
     {
         return name;

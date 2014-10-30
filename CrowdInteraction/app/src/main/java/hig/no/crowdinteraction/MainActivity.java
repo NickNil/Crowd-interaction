@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
                     // Do something after 5s = 5000ms
                     startActivity(intent);
                 }
-            }, 5000);
+            }, 3000);
         }
 
     }

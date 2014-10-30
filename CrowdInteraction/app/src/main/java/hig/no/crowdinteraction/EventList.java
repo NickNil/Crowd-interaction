@@ -13,10 +13,13 @@ import java.util.Set;
 public class EventList extends Activity
 {
 
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
+        user = new User(getApplicationContext());
+
     }
 
 
@@ -36,6 +39,12 @@ public class EventList extends Activity
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.Logout) {
+            user.logout();
+            Intent intent;
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
@@ -84,24 +85,30 @@ public class LoginJSON {
 
                         if (response != null) {
 
-                            InputStream in = response.getEntity().getContent(); //Get the data in the entity
+                            HttpEntity entity;
+                            entity = response.getEntity();
+
+                            InputStream in = entity.getContent();//response.getEntity().getContent(); //Get the data in the entity
                             StatusLine statusLine = response.getStatusLine();
                             int statusCode = statusLine.getStatusCode();
                             Log.i("HTTP Status", Integer.toString(statusCode));
-                            Log.i("LoginResponse", inputStreamToString(in));
 
-                            JSONObject myObject = new JSONObject();
-                            myObject.getString(inputStreamToString(in));
-                            int a = 1;
-                            int b = 1;
-                            int c;
-                            c = a*b;
+                            String jsonString = inputStreamToString(in);
+                            jsonString = jsonString.replace("[","");
+                            jsonString = jsonString.replace("]","");
+                            Log.i("LoginResponse", jsonString);
+
+                            JSONObject jsonObj = new JSONObject(jsonString);
+                            jsonObj = jsonObj.getJSONObject("data");
+                            JSONObject name = jsonObj.getJSONObject("name");
+
                             in.close();
 
-                           /* user.SetPhoneNumber(phoneNumber);
-                            user.SetName(firstname,lastname);
-                            user.SetNationality(nationality);
-                            user.SetGmcId(regID); */
+                            user.SetPhoneNumber(phoneNumber);
+                            user.SetName(name.getString("firstname"),name.getString("lastname"));
+                            user.SetNationality(jsonObj.getString("nationality"));
+                            user.SetGmcId(jsonObj.getString("regid"));
+                            user.SetMongoId(jsonObj.getString("id"));
 
 
 
@@ -132,7 +139,7 @@ public class LoginJSON {
 
             while ((rLine = rd.readLine()) != null) {
                 answer.append(rLine);
-                Log.i("ausdbiuasbd", rLine);
+                Log.i("LoginResponse2", rLine);
             }
 
         } catch (Exception e) {
