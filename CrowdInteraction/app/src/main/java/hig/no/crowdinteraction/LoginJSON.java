@@ -14,6 +14,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,9 +27,12 @@ import java.util.List;
 
 public class LoginJSON {
     Context context;
+    User user;
 
-    LoginJSON(Context appContext) {
+    LoginJSON(Context appContext)
+    {
         context = appContext;
+        user = new User(context);
     }
 
     String SENDER_ID = "914623768180";
@@ -82,9 +88,29 @@ public class LoginJSON {
                             StatusLine statusLine = response.getStatusLine();
                             int statusCode = statusLine.getStatusCode();
                             Log.i("HTTP Status", Integer.toString(statusCode));
-                            Log.i("Response", inputStreamToString(in));
+                            Log.i("LoginResponse", inputStreamToString(in));
+
+                            JSONObject myObject = new JSONObject();
+                            myObject.getString(inputStreamToString(in));
+                            int a = 1;
+                            int b = 1;
+                            int c;
+                            c = a*b;
                             in.close();
-                            Log.i("add regID", "Saving regId on app version ");
+
+                           /* user.SetPhoneNumber(phoneNumber);
+                            user.SetName(firstname,lastname);
+                            user.SetNationality(nationality);
+                            user.SetGmcId(regID); */
+
+
+
+                            /*{"param":"l","data":
+                                {"id":"545239c29c76842a1e8b4568",
+                                "nationality":"Norge",
+                                "name":{"firstname":"Harry","lastname":"Nystad"},
+                                "regid":"APA91bFv_6fAq_SuyFubPrJcDxfktd8YmlzX4gxEEhOahUlOVmKvIu8Y60PDFBuosZiducUxAQva0JWLGxDFXKHOb2bhRlFCILB1jvCIPC6Vz9E5knOmELJQ5M3sQXqX0HOtc8uVWEbtGLme7E4-W2fBKXzdC1th76HJXOezTd5dJB13rGuzRuQ"}}]
+                            */
                         }
 
                     } catch (Exception e) {

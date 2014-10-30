@@ -41,22 +41,15 @@ public class LoginForm extends Activity {
                             "Please fill Phone number and Code to login!",
                             Toast.LENGTH_SHORT).show();
                 }
-                else if(phoneNumber.getText().toString().equals("41415252")
-                        || code.getText().toString().equals("1337"))
-                {
-
-                     LoginJSON json = new LoginJSON(getApplicationContext());
-
-                     json.sendJson(phoneNumber.getText().toString(),
-                                code.getText().toString());
-
-                     Intent i = new Intent(LoginForm.this, EventList.class);
-                        startActivity(i);
-                }
                 else
                 {
-                    Toast.makeText(getApplicationContext(),"Incorrect Phone number or Code",
-                            Toast.LENGTH_SHORT).show();
+                    LoginJSON json = new LoginJSON(getApplicationContext());
+
+                    json.sendJson(phoneNumber.getText().toString(),
+                            code.getText().toString());
+
+                    Intent i = new Intent(LoginForm.this, EventList.class);
+                    startActivity(i);
                 }
             }
         });

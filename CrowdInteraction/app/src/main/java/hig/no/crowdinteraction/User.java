@@ -22,7 +22,7 @@ public class User
     {
         String firstName;
         String lastName;
-
+        context = appContext;
         sharedPref = context.getSharedPreferences("hig.no.crowdInteraction.PREFERENCE_FILE_KEY",
                 Context.MODE_PRIVATE);
         gmcID = sharedPref.getString("GMC_ID","");

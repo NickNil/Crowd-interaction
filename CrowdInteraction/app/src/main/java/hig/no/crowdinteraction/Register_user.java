@@ -36,15 +36,10 @@ public class Register_user extends Activity {
 
         Button register = (Button) findViewById(R.id.registerButton);
         final EditText firstname = (EditText) findViewById(R.id.registerFirstname);
-        firstname.setText("Aaa", TextView.BufferType.EDITABLE);
         final EditText lastname = (EditText) findViewById(R.id.registerLastname);
-        lastname.setText("Bbb", TextView.BufferType.EDITABLE);
         final EditText nationality = (EditText) findViewById(R.id.registerNationality);
-        nationality.setText("Ccc", TextView.BufferType.EDITABLE);
         final EditText phoneNumber = (EditText) findViewById(R.id.registerPhoneNumber);
-        phoneNumber.setText("12345678", TextView.BufferType.EDITABLE);
         final EditText code = (EditText) findViewById(R.id.registerCode);
-        code.setText("1234", TextView.BufferType.EDITABLE);
 
         /*A dropdown menu that can be implementet later on
 

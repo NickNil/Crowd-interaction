@@ -29,9 +29,12 @@ import android.content.SharedPreferences;
 
 public class PostDataJSON {
     Context context;
+    User user;
 
-    PostDataJSON(Context appContext) {
+    PostDataJSON(Context appContext)
+    {
         context = appContext;
+        user = new User(context);
     }
 
     String SENDER_ID = "914623768180";
@@ -100,7 +103,6 @@ public class PostDataJSON {
                             Log.i("HTTP Status", Integer.toString(statusCode));
                             Log.i("Response", inputStreamToString(in));
                             in.close();
-
                         }
 
                     } catch (Exception e) {
