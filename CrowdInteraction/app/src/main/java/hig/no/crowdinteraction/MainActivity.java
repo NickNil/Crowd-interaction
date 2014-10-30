@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
     AtomicInteger msgId = new AtomicInteger();
     SharedPreferences prefs;
     Context context;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,11 @@ public class MainActivity extends Activity {
 
         final Handler handler = new Handler();
         context = getApplicationContext();
+        user = new User(getApplicationContext());
 
         if (checkPlayServices())
         {
-            if (getRegistrationId(context) != "")
+            if (user.GetGmcId() != "")
             {
                 intent = new Intent(this, EventList.class);
             } else
@@ -95,24 +97,4 @@ public class MainActivity extends Activity {
         }
         return true;
     }
-
-    private String getRegistrationId(Context context)
-    {
-        final SharedPreferences prefs = getGCMPreferences(context);
-        String registrationId = prefs.getString(PROPERTY_REG_ID, "");
-        if (registrationId.isEmpty())
-        {
-            Log.i("RegTag", "Registration not found.");
-            return "";
-        }
-        return registrationId;
-    }
-
-    protected SharedPreferences getGCMPreferences(Context context) {
-        // This sample app persists the registration ID in shared preferences, but
-        // how you store the regID in your app is up to you.
-        return getSharedPreferences(MainActivity.class.getSimpleName(),
-                Context.MODE_PRIVATE);
-    }
-
 }

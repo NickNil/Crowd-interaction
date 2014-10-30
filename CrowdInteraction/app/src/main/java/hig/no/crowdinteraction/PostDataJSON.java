@@ -14,21 +14,17 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.SharedPreferences;
+
 
 
 public class PostDataJSON {
@@ -104,13 +100,7 @@ public class PostDataJSON {
                             Log.i("HTTP Status", Integer.toString(statusCode));
                             Log.i("Response", inputStreamToString(in));
                             in.close();
-                            Log.i("add regID", "Saving regId on app version ");
 
-                            final SharedPreferences prefs = getSharedPreferences(MainActivity.class.getSimpleName(),
-                                    Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = prefs.edit();
-                            editor.putString(PROPERTY_REG_ID, regID);
-                            editor.commit();
                         }
 
                     } catch (Exception e) {

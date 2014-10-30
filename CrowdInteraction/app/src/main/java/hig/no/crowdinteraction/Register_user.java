@@ -23,6 +23,7 @@ public class Register_user extends Activity {
     public static final String PROPERTY_REG_ID = "registration_id";
     Context context;
     Intent intent;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,6 +32,7 @@ public class Register_user extends Activity {
         setContentView(R.layout.activity_register_user);
         intent = new Intent(this, LoginForm.class);
         context = getApplicationContext();
+        user = new User(getApplicationContext());
 
         Button register = (Button) findViewById(R.id.registerButton);
         final EditText firstname = (EditText) findViewById(R.id.registerFirstname);
@@ -61,7 +63,7 @@ public class Register_user extends Activity {
             public void onClick(View v)
             {
                 String regid;
-                regid = getRegistrationId(context);
+                regid = user.GetGmcId();
                 if (regid.isEmpty())
                 {
                     PostDataJSON json = new PostDataJSON(getApplicationContext());
@@ -108,26 +110,5 @@ public class Register_user extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private String getRegistrationId(Context context) {
-        final SharedPreferences prefs = getGCMPreferences(context);
-        String registrationId = prefs.getString(PROPERTY_REG_ID, "");
-        if (registrationId.isEmpty()) {
-            Log.i("RegFormGMC", "Registration not found.");
-            return "";
-        }
-        return registrationId;
-    }
-
-    /**
-     * @return Application's {@code SharedPreferences}.
-     */
-    private SharedPreferences getGCMPreferences(Context context) {
-        // This sample app persists the registration ID in shared preferences, but
-        // how you store the regID in your app is up to you.
-        return getSharedPreferences(Register_user.class.getSimpleName(),
-                Context.MODE_PRIVATE);
-    }
-
 
 }
