@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -18,6 +19,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 public class PostDataJSON
 {
@@ -30,7 +32,7 @@ public class PostDataJSON
 
     String SENDER_ID = "914623768180";
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
-    String SERVER_URL ="ci.harnys.net";
+    String SERVER_URL ="http://ci.harnys.net";
     Toast toast;
 
     protected void sendJson(final String firstname, final String lastname, final String nationality,
@@ -68,7 +70,7 @@ public class PostDataJSON
                     JSONObject register = new JSONObject();
                     try {
                         HttpPost post = new HttpPost(SERVER_URL + "/api/register");
-
+                        Log.i("URL:",SERVER_URL + "/api/register");
                         register.put("api_key", SERVER_API_KEY);
                         register.put("phone_number", phoneNumber);
                         register.put("passcode", passcode);
@@ -87,8 +89,13 @@ public class PostDataJSON
                         if (response != null) {
 
                             InputStream in = response.getEntity().getContent(); //Get the data in the entity
+                            StatusLine statusLine = response.getStatusLine();
+                            int statusCode = statusLine.getStatusCode();
+                            Log.i("status",Integer.toString(statusCode));
                             in.close();
-                            Log.i(in.toString(), "xx");
+                            in.
+                            Log.i("xx",in.toString());
+
 
                         }
 
