@@ -2,6 +2,7 @@ package hig.no.crowdinteraction;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.SharedPreferences;
 
 
 public class PostDataJSON {
@@ -39,6 +41,7 @@ public class PostDataJSON {
     String SENDER_ID = "914623768180";
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
+    public static final String PROPERTY_REG_ID = "registration_id";
     Toast toast;
 
     protected void sendJson(final String firstname, final String lastname, final String nationality,
@@ -101,6 +104,13 @@ public class PostDataJSON {
                             Log.i("HTTP Status", Integer.toString(statusCode));
                             Log.i("Response", inputStreamToString(in));
                             in.close();
+                            Log.i("add regID", "Saving regId on app version ");
+
+                            final SharedPreferences prefs = getSharedPreferences(MainActivity.class.getSimpleName(),
+                                    Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString(PROPERTY_REG_ID, regID);
+                            editor.commit();
                         }
 
                     } catch (Exception e) {
