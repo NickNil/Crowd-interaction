@@ -16,8 +16,10 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class PostDataJSON
 {
@@ -67,7 +69,7 @@ public class PostDataJSON
                     JSONObject json = new JSONObject();
                     JSONObject register = new JSONObject();
                     try {
-                        HttpPost post = new HttpPost(SERVER_URL + "/api/register");
+                        HttpPost post = new HttpPost("http://ci.harnys.net/api/register");
 
                         register.put("api_key", SERVER_API_KEY);
                         register.put("phone_number", phoneNumber);
@@ -84,11 +86,13 @@ public class PostDataJSON
                         post.setEntity(se);
                         response = client.execute(post);
 
+
                         if (response != null) {
 
                             InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                            in.close();
-                            Log.i(in.toString(), "xx");
+
+                            Log.i("xx",inputStreamToString(in));
+                            //Log.i(in.toString(), "xx");
 
                         }
 
@@ -102,8 +106,22 @@ public class PostDataJSON
         t.start();
 
     }
+    private String inputStreamToString(InputStream is) {
+        String rLine;
+        StringBuilder answer = new StringBuilder();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, "utf-8"), 8);
 
+            while ((rLine = rd.readLine()) != null) {
+                answer.append(rLine);
+                Log.i("ausdbiuasbd", rLine);
+            }
 
+        } catch (Exception e) {
+        }
+        return answer.toString();
+
+    }
 
 
    /* void sendRegistrationIdToBackend(String regID)
