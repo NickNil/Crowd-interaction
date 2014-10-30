@@ -1,8 +1,11 @@
 package hig.no.crowdinteraction;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,11 +41,17 @@ public class LoginForm extends Activity {
                             "Please fill Phone number and Code to login!",
                             Toast.LENGTH_SHORT).show();
                 }
-                else if(phoneNumber.getText().toString().equals("1234")
-                        || code.getText().toString().equals("1234"))
+                else if(phoneNumber.getText().toString().equals("41415252")
+                        || code.getText().toString().equals("1337"))
                 {
-                    Intent i = new Intent(LoginForm.this, MainActivity.class);
-                    startActivity(i);
+
+                     LoginJSON json = new LoginJSON(getApplicationContext());
+
+                     json.sendJson(phoneNumber.getText().toString(),
+                                code.getText().toString());
+
+                     Intent i = new Intent(LoginForm.this, EventList.class);
+                        startActivity(i);
                 }
                 else
                 {
