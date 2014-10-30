@@ -93,7 +93,7 @@ public class PostDataJSON
                             int statusCode = statusLine.getStatusCode();
                             Log.i("status",Integer.toString(statusCode));
                             in.close();
-                            in.
+
                             Log.i("xx",in.toString());
 
 
