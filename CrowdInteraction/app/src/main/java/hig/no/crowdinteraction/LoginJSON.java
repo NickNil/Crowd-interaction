@@ -1,12 +1,12 @@
 package hig.no.crowdinteraction;
 
-
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
@@ -15,6 +15,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,13 +26,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-public class PostDataJSON {
+public class LoginJSON {
     Context context;
     User user;
 
-    PostDataJSON(Context appContext)
+    LoginJSON(Context appContext)
     {
         context = appContext;
         user = new User(context);
@@ -38,11 +39,8 @@ public class PostDataJSON {
     String SENDER_ID = "914623768180";
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
-    public static final String PROPERTY_REG_ID = "registration_id";
-    Toast toast;
 
-    protected void sendJson(final String firstname, final String lastname, final String nationality,
-                            final String phoneNumber, final String passcode) {
+    protected void sendJson(final String phoneNumber, final String passcode) {
 
         final GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
 
@@ -66,8 +64,8 @@ public class PostDataJSON {
                     HttpClient client = new DefaultHttpClient();
                     HttpResponse response;
                     try {
-                        HttpPost post = new HttpPost(SERVER_URL + "/api/register");
-                        
+                        HttpPost post = new HttpPost(SERVER_URL + "/api/login");
+
                         Log.i("URL", SERVER_URL + "/api/register");
 
 
@@ -79,14 +77,6 @@ public class PostDataJSON {
                         nameValuePairs.add(pair);
                         pair = new BasicNameValuePair("passcode", passcode);
                         nameValuePairs.add(pair);
-                        pair = new BasicNameValuePair("firstname", firstname);
-                        nameValuePairs.add(pair);
-                        pair = new BasicNameValuePair("lastname", lastname);
-                        nameValuePairs.add(pair);
-                        pair = new BasicNameValuePair("nationality", nationality);
-                        nameValuePairs.add(pair);
-                        pair = new BasicNameValuePair("regid", regID);
-                        nameValuePairs.add(pair);
 
 
                         post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -95,12 +85,39 @@ public class PostDataJSON {
 
                         if (response != null) {
 
-                            InputStream in = response.getEntity().getContent(); //Get the data in the entity
+                            HttpEntity entity;
+                            entity = response.getEntity();
+
+                            InputStream in = entity.getContent();//response.getEntity().getContent(); //Get the data in the entity
                             StatusLine statusLine = response.getStatusLine();
                             int statusCode = statusLine.getStatusCode();
                             Log.i("HTTP Status", Integer.toString(statusCode));
-                            Log.i("Response", inputStreamToString(in));
+
+                            String jsonString = inputStreamToString(in);
+                            jsonString = jsonString.replace("[","");
+                            jsonString = jsonString.replace("]","");
+                            Log.i("LoginResponse", jsonString);
+
+                            JSONObject jsonObj = new JSONObject(jsonString);
+                            jsonObj = jsonObj.getJSONObject("data");
+                            JSONObject name = jsonObj.getJSONObject("name");
+
                             in.close();
+
+                            user.SetPhoneNumber(phoneNumber);
+                            user.SetName(name.getString("firstname"),name.getString("lastname"));
+                            user.SetNationality(jsonObj.getString("nationality"));
+                            user.SetGmcId(jsonObj.getString("regid"));
+                            user.SetMongoId(jsonObj.getString("id"));
+
+
+
+                            /*{"param":"l","data":
+                                {"id":"545239c29c76842a1e8b4568",
+                                "nationality":"Norge",
+                                "name":{"firstname":"Harry","lastname":"Nystad"},
+                                "regid":"APA91bFv_6fAq_SuyFubPrJcDxfktd8YmlzX4gxEEhOahUlOVmKvIu8Y60PDFBuosZiducUxAQva0JWLGxDFXKHOb2bhRlFCILB1jvCIPC6Vz9E5knOmELJQ5M3sQXqX0HOtc8uVWEbtGLme7E4-W2fBKXzdC1th76HJXOezTd5dJB13rGuzRuQ"}}]
+                            */
                         }
 
                     } catch (Exception e) {
@@ -122,7 +139,7 @@ public class PostDataJSON {
 
             while ((rLine = rd.readLine()) != null) {
                 answer.append(rLine);
-                Log.i("ausdbiuasbd", rLine);
+                Log.i("LoginResponse2", rLine);
             }
 
         } catch (Exception e) {
@@ -131,5 +148,3 @@ public class PostDataJSON {
 
     }
 }
-
-

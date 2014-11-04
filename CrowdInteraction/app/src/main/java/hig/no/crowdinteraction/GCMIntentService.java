@@ -50,7 +50,7 @@ public class GCMIntentService extends IntentService
         {
             case'r':
             {
-                String regId = intent.getStringExtra("regid");
+                /*String regId = intent.getStringExtra("regid");
 
                 Activity activity = (Activity) context;
                 final SharedPreferences prefs = getSharedPreferences(MainActivity.class.getSimpleName(),
@@ -63,7 +63,7 @@ public class GCMIntentService extends IntentService
                 editor.commit();
 
                 Toast toast = Toast.makeText(context, "User registration is done", Toast.LENGTH_SHORT);
-                toast.show();
+                toast.show();*/
 
                 break;
             }
