@@ -70,12 +70,12 @@ public class PostDataJSON
                         HttpPost post = new HttpPost(SERVER_URL + "/api/register");
 
                         register.put("api_key", SERVER_API_KEY);
-                        register.put("phone_number", phoneNumber);
-                        register.put("passcode", passcode);
-                        register.put("firstname", firstname);
-                        register.put("lastname", lastname);
-                        register.put("nationality", nationality);
-                        register.put("regid", regID);
+                        register.put("PHONE_NUMBER", phoneNumber);
+                        register.put("PASSCODE", passcode);
+                        register.put("FIRSTNAME", firstname);
+                        register.put("LASTNAME", lastname);
+                        register.put("NATIONALITY", nationality);
+                        register.put("REGID", regID);
 
                         json.put("REGISTER", register);
 
