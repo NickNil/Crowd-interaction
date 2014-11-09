@@ -48,8 +48,6 @@ public class LoginForm extends Activity {
                     json.sendJson(phoneNumber.getText().toString(),
                             code.getText().toString());
 
-                    Intent i = new Intent(LoginForm.this, EventList.class);
-                    startActivity(i);
                 }
             }
         });
