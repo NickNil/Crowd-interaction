@@ -9,7 +9,7 @@
     tools:context="hig.no.crowdinteraction.Register_user">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,27 +19,27 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/registerCode"
-        android:layout_alignRight="@+id/textView3"
+        android:layout_alignRight="@+id/lastname"
         android:text="Code:" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/nationality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/registerNationality"
-        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignLeft="@+id/lastname"
         android:text="Nationality:" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/lastname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/registerLastname"
-        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignLeft="@+id/sport"
         android:text="Lastname:" />
 
     <EditText
@@ -54,7 +54,7 @@
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignLeft="@+id/textViewRegister"
         android:layout_below="@+id/registerCode"
         android:layout_marginTop="16dp"
         android:text="Register" />
@@ -69,11 +69,11 @@
         android:inputType="numberPassword" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/sport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView5"
-        android:layout_below="@+id/textView1"
+        android:layout_alignRight="@+id/phoneNumber"
+        android:layout_below="@+id/textViewRegister"
         android:layout_marginTop="23dp"
         android:text="Firstname:" />
 
@@ -81,8 +81,8 @@
         android:id="@+id/registerFirstname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toRightOf="@+id/textView4"
+        android:layout_alignBottom="@+id/sport"
+        android:layout_toRightOf="@+id/nationality"
         android:ems="10" >
 
         <requestFocus />
@@ -92,7 +92,7 @@
         android:id="@+id/registerPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignBottom="@+id/phoneNumber"
         android:layout_alignLeft="@+id/registerCode"
         android:ems="10"
         android:inputType="phone" >
@@ -107,10 +107,10 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/phoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/nationality"
         android:layout_marginTop="24dp"
         android:layout_toLeftOf="@+id/registerPhoneNumber"
         android:text="Phone number:" />
