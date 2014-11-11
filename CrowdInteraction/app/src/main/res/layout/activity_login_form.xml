@@ -56,6 +56,15 @@
         android:layout_marginTop="16dp"
         android:text="Login" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Leaderboard"
+        android:id="@+id/leaderboardButton"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/registerButton2"
+        android:layout_alignEnd="@+id/registerButton2"/>
+
     <EditText
         android:id="@+id/phoneNumberInput"
         android:layout_width="wrap_content"
@@ -75,5 +84,7 @@
         android:layout_alignBottom="@+id/password"
         android:layout_alignLeft="@+id/phoneNumberInput"
         android:layout_alignStart="@+id/phoneNumberInput" />
+
+
 
 </RelativeLayout>

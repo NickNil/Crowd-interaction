@@ -8,6 +8,7 @@
     <string name="title_activity_register_user">Register</string>
     <string name="title_activity_event_list">Event List</string>
     <string name="title_activity_vote">Vote</string>
+    <string name="title_activity_leaderboard">Leaderboard</string>
     <string-array name="sovereignStates">
       <item>Afghanistan</item>
       <item>Albania</item>
