@@ -46,6 +46,11 @@ public class EventList extends Activity
             intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.Leaderboard)
+        {
+            Intent i = new Intent(EventList.this, Leaderboards.class);
+            startActivity(i);
+        }
         return super.onOptionsItemSelected(item);
     }
 

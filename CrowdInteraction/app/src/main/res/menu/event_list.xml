@@ -5,6 +5,10 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+    <item android:id="@+id/Leaderboard"
+        android:title="Leaderboard"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom" />
     <item android:id="@+id/Logout"
         android:title="Log Out"
         android:orderInCategory="100"

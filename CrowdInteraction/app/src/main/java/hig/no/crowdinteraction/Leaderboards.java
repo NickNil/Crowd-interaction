@@ -48,7 +48,10 @@ public class Leaderboards extends Activity{
 
         TableLayout tableLayout = new TableLayout(this);
 
-        for (int i = -1; i < scores.size(); i++)
+        LeaderboardJSON json = new LeaderboardJSON();
+        json.sendJson();
+
+        for (int i = -1; i < json.userList.size(); i++)
         {
             if (i == -1)
             {
@@ -60,12 +63,14 @@ public class Leaderboards extends Activity{
             }
             else
             {
-                score = scores.get(i).toString();
-                position = Integer.toString(i+1);
-                name = names[i];
-                nationality = getNationality();
-                textSize = 25;
+                score = Integer.toString(json.userList.get(i).GetScore());
+                position = Integer.toString(json.userList.get(i).GetPosition());
+                name = json.userList.get(i).GetName()[0];// + " " + json.userList.get(i).GetName()[1]; //lastname
+                nationality = json.userList.get(i).GetNationality();
+                textSize = 18;
             }
+
+            //System.out.println(score + " " + position + " " + name + " " + nationality);
 
             TableRow tableRow = new TableRow(this);
 
