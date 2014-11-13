@@ -16,7 +16,13 @@ public class User
     String phoneNumber;
     Context context;
     SharedPreferences sharedPref;
+    int position;
+    int score;
 
+    User()
+    {
+
+    }
 
     User( Context appContext)
     {
@@ -75,6 +81,14 @@ public class User
     {
         return phoneNumber;
     }
+    protected int GetPosition()
+    {
+        return position;
+    }
+    protected int GetScore()
+    {
+        return score;
+    }
 
     //
 
@@ -116,4 +130,13 @@ public class User
         editor.putString("PhoneNumber",phoneNumber);
         editor.commit();
     }
+    protected void SetPosition(int newPosition)
+    {
+        position = newPosition;
+    }
+    protected void SetScore(int newScore)
+    {
+        position = newScore;
+    }
+
 }
