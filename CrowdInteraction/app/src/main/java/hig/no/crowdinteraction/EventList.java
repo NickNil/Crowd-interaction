@@ -5,23 +5,109 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import org.json.JSONObject;
 
 import java.util.Map;
 import java.util.Set;
 
 
+
+
+/*
+* the listview is an adaption of this
+* http://androidexample.com/Create_A_Simple_Listview_-_Android_Example/index.php?view=article_discription&aid=65&aaid=90
+*/
+
 public class EventList extends Activity
 {
 
     User user;
+    ListView listView ;
+    PostDataJSON post;
+    Intent intent;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_list);
-        user = new User(getApplicationContext());
+
+
+ //     user = new User(getApplicationContext());
+        intent = new Intent(this, VoteActivity.class);
+        post = new PostDataJSON (getApplicationContext());
+
+        // Get ListView object from xml
+        listView = (ListView) findViewById(R.id.eventList);
+
+
+       JSONObject eventJSON =  post.eventlist();
+        JSONObject temp = null;
+        // Defined Array values to show in ListView
+
+      /* try {
+            temp = eventJSON.getJSONObject("event_date");
+       } catch (JSONException e) {
+           e.printStackTrace();
+       }
+        eventJSON.length();
+        String[] values = new String[eventJSON.length()];
+
+        try {
+            values[0] =  temp.getString("event_type");   //jsonObj.getJSONObject("data");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }*/
+
+        String[] values = new String[]
+                { "Event 1",
+                "Event 2",
+                "Event 3",
+                "Event 4",
+                "Event 5",};
+
+        /* Define a new Adapter
+        * First parameter - Context
+        * Second parameter - Layout for the row
+        * Third parameter - ID of the TextView to which the data is written
+        * Forth - the Array of data */
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, android.R.id.text1, values);
+
+
+        // Assign adapter to ListView
+        listView.setAdapter(adapter);
+
+        // ListView Item Click Listener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                // ListView Clicked item index
+                int itemPosition     = position;
+
+                // ListView Clicked item value
+                String  itemValue = (String)listView.getItemAtPosition(position);
+
+                // Show Alert
+                Toast.makeText(getApplicationContext(),
+                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
+                        .show();
+               // startActivity(intent);
+            }
+
+        });
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

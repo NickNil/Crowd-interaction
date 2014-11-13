@@ -6,22 +6,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.NumberPicker;
 
 
 public class VoteActivity extends Activity {
 
-    Button vote = (Button) findViewById(R.id.Votebutton);
+    User user;
+    PostDataJSON post;
+
+    Button voteButton = (Button) findViewById(R.id.Votebutton);
+    NumberPicker scorePicker = (NumberPicker) findViewById(R.id.scorePicker);
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
-        vote.setOnClickListener(new View.OnClickListener()
+
+        user = new User(getApplicationContext());
+        post = new PostDataJSON (getApplicationContext());
+
+        voteButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick (View v)
             {
-
+               int score = scorePicker.getValue();
+                post.vote(Integer.toString(score));
             }
         });
     }

@@ -2,7 +2,6 @@ package hig.no.crowdinteraction;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -15,9 +14,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -93,10 +90,18 @@ public class LoginJSON {
                             int statusCode = statusLine.getStatusCode();
                             Log.i("HTTP Status", Integer.toString(statusCode));
 
+
+
+
                             String jsonString = inputStreamToString(in);
                             jsonString = jsonString.replace("[","");
                             jsonString = jsonString.replace("]","");
                             Log.i("LoginResponse", jsonString);
+
+                            if (jsonString == "0")
+                            {
+
+                            }
 
                             JSONObject jsonObj = new JSONObject(jsonString);
                             jsonObj = jsonObj.getJSONObject("data");

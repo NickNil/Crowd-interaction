@@ -3,17 +3,12 @@ package hig.no.crowdinteraction;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -63,7 +58,7 @@ public class Register_user extends Activity {
                 {
                     PostDataJSON json = new PostDataJSON(getApplicationContext());
 
-                    json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
+                    json.register(firstname.getText().toString(), lastname.getText().toString(),
                             nationality.getText().toString(), phoneNumber.getText().toString(),
                             code.getText().toString());
 
