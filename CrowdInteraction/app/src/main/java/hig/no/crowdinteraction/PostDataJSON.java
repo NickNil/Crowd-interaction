@@ -2,6 +2,7 @@ package hig.no.crowdinteraction;
 
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -116,7 +118,11 @@ public class PostDataJSON {
         }; t.start();
     }
 
-    protected JSONObject eventlist()
+
+
+
+
+/*    protected JSONObject eventlist()
     {
         final JSONObject[] event_data = new JSONObject[1];
         Thread t = new Thread()
@@ -168,7 +174,7 @@ public class PostDataJSON {
         }; t.start();
 
         return event_data[0];
-    }
+    }*/
 
     protected void vote(final String vote)
     {
@@ -244,7 +250,7 @@ public class PostDataJSON {
         return response;
     }
 
-    private String inputStreamToString(InputStream is) {
+    protected String inputStreamToString(InputStream is) {
         String rLine;
         StringBuilder answer = new StringBuilder();
         try {

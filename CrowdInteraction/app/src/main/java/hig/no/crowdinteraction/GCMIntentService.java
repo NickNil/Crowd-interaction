@@ -76,10 +76,6 @@ public class GCMIntentService extends IntentService
                 toast.show();
                 break;
             }
-            case 'e':
-            {
-                EventList.populateEventList(intent);
-            }
 
         }
     }
