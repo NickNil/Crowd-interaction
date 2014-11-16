@@ -54,7 +54,10 @@
             android:label="@string/title_activity_vote"
             android:parentActivityName=".MainActivity" >
         </activity>
-
+        <activity
+            android:name=".Nationality"
+            android:label="Nationality" >
+        </activity>
         <receiver
             android:name=".GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >

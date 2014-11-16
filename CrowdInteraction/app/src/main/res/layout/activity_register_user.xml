@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,7 +6,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="hig.no.crowdinteraction.Register_user">
+    tools:context="hig.no.crowdinteraction.Register_user"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewRegister"
@@ -14,105 +15,97 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:text="Register"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/registerCode"
-        android:layout_alignRight="@+id/lastname"
-        android:text="Code:" />
-
-    <TextView
-        android:id="@+id/nationality"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/registerNationality"
-        android:layout_alignLeft="@+id/lastname"
-        android:text="Nationality:" />
-
-    <TextView
-        android:id="@+id/lastname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/registerLastname"
-        android:layout_alignLeft="@+id/sport"
-        android:text="Lastname:" />
-
-    <EditText
-        android:id="@+id/registerLastname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/registerFirstname"
-        android:layout_below="@+id/registerFirstname"
-        android:ems="10" />
-
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewRegister"
-        android:layout_below="@+id/registerCode"
-        android:layout_marginTop="16dp"
-        android:text="Register" />
-
-    <EditText
-        android:id="@+id/registerCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/registerPhoneNumber"
-        android:ems="10"
-        android:inputType="numberPassword" />
-
-    <TextView
-        android:id="@+id/sport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/phoneNumber"
-        android:layout_below="@+id/textViewRegister"
-        android:layout_marginTop="23dp"
-        android:text="Firstname:" />
+        android:layout_marginTop="15dp"
+        android:text="REGISTER"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp" />
 
     <EditText
         android:id="@+id/registerFirstname"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/sport"
-        android:layout_toRightOf="@+id/nationality"
-        android:ems="10" >
+        android:ems="10"
+        android:hint="Firstname"
+        android:layout_below="@+id/textViewRegister"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <requestFocus />
     </EditText>
 
     <EditText
-        android:id="@+id/registerPhoneNumber"
-        android:layout_width="wrap_content"
+        android:id="@+id/registerLastname"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/phoneNumber"
-        android:layout_alignLeft="@+id/registerCode"
         android:ems="10"
-        android:inputType="phone" >
+        android:hint="Lastname"
+        android:layout_below="@+id/registerFirstname"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nationalityButton"
+        android:gravity="left|center_vertical"
+        android:layout_below="@+id/registerLastname"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:text="Nationality" />
+
+    <EditText
+        android:id="@+id/registerPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Phone number"
+        android:inputType="phone"
+        android:layout_above="@+id/registerCode"
+        android:layout_alignLeft="@+id/registerCode"
+        android:layout_alignStart="@+id/registerCode"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
     </EditText>
 
     <EditText
-        android:id="@+id/registerNationality"
+        android:id="@+id/registerCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Code"
+        android:inputType="numberPassword"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp" />
+
+    <Button
+        android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/registerPhoneNumber"
-        android:layout_below="@+id/registerLastname"
-        android:ems="10" />
+        android:text="Register"
+        android:layout_below="@+id/registerCode"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="15dp"
+        android:elegantTextHeight="true" />
 
-    <TextView
-        android:id="@+id/phoneNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/nationality"
-        android:layout_marginTop="24dp"
-        android:layout_toLeftOf="@+id/registerPhoneNumber"
-        android:text="Phone number:" />
-
-</RelativeLayout>
+</LinearLayout>
