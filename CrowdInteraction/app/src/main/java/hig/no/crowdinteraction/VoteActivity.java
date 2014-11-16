@@ -10,13 +10,14 @@ import android.widget.Button;
 
 public class VoteActivity extends Activity {
 
-    Button vote = (Button) findViewById(R.id.Votebutton);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
+        Button vote = (Button) findViewById(R.id.voteButton);
         vote.setOnClickListener(new View.OnClickListener()
         {
             public void onClick (View v)

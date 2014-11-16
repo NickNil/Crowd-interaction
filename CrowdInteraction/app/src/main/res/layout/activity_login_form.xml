@@ -19,7 +19,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/loginPhoneNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -29,12 +29,12 @@
         android:layout_toLeftOf="@+id/phoneNumberInput" />
 
     <TextView
-        android:id="@+id/password"
+        android:id="@+id/loginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:text="Password:"
-        android:layout_below="@+id/username"
+        android:layout_below="@+id/loginPhoneNumber"
         android:layout_toLeftOf="@+id/codeInput"
         android:layout_toStartOf="@+id/codeInput" />
 
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="phone"
-        android:layout_above="@+id/password"
+        android:layout_above="@+id/loginPassword"
         android:layout_alignLeft="@+id/loginButton"
         android:layout_alignStart="@+id/loginButton" />
 
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberPassword"
-        android:layout_alignBottom="@+id/password"
+        android:layout_alignBottom="@+id/loginPassword"
         android:layout_alignLeft="@+id/phoneNumberInput"
         android:layout_alignStart="@+id/phoneNumberInput" />
 

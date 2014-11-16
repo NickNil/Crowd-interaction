@@ -53,17 +53,20 @@
             android:name=".VoteActivity"
             android:label="@string/title_activity_vote"
             android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="hig.no.crowdinteraction.MainActivity" />
         </activity>
         <activity
+
             android:name=".Leaderboards"
             android:label="@string/title_activity_leaderboard"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hig.no.crowdinteraction.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".Nationality"
+            android:label="Nationality" >
         </activity>
 
         <receiver
@@ -78,6 +81,8 @@
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <uses-library android:name="android.test.runner" />
     </application>
 
 </manifest>

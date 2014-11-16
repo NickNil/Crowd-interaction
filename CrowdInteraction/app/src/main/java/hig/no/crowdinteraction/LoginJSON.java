@@ -58,12 +58,14 @@ public class LoginJSON {
                     e.printStackTrace();
                 }
 
-                Log.i("regID in regthred", regID);
+                if (regID != "" && regID != null) {
 
-                if (regID != "") {
+                    Log.i("regID in regthred", regID);
                     HttpClient client = new DefaultHttpClient();
                     HttpResponse response;
+
                     try {
+
                         HttpPost post = new HttpPost(SERVER_URL + "/api/login");
 
                         Log.i("URL", SERVER_URL + "/api/register");
