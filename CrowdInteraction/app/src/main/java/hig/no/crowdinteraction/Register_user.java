@@ -24,6 +24,7 @@ public class Register_user extends Activity {
     Context context;
     Intent intent;
     User user;
+    Button nationality;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,9 +38,23 @@ public class Register_user extends Activity {
         Button register = (Button) findViewById(R.id.registerButton);
         final EditText firstname = (EditText) findViewById(R.id.registerFirstname);
         final EditText lastname = (EditText) findViewById(R.id.registerLastname);
-        final EditText nationality = (EditText) findViewById(R.id.registerNationality);
         final EditText phoneNumber = (EditText) findViewById(R.id.registerPhoneNumber);
         final EditText code = (EditText) findViewById(R.id.registerCode);
+
+        //final EditText nationality = (EditText) findViewById(R.id.registerNationality);
+        nationality = (Button)findViewById(R.id.nationalityButton);
+
+
+        nationality.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //setContentView(R.layout.country_list);
+                Intent i = new Intent(context, Nationality.class);
+                startActivityForResult(i, 1);
+
+            }
+        });
 
         /*A dropdown menu that can be implementet later on
 
@@ -85,7 +100,20 @@ public class Register_user extends Activity {
         });
 
     }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                String result = data.getStringExtra("result");
+                nationality.setText(result);
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+                return;
+            }
+
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
