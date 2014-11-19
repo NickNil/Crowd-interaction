@@ -2,7 +2,6 @@ package hig.no.crowdinteraction;
 
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -118,64 +116,6 @@ public class PostDataJSON {
         }; t.start();
     }
 
-
-
-
-
-/*    protected JSONObject eventlist()
-    {
-        final JSONObject[] event_data = new JSONObject[1];
-        Thread t = new Thread()
-        {
-            public void run()
-            {
-
-                HttpClient client = new DefaultHttpClient();
-                HttpResponse response;
-                try {
-                    HttpPost post = new HttpPost(SERVER_URL + "/api/events");
-
-                   // Log.i("URL", SERVER_URL + "/api/events");
-
-                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-                    BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
-                    nameValuePairs.add(pair);
-
-
-                    response = sendJson(client, post, nameValuePairs);
-
-                    if (response != null)
-                    {
-
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                        StatusLine statusLine = response.getStatusLine();
-                        int statusCode = statusLine.getStatusCode();
-                        Log.i("HTTP Status", Integer.toString(statusCode));
-                        Log.i("Response", inputStreamToString(in));
-
-                        String jsonString = inputStreamToString(in);
-                        jsonString = jsonString.replace("[","");
-                        jsonString = jsonString.replace("]","");
-                        Log.i("LoginResponse", jsonString);
-
-                        in.close();
-
-                        JSONObject jsonObj = new JSONObject(jsonString);
-                        jsonObj = jsonObj.getJSONObject("data");
-                        event_data[0] = jsonObj;
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }; t.start();
-
-        return event_data[0];
-    }*/
-
     protected void vote(final String vote)
     {
         final JSONObject[] event_data = new JSONObject[1];
@@ -212,7 +152,7 @@ public class PostDataJSON {
                         Log.i("HTTP Status", Integer.toString(statusCode));
                         Log.i("Response", inputStreamToString(in));
 
-                        String jsonString = inputStreamToString(in);
+                        /*String jsonString = inputStreamToString(in);
                         jsonString = jsonString.replace("[","");
                         jsonString = jsonString.replace("]","");
                         Log.i("LoginResponse", jsonString);
@@ -221,7 +161,7 @@ public class PostDataJSON {
 
                         JSONObject jsonObj = new JSONObject(jsonString);
                         jsonObj = jsonObj.getJSONObject("data");
-                        event_data[0] = jsonObj;
+                        event_data[0] = jsonObj;*/
                     }
 
                 } catch (Exception e) {
