@@ -163,6 +163,13 @@ public class EventList extends Activity
     }
 
 
+    private void tempEventBuilder()
+    {
+
+    }
+
+
+
 
     private class  EventListTask extends AsyncTask<Void, Void, JSONObject>
     {
