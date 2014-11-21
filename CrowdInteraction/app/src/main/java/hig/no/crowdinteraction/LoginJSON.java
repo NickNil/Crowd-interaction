@@ -104,9 +104,12 @@ public class LoginJSON {
                             jsonObj = jsonObj.getJSONObject("data");
                             JSONObject name = jsonObj.getJSONObject("name");
 
+                            //treat the  [{"param":"r","data":{"id":"0"}}] case !!
                             in.close();
 
                             user.SetPhoneNumber(phoneNumber);
+
+                            //obj.has("name"), obj.has("lastname")...
                             user.SetName(name.getString("firstname"),name.getString("lastname"));
                             user.SetNationality(jsonObj.getString("nationality"));
                             user.SetGmcId(jsonObj.getString("regid"));

@@ -6,6 +6,7 @@ import android.test.TouchUtils;
 import android.test.ViewAsserts;
 import android.view.KeyEvent;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -54,29 +55,32 @@ public class RegisterUserFunctionalityTest extends ActivityInstrumentationTestCa
         assertEquals("Text incorrect", "Register", textView.getText().toString());
 
         // textView Firstname
-        TextView firstname = (TextView) registerActivity.findViewById(R.id.sport);
+        EditText firstname = (EditText) registerActivity.findViewById(R.id.registerFirstname);
         ViewAsserts.assertOnScreen(registerActivity.getWindow().getDecorView(),firstname);
         assertEquals("Text incorrect", "Firstname:", firstname.getText().toString());
 
         // textView Lastname
-        TextView lastname = (TextView) registerActivity.findViewById(R.id.lastname);
+        EditText lastname = (EditText) registerActivity.findViewById(R.id.registerLastname);
         ViewAsserts.assertOnScreen(registerActivity.getWindow().getDecorView(),lastname);
         assertEquals("Text incorrect", "Lastname:", lastname.getText().toString());
 
         // textView Nationality
-        TextView nationality = (TextView) registerActivity.findViewById(R.id.nationality);
+        Button nationality = (Button) registerActivity.findViewById(R.id.nationalityButton);
         ViewAsserts.assertOnScreen(registerActivity.getWindow().getDecorView(),nationality);
         assertEquals("Text incorrect", "Nationality:", nationality.getText().toString());
 
         // textView Phone number
-        TextView phoneNumber = (TextView) registerActivity.findViewById(R.id.phoneNumber);
+        EditText phoneNumber = (EditText) registerActivity.findViewById(R.id.registerPhoneNumber);
         ViewAsserts.assertOnScreen(registerActivity.getWindow().getDecorView(),phoneNumber);
         assertEquals("Text incorrect", "Phone number:", phoneNumber.getText().toString());
 
         // textView Code
-        TextView code = (TextView) registerActivity.findViewById(R.id.code);
+        EditText code = (EditText) registerActivity.findViewById(R.id.registerCode);
         ViewAsserts.assertOnScreen(registerActivity.getWindow().getDecorView(),code);
         assertEquals("Text incorrect", "Code:", code.getText().toString());
+
+        ViewAsserts.assertOnScreen(registerActivity.getWindow().getDecorView(),register);
+        assertEquals("Text incorrect", "Register", register.getText().toString());
 
         this.sendKeys(KeyEvent.KEYCODE_BACK);
     }

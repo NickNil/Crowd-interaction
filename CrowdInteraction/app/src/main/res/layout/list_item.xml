@@ -7,9 +7,8 @@
         android:id="@+id/icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:contentDescription="Thumbnail"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:paddingRight="10dp"/>
 
     <TextView
         android:id="@+id/exampleTitle"

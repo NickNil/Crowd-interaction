@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -70,10 +71,7 @@ public class CountryCodesJSON {
                     try {
                         HttpPost post = new HttpPost(SERVER_URL + "/api/ioc");
 
-                        Log.i("URL", SERVER_URL + "/api/register");
-
                         response = client.execute(post);
-
 
                         if (response != null) {
 
@@ -87,7 +85,7 @@ public class CountryCodesJSON {
 
                             String jsonString = inputStreamToString(in);
                             jsonString = jsonString.replaceFirst(Pattern.quote("["), "");
-                            Log.i("Response", jsonString);
+                            //Log.i("Response", jsonString);
 
                             JSONObject jsonObj = new JSONObject(jsonString);
                             JSONArray jsonArray = jsonObj.getJSONArray("data");
@@ -98,7 +96,8 @@ public class CountryCodesJSON {
                                 MySQLiteHelper db = new MySQLiteHelper(context);
                                 db.addCountry(new IOCandISOcodes(jsonArray.getJSONObject(i).getString("ioc"),jsonArray.getJSONObject(i).getString("iso"), jsonArray.getJSONObject(i).getString("name")));
                                 //get all countries
-                                //list = db.getAllCountries();
+                                //List<IOCandISOcodes> list = db.getAllCountries();
+                                //Log.i("countries", list.toString());
                             }
 
                             //Log.i("Response2", inputStreamToString(in));

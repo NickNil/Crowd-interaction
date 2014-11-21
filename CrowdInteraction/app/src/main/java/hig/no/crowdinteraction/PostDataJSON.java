@@ -1,7 +1,11 @@
 package hig.no.crowdinteraction;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.ParseException;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,35 +17,46 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 
-
-public class PostDataJSON {
+public class PostDataJSON extends Activity{
     Context context;
     User user;
 
     PostDataJSON(Context appContext)
     {
-        context = appContext;
-        user = new User(context);
+      context = appContext;
+      user = new User(context);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     String SENDER_ID = "914623768180";
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
-    public static final String PROPERTY_REG_ID = "registration_id";
-    Toast toast;
 
-    protected void sendJson(final String firstname, final String lastname, final String nationality,
+
+    protected void sendJson(final String firstname, final String lastname, final String ioc, final String iso,
                             final String phoneNumber, final String passcode) {
 
         final GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
@@ -50,7 +65,6 @@ public class PostDataJSON {
         Thread t = new Thread() {
 
             public void run() {
-
 
                 String regID = null;
 
@@ -66,11 +80,8 @@ public class PostDataJSON {
                     HttpClient client = new DefaultHttpClient();
                     HttpResponse response;
                     try {
-                        HttpPost post = new HttpPost(SERVER_URL + "/api/register");
+                        HttpPost post = new HttpPost(SERVER_URL + "/api/register_android");
                         
-                        Log.i("URL", SERVER_URL + "/api/register");
-
-
                         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                         BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
@@ -83,6 +94,10 @@ public class PostDataJSON {
                         nameValuePairs.add(pair);
                         pair = new BasicNameValuePair("lastname", lastname);
                         nameValuePairs.add(pair);
+
+                        String nationality = "{\"iso\" : \"" + iso + "\", \"ioc\" : \"" + ioc + "\"}";
+
+                        Log.i("nationaltiy", nationality);
                         pair = new BasicNameValuePair("nationality", nationality);
                         nameValuePairs.add(pair);
                         pair = new BasicNameValuePair("regid", regID);
@@ -92,14 +107,42 @@ public class PostDataJSON {
                         post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         response = client.execute(post);
 
-
                         if (response != null) {
 
                             InputStream in = response.getEntity().getContent(); //Get the data in the entity
                             StatusLine statusLine = response.getStatusLine();
                             int statusCode = statusLine.getStatusCode();
                             Log.i("HTTP Status", Integer.toString(statusCode));
-                            Log.i("Response", inputStreamToString(in));
+                            //Log.i("Response", inputStreamToString(in));
+
+                            String jsonString = inputStreamToString(in);
+                            Log.i("jsonString", jsonString);
+                            jsonString = jsonString.replaceFirst(Pattern.quote("["), "");
+
+                            JSONObject jsonObj = new JSONObject(jsonString);
+                            Log.i("jsonObj", jsonObj.toString());
+                            JSONObject data = jsonObj.getJSONObject("data");
+                            String id = data.getString("id");
+
+                            if(id != "0"){
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast toast = Toast.makeText(context, "You can now log in", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                                });
+
+                            }else{
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast toast = Toast.makeText(context, "Registration went wrong. Please try again!", Toast.LENGTH_LONG);
+                                        toast.show();
+                                    }
+                                });
+                            }
                             in.close();
                         }
 
@@ -122,7 +165,6 @@ public class PostDataJSON {
 
             while ((rLine = rd.readLine()) != null) {
                 answer.append(rLine);
-                Log.i("ausdbiuasbd", rLine);
             }
 
         } catch (Exception e) {
