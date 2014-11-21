@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
-        android:text="Login"
+        android:text="@string/login"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="Phone number:"
+        android:text="@string/phoneNumber"
         android:layout_toStartOf="@+id/phoneNumberInput"
         android:layout_below="@+id/login"
         android:layout_toLeftOf="@+id/phoneNumberInput" />
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
-        android:text="Password:"
+        android:text="@string/code"
         android:layout_below="@+id/loginPhoneNumber"
         android:layout_toLeftOf="@+id/codeInput"
         android:layout_toStartOf="@+id/codeInput" />
@@ -45,7 +45,7 @@
         android:layout_alignBaseline="@+id/loginButton"
         android:layout_alignBottom="@+id/loginButton"
         android:layout_toRightOf="@+id/loginButton"
-        android:text="Register" />
+        android:text="@string/register" />
 
     <Button
         android:id="@+id/loginButton"
@@ -54,7 +54,7 @@
         android:layout_alignRight="@+id/login"
         android:layout_below="@+id/codeInput"
         android:layout_marginTop="16dp"
-        android:text="Login" />
+        android:text="@string/login"/>
 
     <Button
         android:layout_width="wrap_content"

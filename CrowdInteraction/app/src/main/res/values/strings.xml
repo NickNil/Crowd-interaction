@@ -9,7 +9,20 @@
     <string name="title_activity_event_list">Event List</string>
     <string name="title_activity_vote">Vote</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
+
     <string name="title_activity_live_event_list">Live Event List</string>
+
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="phoneNumber">Phone number:</string>
+    <string name="code">Code:</string>
+    <string name="crowdInteraction">Crowd Interaction</string>
+    <string name="register2">REGISTER</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="nationality">Nationality</string>
+    <string name="phoneNumber2">Phone number</string>
+    <string name="code2">Code</string>
 
     <string-array name="sovereignStates">
       <item>Afghanistan</item>

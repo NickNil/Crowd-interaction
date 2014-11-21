@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 
 public class Register_user extends Activity {
 
@@ -24,7 +26,9 @@ public class Register_user extends Activity {
     Context context;
     Intent intent;
     User user;
-    Button nationality;
+    Button nationality, register;
+    EditText firstname, lastname, phoneNumber, code;
+    String result, ioc, iso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,11 +39,11 @@ public class Register_user extends Activity {
         context = getApplicationContext();
         user = new User(getApplicationContext());
 
-        Button register = (Button) findViewById(R.id.registerButton);
-        final EditText firstname = (EditText) findViewById(R.id.registerFirstname);
-        final EditText lastname = (EditText) findViewById(R.id.registerLastname);
-        final EditText phoneNumber = (EditText) findViewById(R.id.registerPhoneNumber);
-        final EditText code = (EditText) findViewById(R.id.registerCode);
+        register = (Button) findViewById(R.id.registerButton);
+        firstname = (EditText) findViewById(R.id.registerFirstname);
+        lastname = (EditText) findViewById(R.id.registerLastname);
+        phoneNumber = (EditText) findViewById(R.id.registerPhoneNumber);
+        code = (EditText) findViewById(R.id.registerCode);
 
         //final EditText nationality = (EditText) findViewById(R.id.registerNationality);
         nationality = (Button)findViewById(R.id.nationalityButton);
@@ -50,66 +54,53 @@ public class Register_user extends Activity {
             public void onClick(View v) {
 
                 //setContentView(R.layout.country_list);
+
                 Intent i = new Intent(context, Nationality.class);
                 startActivityForResult(i, 1);
 
             }
         });
-
-        /*A dropdown menu that can be implementet later on
-
-        Spinner spinner = (Spinner) findViewById(R.id.registerNationality);
-           // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.sovereignStates, android.R.layout.simple_spinner_item);
-           // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-           // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);*/
-
-
-        register.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                String regid;
-                regid = user.GetGmcId();
-                if (regid.isEmpty())
-                {
-                    PostDataJSON json = new PostDataJSON(getApplicationContext());
-
-                    json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
-                            nationality.getText().toString(), phoneNumber.getText().toString(),
-                            code.getText().toString());
-
-                    Toast toast = Toast.makeText(context, "Good job, Sending you back!",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-
-
-                    startActivity(intent);
-
-                }
-                else
-                {
-                    Toast toast = Toast.makeText(context, "You are already registered",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            }
-        });
-
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         if (requestCode == 1) {
             if(resultCode == RESULT_OK){
-                String result = data.getStringExtra("result");
+                result = data.getStringExtra("result");
+                ioc = data.getStringExtra("ioc");
+                iso = data.getStringExtra("iso");
+                Log.i("extras", ioc);
+                Log.i("extras", iso);
                 nationality.setText(result);
+                register.setOnClickListener(new View.OnClickListener()
+                {
+                    public void onClick(View v)
+                    {
+                        String regid;
+                        regid = user.GetGmcId();
+                        if (regid.isEmpty())
+                        {
+                            PostDataJSON json = new PostDataJSON(getApplicationContext());
+
+                            json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
+                                    ioc, iso, phoneNumber.getText().toString(),
+                                    code.getText().toString());
+
+                            Intent login = new Intent(context, LoginForm.class);
+                            startActivity(login);
+
+                        }
+                        else
+                        {
+                            Toast toast = Toast.makeText(context, "You are already registered",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                });
+
             }
             if (resultCode == RESULT_CANCELED) {
                 //Write your code if there's no result
-                return;
             }
 
         }

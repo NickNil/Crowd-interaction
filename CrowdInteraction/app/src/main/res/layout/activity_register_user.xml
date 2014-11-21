@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:text="REGISTER"
+        android:text="@string/register2"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="15dp" />
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Firstname"
+        android:hint="@string/firstname"
         android:layout_below="@+id/textViewRegister"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Lastname"
+        android:hint="@string/lastname"
         android:layout_below="@+id/registerFirstname"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
@@ -63,14 +63,14 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:text="Nationality" />
+        android:text="@string/nationality" />
 
     <EditText
         android:id="@+id/registerPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Phone number"
+        android:hint="@string/phoneNumber2"
         android:inputType="phone"
         android:layout_above="@+id/registerCode"
         android:layout_alignLeft="@+id/registerCode"
@@ -87,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Code"
+        android:hint="@string/code2"
         android:inputType="numberPassword"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -95,13 +95,13 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"/>
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/register"
         android:layout_below="@+id/registerCode"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"

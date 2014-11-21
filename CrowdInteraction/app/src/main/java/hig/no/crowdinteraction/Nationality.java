@@ -25,8 +25,7 @@ public class Nationality extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.country_list);
 
-        //CountryCodesJSON json = new CountryCodesJSON(getApplicationContext());
-        //json.sendJson();
+
 
         MySQLiteHelper db = new MySQLiteHelper(this);
         final List<IOCandISOcodes> countryList = db.getAllCountries();
@@ -38,6 +37,16 @@ public class Nationality extends Activity {
         for (int i=0; i<countryList.size(); i++){
             countries[i] = countryList.get(i).toString();
             uri[i] = "drawable/" + countryList.get(i).getIso().toLowerCase();
+
+            if(uri[i].equals("drawable/do")){
+                uri[i] = "drawable/do2";
+            }
+
+            if(uri[i].equals("drawable/bq") || uri[i].equals("drawable/gf")|| uri[i].equals("drawable/gp")||uri[i].equals("drawable/re")||uri[i].equals("drawable/pm")){
+                uri[i] = "drawable/_olympics";
+            }
+
+
             imageResource[i] = getResources().getIdentifier(uri[i],null,getPackageName());
             //Log.i("iso",imageResource[i].toString());
         }
@@ -55,6 +64,8 @@ public class Nationality extends Activity {
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result",countryList.get(position).toString());
+                returnIntent.putExtra("ioc", countryList.get(position).getIoc());
+                returnIntent.putExtra("iso", countryList.get(position).getIso());
                 setResult(RESULT_OK,returnIntent);
                 finish();
             }

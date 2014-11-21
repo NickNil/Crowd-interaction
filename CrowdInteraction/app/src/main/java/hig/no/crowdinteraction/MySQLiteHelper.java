@@ -2,11 +2,13 @@ package hig.no.crowdinteraction;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,24 +45,30 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 "iso TEXT, "+
                 "name TEXT )";
         db.execSQL(CREATE_COUNTRYCODES_TABLE);
+
     }
 
     public void addCountry(IOCandISOcodes iocCodes){
 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
+        int count = db.rawQuery("SELECT id FROM "+ TABLE_NAME, null).getCount();
 
-        // 2. create ContentValues to add key "column"/value
-        ContentValues values = new ContentValues();
-        values.put(KEY_IOC, iocCodes.getIoc());
-        values.put(KEY_ISO, iocCodes.getIso());
-        values.put(KEY_NAME, iocCodes.getCoutryName());
+        //Log.i("number of records", String.valueOf(count));
+
+        if (count <226) {
+            // 2. create ContentValues to add key "column"/value
+            ContentValues values = new ContentValues();
+            values.put(KEY_IOC, iocCodes.getIoc());
+            values.put(KEY_ISO, iocCodes.getIso());
+            values.put(KEY_NAME, iocCodes.getCoutryName());
 
 
-        // 3. insert
-        db.insert(TABLE_NAME, // table
-                null, //nullColumnHack
-                values); // key/value -> keys = column names/ values = column values
+            // 3. insert
+            db.insert(TABLE_NAME, // table
+                    null, //nullColumnHack
+                    values); // key/value -> keys = column names/ values = column values
+        }
 
         // 4. close
         db.close();
@@ -92,6 +100,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
+        db.close();
         // return codes
         return codesList;
     }
@@ -126,9 +135,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         //log
         Log.d("getCodes("+id+")", codes.toString());
 
+        db.close();
         // 5. return codes
         return codes;
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
