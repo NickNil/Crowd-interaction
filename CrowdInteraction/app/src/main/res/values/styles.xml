@@ -5,4 +5,14 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="LiveEventItem">
+        <item name="android:background">@drawable/rounded_corner</item>
+        <item name="android:layout_margin">4dip</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+    <style name="TextStyle">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>

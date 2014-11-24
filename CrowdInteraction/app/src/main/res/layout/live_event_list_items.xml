@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/LiveEventItem"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:padding="10dp">
+
+    <TextView
+        style="@style/TextStyle"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="event"
+        android:id="@+id/eventName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iocIcon"
+        android:src="@drawable/sh"
+        android:layout_below="@+id/eventName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        style="@style/TextStyle"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nationality"
+        android:id="@+id/iocNationality"
+        android:layout_alignBottom="@+id/iocIcon"
+        android:layout_toRightOf="@+id/iocIcon"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"/>
+
+    <TextView
+        style="@style/TextStyle"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="1"
+        android:id="@+id/number"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/iocIcon"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        style="@style/TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="first last"
+        android:id="@+id/athleteName"
+        android:layout_toEndOf="@+id/iocIcon"
+        android:layout_alignBottom="@+id/number"
+        android:layout_toRightOf="@+id/iocIcon" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventIcon"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
