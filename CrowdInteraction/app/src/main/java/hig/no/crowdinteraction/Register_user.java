@@ -52,12 +52,8 @@ public class Register_user extends Activity {
         nationality.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //setContentView(R.layout.country_list);
-
                 Intent i = new Intent(context, Nationality.class);
                 startActivityForResult(i, 1);
-
             }
         });
     }
@@ -77,30 +73,37 @@ public class Register_user extends Activity {
                     {
                         String regid;
                         regid = user.GetGmcId();
-                        if (regid.isEmpty())
-                        {
-                            PostDataJSON json = new PostDataJSON(getApplicationContext());
+                        
+                        if(firstname.getText().toString().equals("")|| lastname.getText().toString().equals("")|| phoneNumber.getText().toString().equals("") || ioc.equals("") || iso.equals("")|| code.getText().toString().equals("")) {
 
-                            json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
-                                    ioc, iso, phoneNumber.getText().toString(),
-                                    code.getText().toString());
-
-                            Intent login = new Intent(context, LoginForm.class);
-                            startActivity(login);
-
-                        }
-                        else
-                        {
-                            Toast toast = Toast.makeText(context, "You are already registered",
+                            Toast toast = Toast.makeText(context, "Please fill in all the details!",
                                     Toast.LENGTH_SHORT);
                             toast.show();
+
+                        }
+                        else {
+                            if (regid.isEmpty()) {
+
+
+                                PostDataJSON json = new PostDataJSON(getApplicationContext());
+
+                                json.sendJson(firstname.getText().toString(), lastname.getText().toString(),
+                                        ioc, iso, phoneNumber.getText().toString(),
+                                        code.getText().toString());
+
+                                Intent login = new Intent(context, LoginForm.class);
+                                startActivity(login);
+
+
+                            } else {
+                                Toast toast2 = Toast.makeText(context, "You are already registered",
+                                        Toast.LENGTH_SHORT);
+                                toast2.show();
+                            }
                         }
                     }
                 });
 
-            }
-            if (resultCode == RESULT_CANCELED) {
-                //Write your code if there's no result
             }
 
         }

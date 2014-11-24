@@ -124,12 +124,12 @@ public class PostDataJSON extends Activity{
                             JSONObject data = jsonObj.getJSONObject("data");
                             String id = data.getString("id");
 
-                            if(id != "0"){
+                            if(id.equals("0")){
 
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast toast = Toast.makeText(context, "You can now log in", Toast.LENGTH_SHORT);
+                                        Toast toast = Toast.makeText(context, "Registration went wrong. Please try again!", Toast.LENGTH_LONG);
                                         toast.show();
                                     }
                                 });
@@ -138,10 +138,11 @@ public class PostDataJSON extends Activity{
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        Toast toast = Toast.makeText(context, "Registration went wrong. Please try again!", Toast.LENGTH_LONG);
+                                        Toast toast = Toast.makeText(context, "You can now log in", Toast.LENGTH_SHORT);
                                         toast.show();
                                     }
                                 });
+
                             }
                             in.close();
                         }
