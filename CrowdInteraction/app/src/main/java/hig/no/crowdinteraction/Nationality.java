@@ -61,7 +61,6 @@ public class Nationality extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 //Toast.makeText(Nationality.this, "You Clicked at " + countries[+position], Toast.LENGTH_SHORT).show();
-
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra("result",countryList.get(position).toString());
                 returnIntent.putExtra("ioc", countryList.get(position).getIoc());
