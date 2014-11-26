@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,11 +57,31 @@ public class VoteActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
+        //TODO: if we are doing different rages for different events give this int that value
+        int Scoreinterval = 1;
+        int numScorce = 21;
+        int Score = 0;
 
-        voteButton = (Button) findViewById(R.id.voteButton);
-       // scorePicker = (EditText) findViewById(R.id.scorePicker);
+        for (int i =0; i < numScorce; i++)
+        {
+            voteButton = new Button(this);
+            voteButton.setId(i);
+            voteButton.setText(Integer.toString(Score));
 
+            LinearLayout voteLayout  = (LinearLayout) findViewById(R.id.votepick);
 
+            int sdk = android.os.Build.VERSION.SDK_INT;
+            if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN)
+            {
+                voteButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.round_button));
+            }
+            else {
+                voteButton.setBackground(getResources().getDrawable(R.drawable.round_button));
+            }
+
+            voteLayout.addView(voteButton);
+            Score +=Scoreinterval;
+        }
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

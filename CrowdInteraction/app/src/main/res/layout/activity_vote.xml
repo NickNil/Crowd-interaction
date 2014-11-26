@@ -9,23 +9,16 @@
     android:background="#0099cc"
     tools:context="hig.no.crowdinteraction.VoteActivity">
 
-    <Button
-        android:id="@+id/voteButton"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:text="Vote"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:id="@+id/Athlete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Athlete:"
-        android:layout_toStartOf="@+id/voteButton"
+        android:layout_marginTop="31dp"
         android:layout_below="@+id/Title"
-        android:layout_toLeftOf="@+id/voteButton"
-        android:layout_marginTop="30dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="23dp" />
 
     <TextView
         android:id="@+id/event"
@@ -72,8 +65,7 @@
         android:text="New Text"
         android:id="@+id/lastname"
         android:layout_alignTop="@+id/Athlete"
-        android:layout_alignLeft="@+id/Title"
-        android:layout_alignStart="@+id/Title" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,21 +73,20 @@
         android:text="New Text"
         android:id="@+id/textView4"
         android:layout_alignTop="@+id/athlete"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignLeft="@+id/lastname"
+        android:layout_alignStart="@+id/lastname" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/horizontalScrollView" >
-
+        android:id="@+id/horizontalScrollView"
+        android:layout_below="@+id/event">
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:id="@+id/votepick">
-    </LinearLayout>
+        android:id="@+id/votepick"/>
+
     </HorizontalScrollView>
 </RelativeLayout>

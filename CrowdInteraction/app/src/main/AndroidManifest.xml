@@ -62,7 +62,7 @@
         <activity
             android:name="hig.no.crowdinteraction.VoteActivity"
             android:label="@string/title_activity_vote"
-            android:parentActivityName="hig.no.crowdinteraction.EventList" >
+            android:parentActivityName="hig.no.crowdinteraction.LiveEventList" >
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.Leaderboards"
