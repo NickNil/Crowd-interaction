@@ -1,7 +1,9 @@
 package hig.no.crowdinteraction;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
@@ -13,6 +15,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -199,6 +203,57 @@ public class EventMap extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.event_list, menu);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(false); // disable the button
+            actionBar.setDisplayHomeAsUpEnabled(false); // remove the left caret
+            actionBar.setDisplayShowHomeEnabled(false); // remove the icon
+            getActionBar().setDisplayShowTitleEnabled(false); //remove title
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        /*if (id == R.id.Logout) {
+            user.logout();
+            Intent intent;
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }*/
+        if (id == R.id.Home) {
+            Intent i = new Intent(EventMap.this, Home.class);
+            startActivity(i);
+        }
+        if (id == R.id.Leaderboard)
+        {
+            Intent i = new Intent(EventMap.this, Leaderboards.class);
+            startActivity(i);
+        }
+        if (id == R.id.LiveEvents)
+        {
+            Intent i = new Intent(EventMap.this, LiveEventList.class);
+            startActivity(i);
+        }
+        if (id == R.id.Events) {
+            Intent i = new Intent(EventMap.this, EventList.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

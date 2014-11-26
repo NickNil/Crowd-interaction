@@ -43,12 +43,12 @@ public class LiveEventList extends Activity{
         setContentView(R.layout.activity_live_event_list);
 
         LiveEventListJSON json = new LiveEventListJSON();
-        if (json.responseError = true)
+        json.sendJson();
+        if (json.responseError == true)
         {
             Toast.makeText(this, "No response from server", Toast.LENGTH_SHORT).show();
         }
         else {
-            json.sendJson();
 
             //creating string arrays for the adapter.
             eventName = new String[json.eventName.size()];
@@ -70,7 +70,7 @@ public class LiveEventList extends Activity{
                 intEventIcon[i] = eventIcon.get(i);
                 intNatIcon[i] = natIcon.get(i);
             }
-            System.out.println(json.isoNationality.get(0));
+
 
             LiveEventListItems adapter = new LiveEventListItems(this, Mongoid, eventName, iocNationality, number,
                     athleteName, intNatIcon, intEventIcon);
@@ -121,7 +121,8 @@ public class LiveEventList extends Activity{
             return true;
         }
         if (id == R.id.Home) {
-            //Intent i = new Intent(LiveEventList.this, Home.class);
+            Intent i = new Intent(LiveEventList.this, Home.class);
+            startActivity(i);
         }
         if (id == R.id.Leaderboard)
         {
@@ -133,8 +134,9 @@ public class LiveEventList extends Activity{
             Intent i = new Intent(LiveEventList.this, EventList.class);
             startActivity(i);
         }
-        if (id == R.id.Settings) {
-            //Intent i = new Intent(LiveEventList.this, Settings.class);
+        if (id == R.id.Map) {
+            Intent i = new Intent(LiveEventList.this, EventMap.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

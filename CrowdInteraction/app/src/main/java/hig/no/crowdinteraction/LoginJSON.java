@@ -143,7 +143,7 @@ public class LoginJSON extends Activity{
                                 user.SetMongoId(id);
                                 user.SetHighscore(data.getString("highscore"));
 
-                                Intent intent = new Intent(context,EventList.class);
+                                Intent intent = new Intent(context,Home.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
 

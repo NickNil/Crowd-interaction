@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
         {
             if (user.GetGmcId() != "")
             {
-                intent = new Intent(this, EventList.class);
+                intent = new Intent(this, Home.class);
             } else
             {
                 intent = new Intent(this, LoginForm.class);

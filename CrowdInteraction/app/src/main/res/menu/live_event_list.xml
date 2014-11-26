@@ -28,10 +28,14 @@
         android:icon="@drawable/olympic_medal"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
-    <item android:id="@+id/Settings"
-        android:title="@string/settings"
-        android:icon="@drawable/settings"
+    <item android:id="@+id/Map"
+        android:title="@string/map"
+        android:icon="@drawable/map_marker"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
+    <item android:id="@+id/Logout"
+        android:title="Log Out"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 
 </menu>

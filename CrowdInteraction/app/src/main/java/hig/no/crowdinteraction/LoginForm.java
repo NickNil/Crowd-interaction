@@ -49,8 +49,8 @@ public class LoginForm extends Activity {
                     json.sendJson(phoneNumber.getText().toString(),
                             code.getText().toString());
 
-                    //Intent intent = new Intent(LoginForm.this, Home.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(LoginForm.this, Home.class);
+                    startActivity(intent);
 
                     if (regid != "" && regid != null) {
 
@@ -77,7 +77,7 @@ public class LoginForm extends Activity {
         {
             public void onClick(View v)
             {
-                Intent i = new Intent(LoginForm.this, EventList.class);
+                Intent i = new Intent(LoginForm.this, Home.class);
                 startActivity(i);
             }
         });

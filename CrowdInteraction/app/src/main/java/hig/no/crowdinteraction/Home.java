@@ -1,8 +1,12 @@
 package hig.no.crowdinteraction;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,5 +39,48 @@ public class Home extends Activity {
 
         TextView country = (TextView)findViewById(R.id.country);
         country.setText(user.GetIoc());
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.live_event_list, menu);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(false); // disable the button
+            actionBar.setDisplayHomeAsUpEnabled(false); // remove the left caret
+            actionBar.setDisplayShowHomeEnabled(false); // remove the icon
+            getActionBar().setDisplayShowTitleEnabled(false); //remove title
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.LiveEvents) {
+            Intent i = new Intent(Home.this, LiveEventList.class);
+            startActivity(i);
+        }
+        if (id == R.id.Leaderboard)
+        {
+            Intent i = new Intent(Home.this, Leaderboards.class);
+            startActivity(i);
+        }
+        if (id == R.id.Events)
+        {
+            Intent i = new Intent(Home.this, EventList.class);
+            startActivity(i);
+        }
+        if (id == R.id.Map) {
+            Intent i = new Intent(Home.this, EventMap.class);
+            startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

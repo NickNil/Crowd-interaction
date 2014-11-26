@@ -105,7 +105,8 @@ public class EventList extends Activity
             startActivity(intent);
         }
         if (id == R.id.Home) {
-            //Intent i = new Intent(EventList.this, Home.class);
+            Intent i = new Intent(EventList.this, Home.class);
+            startActivity(i);
         }
         if (id == R.id.Leaderboard)
         {
@@ -117,8 +118,9 @@ public class EventList extends Activity
             Intent i = new Intent(EventList.this, LiveEventList.class);
             startActivity(i);
         }
-        if (id == R.id.Settings) {
-            //Intent i = new Intent(EventList.this, Settings.class);
+        if (id == R.id.Map) {
+            Intent i = new Intent(EventList.this, EventMap.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
