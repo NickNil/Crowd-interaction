@@ -24,7 +24,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,8 +53,6 @@ public class PostDataJSON extends Activity{
     String SENDER_ID = "914623768180";
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
-
-
     protected void sendJson(final String firstname, final String lastname, final String ioc, final String iso,
                             final String phoneNumber, final String passcode) {
 
@@ -68,20 +65,28 @@ public class PostDataJSON extends Activity{
 
                 String regID = null;
 
-                try {
+                try
+
+                {
                     regID = gcm.register(SENDER_ID);
-                } catch (IOException e) {
+                } catch (
+                        IOException e
+                        )
+
+                {
                     e.printStackTrace();
                 }
 
                 Log.i("regID in regthred", regID);
 
-                if (regID != "") {
+                if (regID != "")
+
+                {
                     HttpClient client = new DefaultHttpClient();
                     HttpResponse response;
                     try {
                         HttpPost post = new HttpPost(SERVER_URL + "/api/register_android");
-                        
+
                         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                         BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
@@ -102,8 +107,6 @@ public class PostDataJSON extends Activity{
                         nameValuePairs.add(pair);
                         pair = new BasicNameValuePair("regid", regID);
                         nameValuePairs.add(pair);
-
-
                         post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                         response = client.execute(post);
 
@@ -152,13 +155,84 @@ public class PostDataJSON extends Activity{
                     }
                 }
             }
-        };
-
-        t.start();
-
+        }; t.start();
     }
 
-    private String inputStreamToString(InputStream is) {
+    protected void vote(final String vote)
+    {
+        final JSONObject[] event_data = new JSONObject[1];
+        Thread t = new Thread()
+        {
+            public void run()
+            {
+
+                HttpClient client = new DefaultHttpClient();
+                HttpResponse response;
+                try {
+                    HttpPost post = new HttpPost(SERVER_URL + "/api/vote");
+
+                    // Log.i("URL", SERVER_URL + "/api/events");
+
+                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+                    BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
+                    nameValuePairs.add(pair);
+                    pair = new BasicNameValuePair("userid", user.GetMongoId());
+                    nameValuePairs.add(pair);
+                    pair = new BasicNameValuePair("vote", vote);
+                    nameValuePairs.add(pair);
+
+
+                    response = sendJson(client, post, nameValuePairs);
+
+                    if (response != null)
+                    {
+
+                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
+                        StatusLine statusLine = response.getStatusLine();
+                        int statusCode = statusLine.getStatusCode();
+                        Log.i("HTTP Status", Integer.toString(statusCode));
+                        Log.i("Response", inputStreamToString(in));
+
+                        /*String jsonString = inputStreamToString(in);
+                        jsonString = jsonString.replace("[","");
+                        jsonString = jsonString.replace("]","");
+                        Log.i("LoginResponse", jsonString);
+
+                        in.close();
+
+                        JSONObject jsonObj = new JSONObject(jsonString);
+                        jsonObj = jsonObj.getJSONObject("data");
+                        event_data[0] = jsonObj;*/
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }; t.start();
+    }
+
+
+    protected HttpResponse sendJson(HttpClient client,HttpPost post, List<NameValuePair> nameValuePairs)
+    {
+        HttpResponse response = null;
+        try
+        {
+            post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            response = client.execute(post);
+
+                return response;
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    protected String inputStreamToString(InputStream is) {
         String rLine;
         StringBuilder answer = new StringBuilder();
         try {

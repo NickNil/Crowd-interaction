@@ -54,10 +54,10 @@ public class MainActivity extends Activity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    // Do something after 5s = 5000ms
+                    // Do after 5s = 5000ms
                     startActivity(intent);
                 }
-            }, 3000);
+            }, 2000);
         }
 
     }

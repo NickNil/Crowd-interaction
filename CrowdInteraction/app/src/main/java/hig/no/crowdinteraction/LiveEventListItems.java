@@ -14,15 +14,17 @@ import android.widget.TextView;
 public class LiveEventListItems extends ArrayAdapter<String>{
     private final Activity context;
     private final String [] eventName;
+    private final String [] id;
     private final String [] nationality;
     private final String [] number;
     private final String [] athleteName;
     private final Integer[] natIcon;
     private final Integer[] eventIcon;
 
-    public LiveEventListItems(Activity context,String [] eventName, String [] nationality, String [] number, String [] athleteName, Integer[] natIcon, Integer[] eventIcon) {
+    public LiveEventListItems(Activity context,String [] id, String [] eventName, String [] nationality, String [] number, String [] athleteName, Integer[] natIcon, Integer[] eventIcon) {
         super(context, R.layout.live_event_list_items, eventName);
         this.context = context;
+        this.id = id;
         this.eventName = eventName;
         this.nationality = nationality;
         this.number = number;
@@ -48,6 +50,7 @@ public class LiveEventListItems extends ArrayAdapter<String>{
         tvAthlete.setText(athleteName[position]);
         ivNat.setImageResource(natIcon[position]);
         ivEvent.setImageResource(eventIcon[position]);
+        rowView.setTag(id);
         return rowView;
     }
 

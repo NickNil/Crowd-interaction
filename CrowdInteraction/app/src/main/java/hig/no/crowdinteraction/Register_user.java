@@ -3,17 +3,13 @@ package hig.no.crowdinteraction;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -75,11 +71,9 @@ public class Register_user extends Activity {
                         regid = user.GetGmcId();
                         
                         if(firstname.getText().toString().equals("")|| lastname.getText().toString().equals("")|| phoneNumber.getText().toString().equals("") || ioc.equals("") || iso.equals("")|| code.getText().toString().equals("")) {
-
                             Toast toast = Toast.makeText(context, "Please fill in all the details!",
                                     Toast.LENGTH_SHORT);
                             toast.show();
-
                         }
                         else {
                             if (regid.isEmpty()) {

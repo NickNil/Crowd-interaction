@@ -5,16 +5,17 @@ package hig.no.crowdinteraction;
  */
 
 
-import android.app.Activity;
+import android.app.Dialog;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -24,8 +25,8 @@ public class GCMIntentService extends IntentService
     Context context;
 
     public static final int NOTIFICATION_ID = 1;
-    private NotificationManager mNotificationManager;
-    NotificationCompat.Builder builder;
+    NotificationManager mNotificationManager;
+    NotificationCompat.Builder NotifyBuilder;
 
     public GCMIntentService()
     {
@@ -34,54 +35,90 @@ public class GCMIntentService extends IntentService
 
     }
 
-    protected void onHandleIntent(Intent intent)
+    public void onHandleIntent(Intent intent)
     {
         Bundle message = intent.getExtras();
         GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(this);
 
         String Response = intent.getStringExtra("param");
+        mNotificationManager = (NotificationManager)
+                this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-
-        /* The server gives JSON like responses like param:x.
-         * Requires: param
-         *
-        */
         switch (Response.charAt(0))
         {
-            case'r':
+
+            case 's':
             {
-                /*String regId = intent.getStringExtra("regid");
+                int notifyID = 1;
+                String score = message.getString("score");
 
-                Activity activity = (Activity) context;
-                final SharedPreferences prefs = getSharedPreferences(MainActivity.class.getSimpleName(),
-                        Context.MODE_PRIVATE);
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                // Vibrate for 500 milliseconds
+                v.vibrate(500);
+                // Sets an ID for the notification, so it can be updated
+                NotifyBuilder = new NotificationCompat.Builder(this)
+                        .setContentTitle("Scores are in")
+                        .setContentText("your score is "+ score)
+                        .setSmallIcon(R.drawable.ic_launcher);
 
+                //scorecPopup (intent);
+                break;
+            }
+            default:
+            {
+                int notifyID = 1;
 
-                Log.i("add regID", "Saving regId on app version ");
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(PROPERTY_REG_ID, regId);
-                editor.commit();
-
-                Toast toast = Toast.makeText(context, "User registration is done", Toast.LENGTH_SHORT);
-                toast.show();*/
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                // Vibrate for 500 milliseconds
+                v.vibrate(500);
+                // Sets an ID for the notification, so it can be updated
+                NotifyBuilder = new NotificationCompat.Builder(this)
+                        .setContentTitle("some msg")
+                        .setContentText("You got something fom the server, but we don't know what")
+                        .setSmallIcon(R.drawable.ic_launcher);
 
                 break;
             }
-            case'x':
-            {
-                CharSequence text = "User is already registered";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-                break;
-            }
-            case 'e':
-            {
-                EventList.populateEventList(intent);
-            }
-
         }
+
+        mNotificationManager.notify(
+                NOTIFICATION_ID,
+                NotifyBuilder.build());
+        GcmBroadcastReceiver.completeWakefulIntent(intent);
+    }
+
+
+   private void  scorecPopup (Intent intent)
+    {
+        // Sets up the custom dialog
+        final Dialog scorepopup = new Dialog(this);
+        scorepopup.setContentView(R.layout.showjugescore);
+        scorepopup.setTitle("score");
+
+        Button done = (Button) scorepopup.findViewById(R.id.button);
+        TextView scoreText = (TextView) scorepopup.findViewById(R.id.button);
+
+        if (intent.getStringExtra("score") != "")
+        {
+            scoreText.setText(intent.getStringExtra("score"));
+        }else
+        {
+            scoreText.setText("Error, something went wrong");
+        }
+
+        // Exits the dialog if button is clicked
+        done.setOnClickListener(new View.OnClickListener()
+        {
+
+            public void onClick(View v)
+            {
+
+                scorepopup.dismiss();
+
+
+            }
+        });
+        scorepopup.show();
     }
 
 }

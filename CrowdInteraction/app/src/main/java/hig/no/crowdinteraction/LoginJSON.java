@@ -18,9 +18,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -104,6 +102,9 @@ public class LoginJSON extends Activity{
                             StatusLine statusLine = response.getStatusLine();
                             int statusCode = statusLine.getStatusCode();
                             Log.i("HTTP Status", Integer.toString(statusCode));
+
+
+
 
                             String jsonString = inputStreamToString(in);
                             jsonString = jsonString.replace("[","");

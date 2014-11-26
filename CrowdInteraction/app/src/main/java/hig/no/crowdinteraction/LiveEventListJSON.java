@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
  */
 public class LiveEventListJSON {
     Context context;
+    ArrayList<String> mongoID = new ArrayList<String>();
     ArrayList<String> eventName = new ArrayList<String>();
     ArrayList<String> eventType = new ArrayList<String>();
     ArrayList<String> athleteName = new ArrayList<String>();
@@ -66,9 +67,9 @@ public class LiveEventListJSON {
 
 
                 try {
-                    HttpPost post = new HttpPost(SERVER_URL + "/api/live");
+                      HttpPost post = new HttpPost(SERVER_URL + "/api/live");
 
-                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                      List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                     BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
                     nameValuePairs.add(pair);
@@ -104,6 +105,9 @@ public class LiveEventListJSON {
                             athlete = data.getJSONObject("current_athlete");
                             nationality = athlete.getJSONObject("nationality");
 
+
+
+                            mongoID.add(data.getString("_id"));
                             eventName.add(data.getString("event_name"));
                             eventType.add(data.getString("event_type"));
                             iocNationality.add(nationality.getString("ioc"));

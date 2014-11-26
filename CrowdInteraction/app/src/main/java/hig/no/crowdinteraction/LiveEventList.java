@@ -3,12 +3,21 @@ package hig.no.crowdinteraction;
 import android.app.ActionBar;
 import android.app.Activity;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Objects;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -18,6 +27,7 @@ public class LiveEventList extends Activity{
 
     ListView liveEventList;
     String[] eventName;
+    String[] Mongoid;
     String[] athleteName;
     String[] iocNationality;
     String[] number;
@@ -36,16 +46,19 @@ public class LiveEventList extends Activity{
 
         //creating string arrays for the adapter.
         eventName = new String[json.eventName.size()];
+        Mongoid = new String[json.mongoID.size()];
         athleteName = new String[json.athleteName.size()];
         iocNationality = new String[json.iocNationality.size()];
         number = new String[json.number.size()];
         intEventIcon = new Integer[json.eventType.size()];
         intNatIcon = new Integer[json.isoNationality.size()];
+
         for(int i = 0; i < json.isoNationality.size(); i++)
         {
             natIcon.add(getDrawable(this, json.isoNationality.get(i).toLowerCase()));
             eventIcon.add(getDrawable(this, json.eventType.get(i)));
             eventName[i] = json.eventName.get(i);
+            Mongoid[i] = json.mongoID.get(i);
             athleteName[i] = json.athleteName.get(i);
             iocNationality[i] = json.iocNationality.get(i);
             number[i] = json.number.get(i);
@@ -54,11 +67,30 @@ public class LiveEventList extends Activity{
         }
         System.out.println(json.isoNationality.get(0));
 
-        LiveEventListItems adapter = new LiveEventListItems(this, eventName, iocNationality, number,
+        LiveEventListItems adapter = new LiveEventListItems(this, Mongoid, eventName, iocNationality, number,
                 athleteName, intNatIcon, intEventIcon);
 
         liveEventList = (ListView)findViewById(R.id.liveEventList);
         liveEventList.setAdapter(adapter);
+
+        liveEventList.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Intent intent = new Intent(getApplicationContext(), VoteActivity.class);
+
+                intent.putExtra("name", eventName[position]);
+                intent.putExtra("id", Mongoid[position]);
+                intent.putExtra("athleteNR", number[position]);
+                intent.putExtra("athlete", athleteName[position]);
+                intent.putExtra("EventIcon",intEventIcon[position]);
+                intent.putExtra("NatIcon",intNatIcon[position]);
+
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override
