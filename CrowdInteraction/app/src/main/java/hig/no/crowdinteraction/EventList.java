@@ -12,16 +12,12 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-<<<<<<< HEAD
 import android.view.Window;
-=======
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
->>>>>>> f59cce69af5080f3eb3135b024164d5fa7444618
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;

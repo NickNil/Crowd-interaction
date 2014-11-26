@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,55 +43,58 @@ public class LiveEventList extends Activity{
         setContentView(R.layout.activity_live_event_list);
 
         LiveEventListJSON json = new LiveEventListJSON();
-        json.sendJson();
-
-        //creating string arrays for the adapter.
-        eventName = new String[json.eventName.size()];
-        Mongoid = new String[json.mongoID.size()];
-        athleteName = new String[json.athleteName.size()];
-        iocNationality = new String[json.iocNationality.size()];
-        number = new String[json.number.size()];
-        intEventIcon = new Integer[json.eventType.size()];
-        intNatIcon = new Integer[json.isoNationality.size()];
-
-        for(int i = 0; i < json.isoNationality.size(); i++)
+        if (json.responseError = true)
         {
-            natIcon.add(getDrawable(this, json.isoNationality.get(i).toLowerCase()));
-            eventIcon.add(getDrawable(this, json.eventType.get(i)));
-            eventName[i] = json.eventName.get(i);
-            Mongoid[i] = json.mongoID.get(i);
-            athleteName[i] = json.athleteName.get(i);
-            iocNationality[i] = json.iocNationality.get(i);
-            number[i] = json.number.get(i);
-            intEventIcon[i] = eventIcon.get(i);
-            intNatIcon[i] = natIcon.get(i);
+            Toast.makeText(this, "No response from server", Toast.LENGTH_SHORT).show();
         }
-        System.out.println(json.isoNationality.get(0));
+        else {
+            json.sendJson();
 
-        LiveEventListItems adapter = new LiveEventListItems(this, Mongoid, eventName, iocNationality, number,
-                athleteName, intNatIcon, intEventIcon);
+            //creating string arrays for the adapter.
+            eventName = new String[json.eventName.size()];
+            Mongoid = new String[json.mongoID.size()];
+            athleteName = new String[json.athleteName.size()];
+            iocNationality = new String[json.iocNationality.size()];
+            number = new String[json.number.size()];
+            intEventIcon = new Integer[json.eventType.size()];
+            intNatIcon = new Integer[json.isoNationality.size()];
 
-        liveEventList = (ListView)findViewById(R.id.liveEventList);
-        liveEventList.setAdapter(adapter);
-
-        liveEventList.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                Intent intent = new Intent(getApplicationContext(), VoteActivity.class);
-
-                intent.putExtra("name", eventName[position]);
-                intent.putExtra("id", Mongoid[position]);
-                intent.putExtra("athleteNR", number[position]);
-                intent.putExtra("athlete", athleteName[position]);
-                intent.putExtra("EventIcon",intEventIcon[position]);
-                intent.putExtra("NatIcon",intNatIcon[position]);
-
-                startActivity(intent);
-
+            for (int i = 0; i < json.isoNationality.size(); i++) {
+                natIcon.add(getDrawable(this, json.isoNationality.get(i).toLowerCase()));
+                eventIcon.add(getDrawable(this, json.eventType.get(i)));
+                eventName[i] = json.eventName.get(i);
+                Mongoid[i] = json.mongoID.get(i);
+                athleteName[i] = json.athleteName.get(i);
+                iocNationality[i] = json.iocNationality.get(i);
+                number[i] = json.number.get(i);
+                intEventIcon[i] = eventIcon.get(i);
+                intNatIcon[i] = natIcon.get(i);
             }
-        });
+            System.out.println(json.isoNationality.get(0));
+
+            LiveEventListItems adapter = new LiveEventListItems(this, Mongoid, eventName, iocNationality, number,
+                    athleteName, intNatIcon, intEventIcon);
+
+            liveEventList = (ListView) findViewById(R.id.liveEventList);
+            liveEventList.setAdapter(adapter);
+
+            liveEventList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getApplicationContext(), VoteActivity.class);
+
+                    intent.putExtra("name", eventName[position]);
+                    intent.putExtra("id", Mongoid[position]);
+                    intent.putExtra("athleteNR", number[position]);
+                    intent.putExtra("athlete", athleteName[position]);
+                    intent.putExtra("EventIcon", intEventIcon[position]);
+                    intent.putExtra("NatIcon", intNatIcon[position]);
+
+                    startActivity(intent);
+
+                }
+            });
+        }
     }
 
     @Override
