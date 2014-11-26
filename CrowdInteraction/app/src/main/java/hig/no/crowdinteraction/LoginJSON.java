@@ -78,14 +78,14 @@ public class LoginJSON extends Activity{
 
                         HttpPost post = new HttpPost(SERVER_URL + "/api/login");
 
-                        Log.i("URL", SERVER_URL + "/api/register");
+                        Log.i("URL", SERVER_URL + "/api/login");
 
 
                         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-                        BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
-                        nameValuePairs.add(pair);
-                        pair = new BasicNameValuePair("phone_number", phoneNumber);
+                        //BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
+                        //nameValuePairs.add(pair);
+                        BasicNameValuePair pair = new BasicNameValuePair("phone_number", phoneNumber);
                         nameValuePairs.add(pair);
                         pair = new BasicNameValuePair("passcode", passcode);
                         nameValuePairs.add(pair);
@@ -132,6 +132,7 @@ public class LoginJSON extends Activity{
                                 JSONObject name = data.getJSONObject("name");
                                 user.SetPhoneNumber(phoneNumber);
                                 user.SetName(name.getString("firstname"), name.getString("lastname"));
+                                Log.i("username", name.getString("firstname"));
                                 user.SetNationality(data.getString("nationality"));
                                 user.SetGmcId(data.getString("regid"));
                                 user.SetMongoId(id);

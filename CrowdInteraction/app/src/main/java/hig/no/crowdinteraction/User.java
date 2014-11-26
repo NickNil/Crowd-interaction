@@ -14,6 +14,7 @@ public class User
     String[] name;
     String nationality;
     String phoneNumber;
+    String highscore;
     Context context;
     SharedPreferences sharedPref;
     int position;
@@ -38,7 +39,7 @@ public class User
         firstName = sharedPref.getString("firstName","");
         lastName = sharedPref.getString("lastName","");
         name  = new String[] {firstName, lastName};
-
+        highscore = sharedPref.getString("Highscore","");
         context = appContext;
     }
 
@@ -49,6 +50,7 @@ public class User
         name = new String[] {"", ""};
         nationality = "";
         phoneNumber = "";
+        highscore = "";
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -58,6 +60,7 @@ public class User
         editor.putString("lastName","");
         editor.putString("Nationality",nationality);
         editor.putString("PhoneNumber",phoneNumber);
+        editor.putString("Highscore", highscore);
         editor.commit();
     }
 
@@ -80,6 +83,10 @@ public class User
     protected String GetPhoneNumber()
     {
         return phoneNumber;
+    }
+    protected String GetHighscore()
+    {
+        return highscore;
     }
     protected int GetPosition()
     {
@@ -128,6 +135,13 @@ public class User
         phoneNumber = newPhoneNumber;
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("PhoneNumber",phoneNumber);
+        editor.commit();
+    }
+    protected void SetHighscore(String newHighscore)
+    {
+        highscore = newHighscore;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("Highscore",highscore);
         editor.commit();
     }
     protected void SetPosition(int newPosition)

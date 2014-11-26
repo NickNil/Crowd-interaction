@@ -2,6 +2,7 @@ package hig.no.crowdinteraction;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -20,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -60,7 +62,7 @@ public class EventMap extends FragmentActivity {
     String SERVER_URL = "http://ci.harnys.net";
 
     public GoogleMap mMap;
-    Double latitude, longitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,23 +106,42 @@ public class EventMap extends FragmentActivity {
 
                         JSONObject jsonObj = new JSONObject(jsonString);
                         JSONObject data = jsonObj.getJSONObject("data");
-                        JSONObject id = data.getJSONObject("5464cdcc9c7684e324ff4ccb");
-                        JSONObject eventdata = id.getJSONObject("event_data");
-                        final JSONObject location = eventdata.getJSONObject("event_location");
-                        Log.i("location", location.toString());
 
-                        latitude = Double.parseDouble(location.get("latitude").toString());
-                        longitude = Double.parseDouble(location.get("longitude").toString());
+                        String[] id = new String[]{"5464cdcc9c7684e324ff4ccb","54281393e4b0b7147c91f492","542a8c27a77c9e3cb8d63af2"};
+                        Double latitude, longitude;
+                        final LatLng[] latLong = new LatLng[3];
+                        final String[] eventNames = new String[3];
+
+                        for(int i = 0; i<id.length; i++) {
+                            JSONObject ID = data.getJSONObject(id[i]);
+                            JSONObject eventData = ID.getJSONObject("event_data");
+                            String eventName = eventData.getString("event_name");
+                            eventNames[i] = eventName;
+
+                            final JSONObject location = eventData.getJSONObject("event_location");
+                            Log.i("location", location.toString());
+                            latitude = Double.parseDouble(location.get("latitude").toString());
+                            longitude = Double.parseDouble(location.get("longitude").toString());
+                            latLong[i] = new LatLng(latitude, longitude);
+                        }
+
+
+                        final Integer[] icons = new Integer[]{ R.drawable.figure_skating, R.drawable.ski_jump, R.drawable.snowboard};
 
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                LatLng latlong = new LatLng(latitude, longitude);
-                                mMap.addMarker(new MarkerOptions()
-                                        .position(latlong)
-                                        .title("Event location"));
-                                CameraPosition cameraPosition = new CameraPosition.Builder().target(latlong).zoom(10).build();
+
+                                for(int i = 0; i<latLong.length; i++){
+
+                                    mMap.addMarker(new MarkerOptions()
+                                            .position(latLong[i])
+                                            .title(eventNames[i])
+                                            .icon(BitmapDescriptorFactory.fromResource(icons[i])));
+                                }
+                                CameraPosition cameraPosition = new CameraPosition.Builder().target(latLong[1]).zoom(11).build();
                                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
                             }
                         });
 

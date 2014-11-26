@@ -90,6 +90,10 @@
             android:label="Event Map" >
         </activity>
 
+        <activity
+            android:name=".Home"
+            android:label="Home" >
+        </activity>
 
         <receiver
             android:name=".GcmBroadcastReceiver"

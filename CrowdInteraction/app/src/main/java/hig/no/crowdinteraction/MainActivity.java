@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         final Intent intent;
 
         final Handler handler = new Handler();
