@@ -3,18 +3,20 @@
     package="hig.no.crowdinteraction" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <permission android:name="com.example.gcm.permission.C2D_MESSAGE"
+    <permission
+        android:name="com.example.gcm.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
 
     <application
@@ -22,13 +24,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAo819TiU_zcVtkV5UuSH5kOip5T-SuH14"/>
+            android:value="AIzaSyAo819TiU_zcVtkV5UuSH5kOip5T-SuH14" />
 
         <activity
-            android:name=".MainActivity"
+            android:name="hig.no.crowdinteraction.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,75 +38,78 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginForm"
-            android:label="@string/title_activity_login_form">
+            android:name="hig.no.crowdinteraction.LoginForm"
+            android:label="@string/title_activity_login_form" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hig.no.crowdinteraction.MainActivity" />
         </activity>
         <activity
-            android:name=".Register_user"
+            android:name="hig.no.crowdinteraction.Register_user"
             android:label="@string/title_activity_register_user"
-            android:parentActivityName=".LoginForm" >
+            android:parentActivityName="hig.no.crowdinteraction.LoginForm" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hig.no.crowdinteraction.LoginForm" />
         </activity>
         <activity
-            android:name=".EventList"
-            android:label="@string/title_activity_event_list">
+            android:name="hig.no.crowdinteraction.EventList"
+            android:label="@string/title_activity_event_list" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hig.no.crowdinteraction.MainActivity" />
         </activity>
         <activity
-            android:name=".VoteActivity"
+            android:name="hig.no.crowdinteraction.VoteActivity"
             android:label="@string/title_activity_vote"
-            android:parentActivityName=".EventList" >
+            android:parentActivityName="hig.no.crowdinteraction.EventList" >
         </activity>
         <activity
-            android:name=".Leaderboards"
+            android:name="hig.no.crowdinteraction.Leaderboards"
             android:label="@string/title_activity_leaderboard"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="hig.no.crowdinteraction.EventList" >
         </activity>
         <activity
-            android:name=".LiveEventList"
+            android:name="hig.no.crowdinteraction.LiveEventList"
             android:label="@string/title_activity_live_event_list"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="hig.no.crowdinteraction.MainActivity" >
         </activity>
-
         <activity
-            android:name=".Nationality"
+            android:name="hig.no.crowdinteraction.Nationality"
             android:label="Nationality" >
         </activity>
-
         <activity
-            android:name=".EventMap"
+            android:name="hig.no.crowdinteraction.EventMap"
             android:label="Event Map" >
         </activity>
 
-
         <receiver
-            android:name=".GcmBroadcastReceiver"
+            android:name="hig.no.crowdinteraction.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="hig.no.crowdinteraction" />
             </intent-filter>
         </receiver>
-        <service android:name=".GCMIntentService" />
 
+        <service android:name="hig.no.crowdinteraction.GCMIntentService" />
 
         <uses-library android:name="android.test.runner" />
 
-        <!--requirement for OpenGL ES version 2-->
+        <!-- requirement for OpenGL ES version 2 -->
         <uses-feature
             android:glEsVersion="0x00020000"
-            android:required="true"/>
+            android:required="true" />
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-    </application>
 
+        <activity
+            android:name="hig.no.crowdinteraction.Home"
+            android:label="@string/title_activity_home" >
+        </activity>
+    </application>
 
 </manifest>

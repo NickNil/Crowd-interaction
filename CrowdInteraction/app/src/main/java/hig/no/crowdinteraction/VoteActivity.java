@@ -58,7 +58,7 @@ public class VoteActivity extends Activity {
 
 
         voteButton = (Button) findViewById(R.id.voteButton);
-        scorePicker = (EditText) findViewById(R.id.scorePicker);
+       // scorePicker = (EditText) findViewById(R.id.scorePicker);
 
 
 
