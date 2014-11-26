@@ -18,7 +18,8 @@
         android:layout_below="@+id/Title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="23dp" />
+        android:layout_marginLeft="23dp"
+        android:textColor="#ffffff"/>
 
     <TextView
         android:id="@+id/event"
@@ -28,18 +29,20 @@
         android:layout_marginTop="62dp"
         android:layout_below="@+id/Athlete"
         android:layout_alignLeft="@+id/Athlete"
-        android:layout_alignStart="@+id/Athlete" />
+        android:layout_alignStart="@+id/Athlete"
+        android:layout_marginBottom="20dp"
+        android:textColor="#ffffff"/>
 
     <TextView
         android:id="@+id/athlete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Starting #:"
-
         android:layout_marginTop="23dp"
         android:layout_below="@+id/Athlete"
         android:layout_alignLeft="@+id/Athlete"
-        android:layout_alignStart="@+id/Athlete" />
+        android:layout_alignStart="@+id/Athlete"
+        android:textColor="#ffffff"/>
 
     <TextView
         android:id="@+id/Title"
@@ -49,7 +52,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"
         android:text="Voting"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#ffffff"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,7 +61,8 @@
         android:text="New Text"
         android:id="@+id/textView"
         android:layout_alignTop="@+id/event"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,7 +70,8 @@
         android:text="New Text"
         android:id="@+id/lastname"
         android:layout_alignTop="@+id/Athlete"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -74,12 +80,14 @@
         android:id="@+id/textView4"
         android:layout_alignTop="@+id/athlete"
         android:layout_alignLeft="@+id/lastname"
-        android:layout_alignStart="@+id/lastname" />
+        android:layout_alignStart="@+id/lastname"
+        android:textColor="#ffffff"/>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/horizontalScrollView"
+        android:fillViewport="false"
         android:layout_below="@+id/event">
     <LinearLayout
         android:orientation="horizontal"
@@ -89,4 +97,21 @@
         android:id="@+id/votepick"/>
 
     </HorizontalScrollView>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/eventIco"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/flag"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

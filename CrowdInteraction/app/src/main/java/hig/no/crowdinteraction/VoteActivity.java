@@ -1,5 +1,6 @@
 package hig.no.crowdinteraction;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,8 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +43,7 @@ public class VoteActivity extends Activity {
 
     Button voteButton;// = (Button) findViewById(R.id.Votebutton);
     EditText scorePicker;// = (NumberPicker) findViewById(R.id.scorePicker);
+    LinearLayout voteLayout;
 
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
@@ -49,6 +54,8 @@ public class VoteActivity extends Activity {
     String startingNumber;
     String athlete;
     String score;
+    int EventIcon;
+    int intNatIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,18 +64,24 @@ public class VoteActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true); // remove the left caret
+        actionBar.setDisplayShowHomeEnabled(true); // remove the icon
+        getActionBar().setDisplayShowTitleEnabled(false);
+
         //TODO: if we are doing different rages for different events give this int that value
-        int Scoreinterval = 1;
-        int numScorce = 21;
-        int Score = 0;
+        float Scoreinterval = 0.5f;
+        int numScorce = 41;
+        float curScore = 0;
+        int size = 5;
 
         for (int i =0; i < numScorce; i++)
         {
             voteButton = new Button(this);
             voteButton.setId(i);
-            voteButton.setText(Integer.toString(Score));
+            voteButton.setText(Float.toString(curScore));
 
-            LinearLayout voteLayout  = (LinearLayout) findViewById(R.id.votepick);
+            voteLayout  = (LinearLayout) findViewById(R.id.votepick);
 
             int sdk = android.os.Build.VERSION.SDK_INT;
             if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN)
@@ -76,11 +89,27 @@ public class VoteActivity extends Activity {
                 voteButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.round_button));
             }
             else {
+
                 voteButton.setBackground(getResources().getDrawable(R.drawable.round_button));
             }
 
+                voteButton.setOnClickListener(new View.OnClickListener()
+                {
+                    public void onClick (View v)
+                    {
+                        int scoreid = v.getId();
+                        Button temp = (Button)findViewById(scoreid);
+                        score = temp.getText().toString();
+
+                        Toast toast = Toast.makeText(getApplicationContext(), "Click " +score,
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                        new VoteTask().execute();
+
+                    }
+                });
             voteLayout.addView(voteButton);
-            Score +=Scoreinterval;
+            curScore +=Scoreinterval;
         }
 
         Bundle extras = getIntent().getExtras();
@@ -91,6 +120,8 @@ public class VoteActivity extends Activity {
             mongoID = extras.getString("id");
             startingNumber = extras.getString("athleteNR");
             athlete = extras.getString("athlete");
+            EventIcon = extras.getInt("EventIcon");
+            intNatIcon = extras.getInt("NatIcon");
         }
 
         TextView text = (TextView) findViewById(R.id.textView);
@@ -105,19 +136,37 @@ public class VoteActivity extends Activity {
         user = new User(getApplicationContext());
         post = new PostDataJSON (getApplicationContext());
 
-        voteButton.setOnClickListener(new View.OnClickListener()
+        ImageView flag = (ImageView)findViewById(R.id.flag);
+        ImageView eventIco = (ImageView)findViewById(R.id.eventIco);
+
+        flag.setImageResource(intNatIcon);
+        eventIco.setImageResource(EventIcon);
+
+
+
+        voteLayout.setOnClickListener(new View.OnClickListener()
         {
             public void onClick (View v)
             {
+
+                for (int i = 0; i< 0; i++)
+                {
+
+                }
 
                 score = scorePicker.getText().toString();
                 Toast toast = Toast.makeText(getApplicationContext(), "Click",
                         Toast.LENGTH_SHORT);
                 toast.show();
-                new VoteTask().execute();
+                //new VoteTask().execute();
 
             }
         });
+
+        HorizontalScrollView scroll = (HorizontalScrollView)findViewById(R.id.horizontalScrollView);
+        scroll.setScrollX(100);
+        scroll.setScrollY(100);
+
     }
 
 

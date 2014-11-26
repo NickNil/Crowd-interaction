@@ -43,11 +43,12 @@ public class LiveEventList extends Activity{
         setContentView(R.layout.activity_live_event_list);
 
         LiveEventListJSON json = new LiveEventListJSON();
-        if (json.responseError = true)
+       // if (json.responseError = true)
         {
             Toast.makeText(this, "No response from server", Toast.LENGTH_SHORT).show();
         }
-        else {
+     //   else
+        {
             json.sendJson();
 
             //creating string arrays for the adapter.

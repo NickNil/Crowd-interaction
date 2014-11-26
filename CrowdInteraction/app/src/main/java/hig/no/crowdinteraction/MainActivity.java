@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
 
         final Intent intent;
 
+
         final Handler handler = new Handler();
         context = getApplicationContext();
         user = new User(getApplicationContext());
