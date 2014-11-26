@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
  */
 public class LiveEventListJSON {
     Context context;
+    Boolean responseError = false;
     ArrayList<String> mongoID = new ArrayList<String>();
     ArrayList<String> eventName = new ArrayList<String>();
     ArrayList<String> eventType = new ArrayList<String>();
@@ -116,6 +117,10 @@ public class LiveEventListJSON {
                             athleteName.add(athlete.getString("name"));
                         }
 
+                    }
+                    else
+                    {
+                        responseError = true;
                     }
 
                 } catch (JSONException e) {

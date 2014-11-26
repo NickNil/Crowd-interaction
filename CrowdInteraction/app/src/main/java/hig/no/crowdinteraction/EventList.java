@@ -1,5 +1,6 @@
 package hig.no.crowdinteraction;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -11,12 +12,12 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -77,6 +78,13 @@ public class EventList extends Activity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.event_list, menu);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(false); // disable the button
+            actionBar.setDisplayHomeAsUpEnabled(false); // remove the left caret
+            actionBar.setDisplayShowHomeEnabled(false); // remove the icon
+            getActionBar().setDisplayShowTitleEnabled(false); //remove title
+        }
         return true;
     }
 
@@ -96,6 +104,9 @@ public class EventList extends Activity
             intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
+        if (id == R.id.Home) {
+            //Intent i = new Intent(EventList.this, Home.class);
+        }
         if (id == R.id.Leaderboard)
         {
             Intent i = new Intent(EventList.this, Leaderboards.class);
@@ -105,6 +116,9 @@ public class EventList extends Activity
         {
             Intent i = new Intent(EventList.this, LiveEventList.class);
             startActivity(i);
+        }
+        if (id == R.id.Settings) {
+            //Intent i = new Intent(EventList.this, Settings.class);
         }
         return super.onOptionsItemSelected(item);
     }

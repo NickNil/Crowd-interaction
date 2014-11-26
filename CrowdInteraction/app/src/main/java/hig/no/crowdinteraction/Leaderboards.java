@@ -1,5 +1,6 @@
 package hig.no.crowdinteraction;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import java.io.BufferedReader;
 import java.io.File;
@@ -116,6 +117,13 @@ public class Leaderboards extends Activity{
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.leaderboard, menu);
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(false); // disable the button
+            actionBar.setDisplayHomeAsUpEnabled(false); // remove the left caret
+            actionBar.setDisplayShowHomeEnabled(false); // remove the icon
+            getActionBar().setDisplayShowTitleEnabled(false); //remove title
+        }
         return true;
     }
 
@@ -127,6 +135,22 @@ public class Leaderboards extends Activity{
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.Home) {
+            //Intent i = new Intent(Leaderboards.this, Home.class);
+        }
+        if (id == R.id.Events)
+        {
+            Intent i = new Intent(Leaderboards.this, EventList.class);
+            startActivity(i);
+        }
+        if (id == R.id.LiveEvents)
+        {
+            Intent i = new Intent(Leaderboards.this, LiveEventList.class);
+            startActivity(i);
+        }
+        if (id == R.id.Settings) {
+            //Intent i = new Intent(Leaderboards.this, Settings.class);
         }
         return super.onOptionsItemSelected(item);
     }
