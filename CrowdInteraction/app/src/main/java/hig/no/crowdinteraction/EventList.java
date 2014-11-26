@@ -105,7 +105,7 @@ public class EventList extends Activity
             startActivity(intent);
         }
         if (id == R.id.Home) {
-            //Intent i = new Intent(EventList.this, Home.class);
+            Intent i = new Intent(EventList.this, Home.class);
         }
         if (id == R.id.Leaderboard)
         {
