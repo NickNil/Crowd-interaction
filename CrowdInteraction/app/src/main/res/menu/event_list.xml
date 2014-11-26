@@ -9,6 +9,10 @@
         android:title="Leaderboard"
         android:orderInCategory="100"
         android:showAsAction="ifRoom" />
+    <item android:id="@+id/LiveEvents"
+        android:title="Live Events"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom" />
     <item android:id="@+id/Logout"
         android:title="Log Out"
         android:orderInCategory="100"

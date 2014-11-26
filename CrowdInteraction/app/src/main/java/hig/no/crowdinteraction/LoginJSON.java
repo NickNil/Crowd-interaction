@@ -1,7 +1,11 @@
 package hig.no.crowdinteraction;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -23,14 +27,21 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginJSON {
+public class LoginJSON extends Activity{
     Context context;
     User user;
 
-    LoginJSON(Context appContext)
+    public LoginJSON(){
+    }
+    public LoginJSON(Context appContext)
     {
         context = appContext;
         user = new User(context);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     String SENDER_ID = "914623768180";
@@ -55,12 +66,14 @@ public class LoginJSON {
                     e.printStackTrace();
                 }
 
-                Log.i("regID in regthred", regID);
+                if (regID != "" && regID != null) {
 
-                if (regID != "") {
+                    Log.i("regID in regthred", regID);
                     HttpClient client = new DefaultHttpClient();
                     HttpResponse response;
+
                     try {
+
                         HttpPost post = new HttpPost(SERVER_URL + "/api/login");
 
                         Log.i("URL", SERVER_URL + "/api/register");
@@ -98,23 +111,37 @@ public class LoginJSON {
                             jsonString = jsonString.replace("]","");
                             Log.i("LoginResponse", jsonString);
 
-                            if (jsonString == "0")
-                            {
-
-                            }
-
-                            JSONObject jsonObj = new JSONObject(jsonString);
-                            jsonObj = jsonObj.getJSONObject("data");
-                            JSONObject name = jsonObj.getJSONObject("name");
-
                             in.close();
 
-                            user.SetPhoneNumber(phoneNumber);
-                            user.SetName(name.getString("firstname"),name.getString("lastname"));
-                            user.SetNationality(jsonObj.getString("nationality"));
-                            user.SetGmcId(jsonObj.getString("regid"));
-                            user.SetMongoId(jsonObj.getString("id"));
+                            JSONObject jsonObj = new JSONObject(jsonString);
+                            JSONObject data = jsonObj.getJSONObject("data");
+                            String id = data.getString("id");
+                            Log.i("id",id);
 
+                            if (id.equals("0")) {
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast toast = Toast.makeText(context, "The phone number and code don't match. Please double-check and try again.", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                                });
+                            }
+                            else{
+
+                                JSONObject name = data.getJSONObject("name");
+                                user.SetPhoneNumber(phoneNumber);
+                                user.SetName(name.getString("firstname"), name.getString("lastname"));
+                                user.SetNationality(data.getString("nationality"));
+                                user.SetGmcId(data.getString("regid"));
+                                user.SetMongoId(id);
+
+                                Intent intent = new Intent(context,EventList.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
+
+                            }
 
 
                             /*{"param":"l","data":

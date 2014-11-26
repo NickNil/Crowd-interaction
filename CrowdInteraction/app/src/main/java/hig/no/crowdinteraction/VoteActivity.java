@@ -32,6 +32,7 @@ import java.util.List;
 
 public class VoteActivity extends Activity {
 
+
     User user;
     PostDataJSON post;
 
@@ -48,7 +49,6 @@ public class VoteActivity extends Activity {
     String athlete;
     String score;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -56,7 +56,8 @@ public class VoteActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
-        voteButton = (Button) findViewById(R.id.Votebutton);
+
+        voteButton = (Button) findViewById(R.id.voteButton);
         scorePicker = (EditText) findViewById(R.id.scorePicker);
 
 
@@ -74,7 +75,7 @@ public class VoteActivity extends Activity {
         TextView text = (TextView) findViewById(R.id.textView);
         text.setText(sportName);
 
-        text = (TextView) findViewById(R.id.textView3);
+        text = (TextView) findViewById(R.id.lastname);
         text.setText(athlete);
 
         text = (TextView) findViewById(R.id.textView4);

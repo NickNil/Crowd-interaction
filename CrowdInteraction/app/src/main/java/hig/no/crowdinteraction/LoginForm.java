@@ -16,24 +16,26 @@ import android.widget.Toast;
 
 public class LoginForm extends Activity {
 
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
-
+        user = new User(getApplicationContext());
 
         Button login = (Button) findViewById(R.id.loginButton);
         Button register = (Button) findViewById(R.id.registerButton2);
         //Button leaderboard = (Button) findViewById(R.id.leaderboardButton);
+
         final EditText phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
         final EditText code = (EditText) findViewById(R.id.codeInput);
+        final String regid;
+        regid = user.GetGmcId();
 
         login.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                Intent test = new Intent(LoginForm.this, MainActivity.class);
-                startActivity(test);
 
                 if(phoneNumber.getText().toString().equals("")
                         || code.getText().toString().equals(""))
@@ -49,8 +51,12 @@ public class LoginForm extends Activity {
                     json.sendJson(phoneNumber.getText().toString(),
                             code.getText().toString());
 
-                    Intent i = new Intent(LoginForm.this, EventList.class);
-                    startActivity(i);
+                    if (regid != "" && regid != null) {
+
+                    Log.i("regID in regthred", regid);
+                    Intent intent = new Intent(LoginForm.this, EventList.class);
+                    startActivity(intent);
+                    }
                 }
             }
         });
@@ -59,6 +65,8 @@ public class LoginForm extends Activity {
         {
             public void onClick(View v)
             {
+                CountryCodesJSON json = new CountryCodesJSON(getApplicationContext());
+                json.sendJson();
                 Intent i = new Intent(LoginForm.this, Register_user.class);
                 startActivity(i);
             }
@@ -68,8 +76,8 @@ public class LoginForm extends Activity {
         {
             public void onClick(View v)
             {
-                Intent i = new Intent(LoginForm.this, Leaderboards.class);
-                startActivity(i);
+                //Intent i = new Intent(LoginForm.this, LiveEventList.class);
+                //startActivity(i);
             }
         });*/
 
