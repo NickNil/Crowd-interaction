@@ -47,7 +47,7 @@ public class User
         context = appContext;
     }
 
-    protected void logout()
+    public void logout()
     {
         gmcID = "";
         mongoID = "";

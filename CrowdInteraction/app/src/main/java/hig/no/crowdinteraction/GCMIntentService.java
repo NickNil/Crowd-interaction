@@ -19,19 +19,19 @@ import android.widget.TextView;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-public class GCMIntentService extends IntentService
+public class GcmIntentService extends IntentService
 {
     public static final String PROPERTY_REG_ID = "registration_id";
-    Context context;
+    //Context context;
 
     public static final int NOTIFICATION_ID = 1;
     NotificationManager mNotificationManager;
     NotificationCompat.Builder NotifyBuilder;
 
-    public GCMIntentService()
+    public GcmIntentService()
     {
         super("GcmIntentService");
-        context = getApplicationContext();
+        //context = getApplicationContext();
 
     }
 
@@ -88,7 +88,7 @@ public class GCMIntentService extends IntentService
     }
 
 
-   private void  scorecPopup (Intent intent)
+    private void  scorecPopup (Intent intent)
     {
         // Sets up the custom dialog
         final Dialog scorepopup = new Dialog(this);
