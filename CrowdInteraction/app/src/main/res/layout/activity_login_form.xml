@@ -56,14 +56,14 @@
         android:layout_marginTop="16dp"
         android:text="@string/login"/>
 
-    <!--Button
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Test"
         android:id="@+id/leaderboardButton"
         android:layout_centerVertical="true"
         android:layout_alignRight="@+id/registerButton2"
-        android:layout_alignEnd="@+id/registerButton2"/-->
+        android:layout_alignEnd="@+id/registerButton2"/>
 
     <EditText
         android:id="@+id/phoneNumberInput"

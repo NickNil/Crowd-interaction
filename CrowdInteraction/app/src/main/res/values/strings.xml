@@ -23,6 +23,11 @@
     <string name="nationality">Nationality</string>
     <string name="phoneNumber2">Phone number</string>
     <string name="code2">Code</string>
+    <string name="home">Home</string>
+    <string name="live">Live</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="events">Events</string>
+    <string name="settings">Settings</string>
 
     <string-array name="sovereignStates">
       <item>Afghanistan</item>
