@@ -13,6 +13,8 @@ public class User
     String mongoID;
     String[] name;
     String nationality;
+    String ioc;
+    String iso;
     String phoneNumber;
     String highscore;
     Context context;
@@ -40,6 +42,8 @@ public class User
         lastName = sharedPref.getString("lastName","");
         name  = new String[] {firstName, lastName};
         highscore = sharedPref.getString("Highscore","");
+        ioc = sharedPref.getString("ioc","");
+        iso = sharedPref.getString("iso","");
         context = appContext;
     }
 
@@ -51,6 +55,8 @@ public class User
         nationality = "";
         phoneNumber = "";
         highscore = "";
+        ioc = "";
+        iso = "";
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -61,6 +67,8 @@ public class User
         editor.putString("Nationality",nationality);
         editor.putString("PhoneNumber",phoneNumber);
         editor.putString("Highscore", highscore);
+        editor.putString("ioc", ioc);
+        editor.putString("iso", iso);
         editor.commit();
     }
 
@@ -80,6 +88,15 @@ public class User
     {
         return nationality;
     }
+    protected String GetIoc()
+    {
+        return ioc;
+    }
+    protected String GetIso()
+    {
+        return iso;
+    }
+
     protected String GetPhoneNumber()
     {
         return phoneNumber;
@@ -96,7 +113,6 @@ public class User
     {
         return score;
     }
-
     //
 
     protected void SetGmcId(String id)
@@ -128,6 +144,20 @@ public class User
         nationality = newNationality;
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("Nationality",nationality);
+        editor.commit();
+    }
+    protected void SetIoc(String newIoc)
+    {
+        ioc = newIoc;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("ioc",ioc);
+        editor.commit();
+    }
+    protected void SetIso(String newIso)
+    {
+        iso = newIso;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("iso",iso);
         editor.commit();
     }
     protected void SetPhoneNumber(String newPhoneNumber)

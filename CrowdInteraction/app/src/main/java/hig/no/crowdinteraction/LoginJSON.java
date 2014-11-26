@@ -115,6 +115,7 @@ public class LoginJSON extends Activity{
 
                             JSONObject jsonObj = new JSONObject(jsonString);
                             JSONObject data = jsonObj.getJSONObject("data");
+                            Log.i("data", data.toString());
                             String id = data.getString("id");
                             Log.i("id",id);
 
@@ -133,10 +134,14 @@ public class LoginJSON extends Activity{
                                 JSONObject name = data.getJSONObject("name");
                                 user.SetPhoneNumber(phoneNumber);
                                 user.SetName(name.getString("firstname"), name.getString("lastname"));
-                                Log.i("username", name.getString("firstname"));
-                                user.SetNationality(data.getString("nationality"));
+
+                                JSONObject nationality = data.getJSONObject("nationality");
+                                //user.SetNationality(data.getString("nationality"));
+                                user.SetIoc(nationality.getString("ioc"));
+                                user.SetIso(nationality.getString("iso"));
                                 user.SetGmcId(data.getString("regid"));
                                 user.SetMongoId(id);
+                                user.SetHighscore(data.getString("highscore"));
 
                                 Intent intent = new Intent(context,EventList.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -144,6 +149,22 @@ public class LoginJSON extends Activity{
 
                             }
 
+                            /*{
+                                "param":"l",
+                                    "data":{
+                                "id":"545219809c76847e198b4570",
+                                        "nationality":{
+                                    "iso":"AL",
+                                            "ioc":"ALB"
+                                },
+                                "highscore":0,
+                                        "name":{
+                                    "firstname":"Bjarne",
+                                            "lastname":"Betjent"
+                                },
+                                "regid":"REGIDBJARNE1337"
+                            }
+                            }*/
 
                             /*{"param":"l","data":
                                 {"id":"545239c29c76842a1e8b4568",
