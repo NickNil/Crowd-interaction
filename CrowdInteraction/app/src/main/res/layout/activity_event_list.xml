@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Select live event"
+        android:text="Events"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal"
         android:textColor="#0099CC"
@@ -23,7 +23,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/liveEventList"
+        android:id="@+id/EventList"
         android:divider="@android:color/white"
         android:dividerHeight="20dp"
         android:drawSelectorOnTop="false"
