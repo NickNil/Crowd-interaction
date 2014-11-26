@@ -24,6 +24,7 @@ public class Home extends Activity {
         username.setText(firstnameLastname[0] + " " + firstnameLastname[1]);
 
         TextView scoreView = (TextView) findViewById(R.id.totalScore);
+
         scoreView.setText(user.GetHighscore());
 
         String uri ="@drawable/"+user.GetIso().toLowerCase();
