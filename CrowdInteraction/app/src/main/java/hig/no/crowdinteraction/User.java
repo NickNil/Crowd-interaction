@@ -13,7 +13,10 @@ public class User
     String mongoID;
     String[] name;
     String nationality;
+    String ioc;
+    String iso;
     String phoneNumber;
+    String highscore;
     Context context;
     SharedPreferences sharedPref;
     int position;
@@ -38,7 +41,9 @@ public class User
         firstName = sharedPref.getString("firstName","");
         lastName = sharedPref.getString("lastName","");
         name  = new String[] {firstName, lastName};
-
+        highscore = sharedPref.getString("Highscore","");
+        ioc = sharedPref.getString("ioc","");
+        iso = sharedPref.getString("iso","");
         context = appContext;
     }
 
@@ -49,6 +54,9 @@ public class User
         name = new String[] {"", ""};
         nationality = "";
         phoneNumber = "";
+        highscore = "";
+        ioc = "";
+        iso = "";
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -58,6 +66,9 @@ public class User
         editor.putString("lastName","");
         editor.putString("Nationality",nationality);
         editor.putString("PhoneNumber",phoneNumber);
+        editor.putString("Highscore", highscore);
+        editor.putString("ioc", ioc);
+        editor.putString("iso", iso);
         editor.commit();
     }
 
@@ -77,9 +88,22 @@ public class User
     {
         return nationality;
     }
+    protected String GetIoc()
+    {
+        return ioc;
+    }
+    protected String GetIso()
+    {
+        return iso;
+    }
+
     protected String GetPhoneNumber()
     {
         return phoneNumber;
+    }
+    protected String GetHighscore()
+    {
+        return highscore;
     }
     protected int GetPosition()
     {
@@ -89,7 +113,6 @@ public class User
     {
         return score;
     }
-
     //
 
     protected void SetGmcId(String id)
@@ -123,11 +146,32 @@ public class User
         editor.putString("Nationality",nationality);
         editor.commit();
     }
+    protected void SetIoc(String newIoc)
+    {
+        ioc = newIoc;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("ioc",ioc);
+        editor.commit();
+    }
+    protected void SetIso(String newIso)
+    {
+        iso = newIso;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("iso",iso);
+        editor.commit();
+    }
     protected void SetPhoneNumber(String newPhoneNumber)
     {
         phoneNumber = newPhoneNumber;
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("PhoneNumber",phoneNumber);
+        editor.commit();
+    }
+    protected void SetHighscore(String newHighscore)
+    {
+        highscore = newHighscore;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("Highscore",highscore);
         editor.commit();
     }
     protected void SetPosition(int newPosition)

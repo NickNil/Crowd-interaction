@@ -76,14 +76,14 @@ public class LoginJSON extends Activity{
 
                         HttpPost post = new HttpPost(SERVER_URL + "/api/login");
 
-                        Log.i("URL", SERVER_URL + "/api/register");
+                        Log.i("URL", SERVER_URL + "/api/login");
 
 
                         List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
-                        BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
-                        nameValuePairs.add(pair);
-                        pair = new BasicNameValuePair("phone_number", phoneNumber);
+                        //BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
+                        //nameValuePairs.add(pair);
+                        BasicNameValuePair pair = new BasicNameValuePair("phone_number", phoneNumber);
                         nameValuePairs.add(pair);
                         pair = new BasicNameValuePair("passcode", passcode);
                         nameValuePairs.add(pair);
@@ -115,6 +115,7 @@ public class LoginJSON extends Activity{
 
                             JSONObject jsonObj = new JSONObject(jsonString);
                             JSONObject data = jsonObj.getJSONObject("data");
+                            Log.i("data", data.toString());
                             String id = data.getString("id");
                             Log.i("id",id);
 
@@ -133,9 +134,14 @@ public class LoginJSON extends Activity{
                                 JSONObject name = data.getJSONObject("name");
                                 user.SetPhoneNumber(phoneNumber);
                                 user.SetName(name.getString("firstname"), name.getString("lastname"));
-                                user.SetNationality(data.getString("nationality"));
+
+                                JSONObject nationality = data.getJSONObject("nationality");
+                                //user.SetNationality(data.getString("nationality"));
+                                user.SetIoc(nationality.getString("ioc"));
+                                user.SetIso(nationality.getString("iso"));
                                 user.SetGmcId(data.getString("regid"));
                                 user.SetMongoId(id);
+                                user.SetHighscore(data.getString("highscore"));
 
                                 Intent intent = new Intent(context,EventList.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -143,6 +149,22 @@ public class LoginJSON extends Activity{
 
                             }
 
+                            /*{
+                                "param":"l",
+                                    "data":{
+                                "id":"545219809c76847e198b4570",
+                                        "nationality":{
+                                    "iso":"AL",
+                                            "ioc":"ALB"
+                                },
+                                "highscore":0,
+                                        "name":{
+                                    "firstname":"Bjarne",
+                                            "lastname":"Betjent"
+                                },
+                                "regid":"REGIDBJARNE1337"
+                            }
+                            }*/
 
                             /*{"param":"l","data":
                                 {"id":"545239c29c76842a1e8b4568",
