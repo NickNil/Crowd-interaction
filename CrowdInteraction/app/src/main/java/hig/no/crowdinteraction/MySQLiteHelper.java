@@ -78,7 +78,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         List<IOCandISOcodes> codesList = new LinkedList<IOCandISOcodes>();
 
         // 1. build the query
-        String query = "SELECT  * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME;
 
         // 2. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -110,6 +110,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // 1. get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
 
+        //db.rawQuery("SELECT * FROM " + TABLE_NAME + "WHERE id = ?", new String[]{String.valueOf(id)});
+
         // 2. build query
         Cursor cursor =
                 db.query(TABLE_NAME, // a. table
@@ -120,6 +122,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                         null, // f. having
                         null, // g. order by
                         null); // h. limit
+
 
         // 3. if we got results get the first one
         if (cursor != null)

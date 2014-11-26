@@ -1,9 +1,7 @@
 package hig.no.crowdinteraction;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -51,11 +49,14 @@ public class LoginForm extends Activity {
                     json.sendJson(phoneNumber.getText().toString(),
                             code.getText().toString());
 
+                    //Intent intent = new Intent(LoginForm.this, Home.class);
+                    //startActivity(intent);
+
                     if (regid != "" && regid != null) {
 
                     Log.i("regID in regthred", regid);
-                    Intent intent = new Intent(LoginForm.this, EventList.class);
-                    startActivity(intent);
+                    Intent intent2 = new Intent(LoginForm.this, Home.class);
+                    startActivity(intent2);
                     }
                 }
             }

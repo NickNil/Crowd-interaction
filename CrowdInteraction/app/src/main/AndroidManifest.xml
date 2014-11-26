@@ -83,6 +83,11 @@
             android:label="Event Map" >
         </activity>
 
+        <activity
+            android:name=".Home"
+            android:label="Home" >
+        </activity>
+
         <receiver
             android:name="hig.no.crowdinteraction.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
@@ -106,10 +111,6 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name="hig.no.crowdinteraction.Home"
-            android:label="@string/title_activity_home" >
-        </activity>
     </application>
 
 </manifest>
