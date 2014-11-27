@@ -15,7 +15,7 @@
         android:showAsAction="always|withText" />
     <item android:id="@+id/LiveEvents"
         android:title="@string/live"
-        android:icon="@drawable/law"
+        android:icon="@drawable/law_black"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
     <item android:id="@+id/Events"

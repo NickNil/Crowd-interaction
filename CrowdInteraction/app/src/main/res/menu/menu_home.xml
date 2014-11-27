@@ -4,7 +4,7 @@
         android:orderInCategory="100" android:showAsAction="never" />
     <item android:id="@+id/Home"
         android:title="@string/home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/home_black"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
     <item android:id="@+id/LiveEvents"
@@ -20,6 +20,11 @@
     <item android:id="@+id/Leaderboard"
         android:title="@string/leaderboard"
         android:icon="@drawable/olympic_medal"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText" />
+    <item android:id="@+id/Map"
+        android:title="@string/map"
+        android:icon="@drawable/map_marker"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
     <item android:id="@+id/Logout"

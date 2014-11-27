@@ -136,11 +136,12 @@ public class LeaderboardJSON {
                         */
                     }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 } catch (UnknownHostException e){
                     e.printStackTrace();
-                }catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
+                    responseError = true;
+                }catch (ClientProtocolException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
