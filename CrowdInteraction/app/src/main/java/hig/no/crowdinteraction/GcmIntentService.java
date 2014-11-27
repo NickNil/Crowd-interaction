@@ -59,7 +59,7 @@ public class GcmIntentService extends IntentService
                 // Sets an ID for the notification, so it can be updated
                 NotifyBuilder = new NotificationCompat.Builder(this)
                         .setContentTitle("Scores are in")
-                        .setContentText("your score is "+ score)
+                        .setContentText(score)
                         .setSmallIcon(R.drawable.ic_launcher);
 
                 //scorecPopup (intent);

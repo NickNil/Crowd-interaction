@@ -32,6 +32,7 @@ public class LiveEventList extends Activity{
     String[] athleteName;
     String[] iocNationality;
     String[] number;
+    String[] eventType;
     ArrayList<Integer> eventIcon = new ArrayList<Integer>();
     ArrayList<Integer> natIcon = new ArrayList<Integer>();
     Integer[] intEventIcon;
@@ -56,6 +57,7 @@ public class LiveEventList extends Activity{
             athleteName = new String[json.athleteName.size()];
             iocNationality = new String[json.iocNationality.size()];
             number = new String[json.number.size()];
+            eventType = new String[json.eventType.size()];
             intEventIcon = new Integer[json.eventType.size()];
             intNatIcon = new Integer[json.isoNationality.size()];
 
@@ -65,6 +67,7 @@ public class LiveEventList extends Activity{
                 eventName[i] = json.eventName.get(i);
                 Mongoid[i] = json.mongoID.get(i);
                 athleteName[i] = json.athleteName.get(i);
+                eventType[i] = json.eventType.get(i);
                 iocNationality[i] = json.iocNationality.get(i);
                 number[i] = json.number.get(i);
                 intEventIcon[i] = eventIcon.get(i);
@@ -87,6 +90,7 @@ public class LiveEventList extends Activity{
                     intent.putExtra("id", Mongoid[position]);
                     intent.putExtra("athleteNR", number[position]);
                     intent.putExtra("athlete", athleteName[position]);
+                    intent.putExtra("eventType", eventType[position]);
                     intent.putExtra("EventIcon", intEventIcon[position]);
                     intent.putExtra("NatIcon", intNatIcon[position]);
 

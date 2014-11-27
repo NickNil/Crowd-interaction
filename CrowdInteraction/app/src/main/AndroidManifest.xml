@@ -55,24 +55,22 @@
         <activity
             android:name="hig.no.crowdinteraction.EventList"
             android:label="@string/title_activity_event_list" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="hig.no.crowdinteraction.MainActivity" />
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.VoteActivity"
             android:label="@string/title_activity_vote"
-            android:parentActivityName="hig.no.crowdinteraction.EventList" >
+            android:parentActivityName="hig.no.crowdinteraction.LiveEventList" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hig.no.crowdinteraction.LiveEventList" />
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.Leaderboards"
-            android:label="@string/title_activity_leaderboard"
-            android:parentActivityName="hig.no.crowdinteraction.EventList" >
+            android:label="@string/title_activity_leaderboard">
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.LiveEventList"
-            android:label="@string/title_activity_live_event_list"
-            android:parentActivityName="hig.no.crowdinteraction.MainActivity" >
+            android:label="@string/title_activity_live_event_list">
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.Nationality"
