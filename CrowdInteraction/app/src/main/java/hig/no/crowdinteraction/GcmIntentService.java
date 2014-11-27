@@ -23,7 +23,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 public class GcmIntentService extends IntentService
 {
     public static final String PROPERTY_REG_ID = "registration_id";
-    //Context context;
+    Context context;
 
     public static final int NOTIFICATION_ID = 1;
     NotificationManager mNotificationManager;
@@ -32,7 +32,7 @@ public class GcmIntentService extends IntentService
     public GcmIntentService()
     {
         super("GcmIntentService");
-        //context = getApplicationContext();
+        context = getApplicationContext();
 
     }
 
@@ -63,6 +63,18 @@ public class GcmIntentService extends IntentService
                         .setSmallIcon(R.drawable.ic_launcher);
 
                 //scorecPopup (intent);
+                break;
+            }
+            case 'n':
+            {
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                // Vibrate for 500 milliseconds
+                v.vibrate(500);
+                // Sets an ID for the notification, so it can be updated
+                NotifyBuilder = new NotificationCompat.Builder(this)
+                        .setContentTitle("Do a uppdate")
+                        .setContentText("Uppdate your live events, Sorry")
+                        .setSmallIcon(R.drawable.ic_launcher);
                 break;
             }
             default:

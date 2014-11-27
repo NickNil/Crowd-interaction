@@ -157,5 +157,4 @@ public class LiveEventList extends Activity{
         return context.getResources().getIdentifier(name,
                 "drawable", context.getPackageName());
     }
-
 }
