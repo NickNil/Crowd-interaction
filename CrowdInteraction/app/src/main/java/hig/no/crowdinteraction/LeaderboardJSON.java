@@ -39,6 +39,10 @@ public class LeaderboardJSON {
     Context context;
     ArrayList<User> userList = new ArrayList<User>();
     ArrayList<String> isoNationality = new ArrayList<String>();
+    ArrayList<String> position = new ArrayList<String>();
+    ArrayList<String> userName = new ArrayList<String>();
+    ArrayList<String> points = new ArrayList<String>();
+    ArrayList<String> iocNationality = new ArrayList<String>();
     Boolean responseError = false;
 
     LeaderboardJSON(Context appContext)
@@ -61,7 +65,6 @@ public class LeaderboardJSON {
                 JSONObject user;
                 JSONObject nationality;
                 JSONObject name;
-                User player;
 
 
                 try {
@@ -107,29 +110,16 @@ public class LeaderboardJSON {
 
                         for (int i=0; i<jsonArray.length(); i++)
                         {
-                            player = new User(context);
                             user = jsonArray.getJSONObject(i).getJSONObject("user");
                             nationality = user.getJSONObject("nationality");
                             name = user.getJSONObject("name");
 
-                            player.name = new String[]{name.getString("firstname"), name.getString("lastname")};
-                            player.nationality = nationality.getString("ioc");
+                            userName.add(name.getString("firstname") + " " + name.getString("lastname"));
+                            iocNationality.add(nationality.getString("ioc"));
                             isoNationality.add(nationality.getString("iso"));
-                            player.position = Integer.parseInt(jsonArray.getJSONObject(i).getString("standing"));
-                            player.score = Integer.parseInt(user.getString("highscore"));
-
-                            userList.add(player);
+                            position.add(jsonArray.getJSONObject(i).getString("standing"));
+                            points.add(user.getString("highscore"));
                         }
-
-                        System.out.println("name:" + userList.get(0).GetName()[0] + " " + userList.get(0).GetName()[1]);
-                        System.out.println("nat:" + userList.get(0).GetNationality());
-                        System.out.println("pos:" + userList.get(0).GetPosition());
-                        System.out.println("score:" + userList.get(0).GetScore());
-
-                        System.out.println("name:" + userList.get(1).GetName()[0] + " " + userList.get(0).GetName()[1]);
-                        System.out.println("nat:" + userList.get(1).GetNationality());
-                        System.out.println("pos:" + userList.get(1).GetPosition());
-                        System.out.println("score:" + userList.get(1).GetScore());
 
 
 

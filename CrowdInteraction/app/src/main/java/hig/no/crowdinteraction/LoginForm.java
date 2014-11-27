@@ -23,7 +23,6 @@ public class LoginForm extends Activity {
 
         Button login = (Button) findViewById(R.id.loginButton);
         Button register = (Button) findViewById(R.id.registerButton2);
-        Button leaderboard = (Button) findViewById(R.id.leaderboardButton);
 
         final EditText phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
         final EditText code = (EditText) findViewById(R.id.codeInput);
@@ -69,15 +68,6 @@ public class LoginForm extends Activity {
                 CountryCodesJSON json = new CountryCodesJSON(getApplicationContext());
                 json.sendJson();
                 Intent i = new Intent(LoginForm.this, Register_user.class);
-                startActivity(i);
-            }
-        });
-
-        leaderboard.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Intent i = new Intent(LoginForm.this, Home.class);
                 startActivity(i);
             }
         });

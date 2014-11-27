@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/textView4"
+        android:id="@+id/points"
         android:layout_alignTop="@+id/athlete"
         android:layout_alignLeft="@+id/lastname"
         android:layout_alignStart="@+id/lastname"

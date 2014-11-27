@@ -19,13 +19,6 @@ public class User
     String highscore;
     Context context;
     SharedPreferences sharedPref;
-    int position;
-    int score;
-
-    User()
-    {
-
-    }
 
     User( Context appContext)
     {
@@ -105,14 +98,6 @@ public class User
     {
         return highscore;
     }
-    protected int GetPosition()
-    {
-        return position;
-    }
-    protected int GetScore()
-    {
-        return score;
-    }
     //
 
     protected void SetGmcId(String id)
@@ -173,14 +158,6 @@ public class User
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("Highscore",highscore);
         editor.commit();
-    }
-    protected void SetPosition(int newPosition)
-    {
-        position = newPosition;
-    }
-    protected void SetScore(int newScore)
-    {
-        position = newScore;
     }
 
 }
