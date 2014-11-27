@@ -16,12 +16,15 @@ import android.widget.TextView;
 public class Home extends Activity {
 
     User user;
+    UserScore score;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
         user = new User(getApplicationContext());
+        score = new UserScore(getApplicationContext());
 
         String [] firstnameLastname = user.GetName();
         TextView username = (TextView)findViewById(R.id.username);
@@ -29,7 +32,6 @@ public class Home extends Activity {
 
         TextView scoreView = (TextView) findViewById(R.id.totalScore);
 
-        scoreView.setText(user.GetHighscore());
 
         String uri ="@drawable/"+user.GetIso().toLowerCase();
         Log.i("uri", uri);
@@ -39,6 +41,10 @@ public class Home extends Activity {
 
         TextView country = (TextView)findViewById(R.id.country);
         country.setText(user.GetIoc());
+
+        score.sendJson(user.GetMongoId());
+        scoreView.setText(user.GetHighscore());
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
