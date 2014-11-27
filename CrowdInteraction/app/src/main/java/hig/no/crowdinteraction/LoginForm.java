@@ -51,12 +51,14 @@ public class LoginForm extends Activity {
                     //Intent intent = new Intent(LoginForm.this, Home.class);
                     //startActivity(intent);
 
-                    if (!user.GetMongoId().equals("") && !user.GetMongoId().equals(null) ) {
+                    if (!user.GetMongoId().equals("") && !user.GetMongoId().equals(null) )
+                    {
 
                     Intent intent2 = new Intent(LoginForm.this, Home.class);
                     startActivity(intent2);
                     }
-                    else{
+                    else
+                    {
                         Toast.makeText(getApplicationContext(),
                                 "You are not a registered user. Please register first!",
                                 Toast.LENGTH_SHORT).show();

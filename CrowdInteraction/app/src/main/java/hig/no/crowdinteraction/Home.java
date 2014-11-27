@@ -2,11 +2,14 @@ package hig.no.crowdinteraction;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +45,18 @@ public class Home extends Activity {
         TextView country = (TextView)findViewById(R.id.country);
         country.setText(user.GetIoc());
 
+
+        boolean popup = false;
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            popup = extras.getBoolean("dialog");
+            if (popup)
+            {
+                 //scorecPopup();
+            }
+
+        }
         score.sendJson(user.GetMongoId());
         scoreView.setText(user.GetHighscore());
         Log.i("user score",user.GetHighscore());
@@ -96,5 +111,24 @@ public class Home extends Activity {
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void  scorecPopup ()
+    {
+        // Sets up the custom dialog
+        final Dialog scorepopup = new Dialog(getApplicationContext());
+        scorepopup.setContentView(R.layout.scorepopup);
+        scorepopup.setTitle("Pleas wait");
+
+        Button done = (Button) scorepopup.findViewById(R.id.button1);
+        done.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                scorepopup.dismiss();
+            }
+        });
+        scorepopup.show();
+
     }
 }

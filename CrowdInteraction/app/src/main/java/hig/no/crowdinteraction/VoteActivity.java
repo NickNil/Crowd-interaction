@@ -2,6 +2,7 @@ package hig.no.crowdinteraction;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -157,9 +158,9 @@ public class VoteActivity extends Activity {
                         Button temp = (Button)findViewById(scoreid);
                         score = temp.getText().toString();
 
-                        Toast toast = Toast.makeText(getApplicationContext(), "Click " +score,
+                       /* Toast toast = Toast.makeText(getApplicationContext(), "Click " +score,
                                 Toast.LENGTH_SHORT);
-                        toast.show();
+                        toast.show();*/
                         new VoteTask().execute();
 
                     }
@@ -197,11 +198,6 @@ public class VoteActivity extends Activity {
                 new VoteTask().execute();
             }
         });
-
-        HorizontalScrollView scroll = (HorizontalScrollView)findViewById(R.id.horizontalScrollView);
-        scroll.setScrollX(100);
-        scroll.setScrollY(100);
-
     }
 
 
@@ -309,6 +305,7 @@ public class VoteActivity extends Activity {
                         Toast.LENGTH_SHORT);
                 toast.show();
                 Intent intent = new Intent(getApplicationContext(), Home.class);
+                intent.putExtra("dialog",true);
                 startActivity(intent);
             }
             else
