@@ -158,9 +158,9 @@ public class VoteActivity extends Activity {
                         Button temp = (Button)findViewById(scoreid);
                         score = temp.getText().toString();
 
-                        Toast toast = Toast.makeText(getApplicationContext(), "Click " +score,
+                       /* Toast toast = Toast.makeText(getApplicationContext(), "Click " +score,
                                 Toast.LENGTH_SHORT);
-                        toast.show();
+                        toast.show();*/
                         new VoteTask().execute();
 
                     }

@@ -164,9 +164,6 @@ public class EventList extends Activity
                     Log.i("HTTP Status", Integer.toString(statusCode));
 
                     jsonString = post.inputStreamToString(in);
-                    //jsonString = jsonString.replace("[", "");
-                    //jsonString = jsonString.replace("]", "");
-                   // jsonString = jsonString.replace("\\", "");
                     Log.i("LoginResponse", jsonString);
 
                     in.close();

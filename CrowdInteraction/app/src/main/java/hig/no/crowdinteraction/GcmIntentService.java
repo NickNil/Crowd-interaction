@@ -14,16 +14,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class GcmIntentService extends IntentService
 {
     public static final String PROPERTY_REG_ID = "registration_id";
-    Context context;
+    //Context context;
 
     public static final int NOTIFICATION_ID = 1;
     NotificationManager mNotificationManager;
@@ -32,7 +30,7 @@ public class GcmIntentService extends IntentService
     public GcmIntentService()
     {
         super("GcmIntentService");
-        context = getApplicationContext();
+       // context = getApplicationContext();
 
     }
 
@@ -62,7 +60,6 @@ public class GcmIntentService extends IntentService
                         .setContentText(score)
                         .setSmallIcon(R.drawable.ic_launcher);
 
-                //scorecPopup (intent);
                 break;
             }
             case 'n':
@@ -72,7 +69,7 @@ public class GcmIntentService extends IntentService
                 v.vibrate(500);
                 // Sets an ID for the notification, so it can be updated
                 NotifyBuilder = new NotificationCompat.Builder(this)
-                        .setContentTitle("Do a uppdate")
+                        .setContentTitle("Uppdate events")
                         .setContentText("Uppdate your live events, Sorry")
                         .setSmallIcon(R.drawable.ic_launcher);
                 break;
@@ -99,39 +96,4 @@ public class GcmIntentService extends IntentService
                 NotifyBuilder.build());
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }
-
-
-    private void  scorecPopup (Intent intent)
-    {
-        // Sets up the custom dialog
-        final Dialog scorepopup = new Dialog(this);
-        scorepopup.setContentView(R.layout.showjugescore);
-        scorepopup.setTitle("score");
-
-        Button done = (Button) scorepopup.findViewById(R.id.button);
-        TextView scoreText = (TextView) scorepopup.findViewById(R.id.button);
-
-        if (intent.getStringExtra("score") != "")
-        {
-            scoreText.setText(intent.getStringExtra("score"));
-        }else
-        {
-            scoreText.setText("Error, something went wrong");
-        }
-
-        // Exits the dialog if button is clicked
-        done.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-
-                scorepopup.dismiss();
-
-
-            }
-        });
-        scorepopup.show();
-    }
-
 }

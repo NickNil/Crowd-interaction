@@ -48,15 +48,15 @@ public class Home extends Activity {
 
         boolean popup = false;
 
-       /* Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             popup = extras.getBoolean("dialog");
             if (popup)
             {
-                // scorecPopup();
+                 //scorecPopup();
             }
 
-        }*/
+        }
         score.sendJson(user.GetMongoId());
         scoreView.setText(user.GetHighscore());
 
@@ -116,17 +116,17 @@ public class Home extends Activity {
         // Sets up the custom dialog
         final Dialog scorepopup = new Dialog(getApplicationContext());
         scorepopup.setContentView(R.layout.scorepopup);
-        scorepopup.setTitle("score");
+        scorepopup.setTitle("Pleas wait");
 
-        Button done = (Button) scorepopup.findViewById(R.id.button);
+        Button done = (Button) scorepopup.findViewById(R.id.button1);
         done.setOnClickListener(new View.OnClickListener()
         {
-
             public void onClick(View v)
             {
                 scorepopup.dismiss();
             }
         });
         scorepopup.show();
+
     }
 }
