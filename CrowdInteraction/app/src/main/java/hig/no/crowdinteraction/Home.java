@@ -63,6 +63,12 @@ public class Home extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.Logout) {
+            user.logout();
+            Intent intent;
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
         if (id == R.id.LiveEvents) {
             Intent i = new Intent(Home.this, LiveEventList.class);
             startActivity(i);

@@ -124,6 +124,13 @@ public class LiveEventList extends Activity{
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.Logout) {
+            User user = new User(getApplicationContext());
+            user.logout();
+            Intent intent;
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
         if (id == R.id.Home) {
             Intent i = new Intent(LiveEventList.this, Home.class);
             startActivity(i);

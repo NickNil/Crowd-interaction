@@ -7,11 +7,13 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,7 +95,7 @@ public class VoteActivity extends Activity {
 
         if (eventType.equals("figure_skating") )
         {
-            numScorce = 13;
+            numScorce = 13; //13
             Scoreinterval = 0.5f;
         }else if(eventType.equals("snowboard") )
         {
@@ -110,12 +112,26 @@ public class VoteActivity extends Activity {
 
         voteLayout  = new LinearLayout(this);
         LinearLayout scrollView = (LinearLayout)findViewById(R.id.votepick);
+
+        // Get the screen's density scale
+        final float scale = getResources().getDisplayMetrics().density;
+        // Convert the dps to pixels, based on density scale
+
+        //android recommendation
+        int buttonSize = 60;
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)(buttonSize*scale),
+                (int)(buttonSize*scale));
+
+        params.setMargins((int)(2*scale), (int)(2*scale), (int)(2*scale), (int)(2*scale));
+
         for (int i =0; i < numScorce; i++)
         {
             voteButton = new Button(this);
             voteButton.setId(i);
             voteButton.setText(Float.toString(curScore));
             voteButton.setTextColor(Color.parseColor("#ffffff"));
+            voteButton.setLayoutParams(params);
 
             if (i % size == 0)
             {
@@ -179,18 +195,7 @@ public class VoteActivity extends Activity {
         {
             public void onClick (View v)
             {
-
-                for (int i = 0; i< 0; i++)
-                {
-
-                }
-
-                score = scorePicker.getText().toString();
-                Toast toast = Toast.makeText(getApplicationContext(), "Click",
-                        Toast.LENGTH_SHORT);
-                toast.show();
                 new VoteTask().execute();
-
             }
         });
 
@@ -221,13 +226,14 @@ public class VoteActivity extends Activity {
     }
 
 
-    private class  VoteTask extends AsyncTask<Void, Void, Void>
+    private class  VoteTask extends AsyncTask<Void, Void, String>
     {
         String jsonString = null;
         JSONObject eventJSON;
         @Override
-        protected Void doInBackground(Void... params)
+        protected String doInBackground(Void... params)
         {
+            String responsString = "";
             HttpClient client = new DefaultHttpClient();
             HttpResponse response;
             HttpPost httpPost = new HttpPost(SERVER_URL + "/api/add_user_score");
@@ -274,6 +280,17 @@ public class VoteActivity extends Activity {
                 catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                try {
+
+                    JSONArray tempArray = new JSONArray(jsonString);
+                    JSONObject tempObject = tempArray.getJSONObject(0);
+                    tempObject = tempObject.getJSONObject("data");
+                    responsString = tempObject.getString("response");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
             else
             {
@@ -282,15 +299,11 @@ public class VoteActivity extends Activity {
                 toast.show();
             }
 
-            String responsString = "";
-            try {
-                JSONArray tempArray = new JSONArray(jsonString);
-                JSONObject tempObject = tempArray.getJSONObject(0);
-                responsString = tempObject.getString("response");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
+            return responsString;
+        }
+        protected void onPostExecute(String responsString)
+        {
             if (responsString.equals("1"))
             {
                 Toast toast = Toast.makeText(getApplicationContext(), "Thank you for voting",
@@ -305,11 +318,6 @@ public class VoteActivity extends Activity {
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
-            return null;
-        }
-        protected void onPostExecute()
-        {
-
         }
     }
 
