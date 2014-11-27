@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -35,8 +38,14 @@ public class Leaderboards extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboards);
 
-        String score, position, name, nationality;
-        int textSize;
+        ListView leaderboardList;
+
+        String[] score;
+        String[] position;
+        String[] name;
+        String[] nationality;
+        ArrayList<Integer> natIcon = new ArrayList<Integer>();
+        Integer[] intNatIcon;
 
         ScrollView scrollView = new ScrollView(this);
 
@@ -44,110 +53,38 @@ public class Leaderboards extends Activity{
 
         LeaderboardJSON json = new LeaderboardJSON(getApplicationContext());
         json.sendJson();
-        System.out.println("test2");
+
         System.out.println(json.responseError);
         if (json.responseError == true)
         {
             Toast.makeText(this, "No response from server", Toast.LENGTH_SHORT).show();
         }
         else {
-            for (int i = -1; i < json.userList.size(); i++) {
-                if (i == -1)
-                {
-                    score = "Points";
-                    name = "Competitor";
-                    textSize = 18;
-
-                    TableRow tableRow = new TableRow(this);
-
-                    TextView tvScore = new TextView(this);
-                    TextView tvNames = new TextView(this);
-
-                    tvScore.setTextSize(textSize);
-                    tvNames.setTextSize(textSize);
-
-                    tvScore.setTextColor(Color.parseColor("#0099CC"));
-                    tvNames.setTextColor(Color.parseColor("#0099CC"));
-
-                    tvNames.setPadding(10, 10, 10, 10);
-                    tvNames.setGravity(Gravity.END);
-                    tvScore.setPadding(10, 10, 10, 10);
-                    tvScore.setGravity(Gravity.RIGHT);
-
-                    tvNames.setText(name);
-                    tableRow.addView(tvNames, 0);
-
-                    tvScore.setText(score);
-                    tableRow.addView(tvScore, 1);
-
-                    tableLayout.addView(tableRow);
-                    View v = new View(this);
-                    v.setLayoutParams(new TableRow.LayoutParams(
-                            TableRow.LayoutParams.MATCH_PARENT, 1));
-                    v.setBackgroundColor(Color.rgb(51, 51, 51));
-                    tableLayout.addView(v);
-
-                    continue;
-
-                }
-                else
-                {
-                    score = Integer.toString(json.userList.get(i).GetScore());
-                    position = Integer.toString(json.userList.get(i).GetPosition());
-                    name = json.userList.get(i).GetName()[0];// + " " + json.userList.get(i).GetName()[1]; //lastname
-                    nationality = json.userList.get(i).GetNationality();
-                    textSize = 18;
-                }
-
-                //System.out.println(score + " " + position + " " + name + " " + nationality);
-
-                TableRow tableRow = new TableRow(this);
-
-                TextView tvScore = new TextView(this);
-                TextView tvNames = new TextView(this);
-                TextView tvNat = new TextView(this);
-                TextView tvPos = new TextView(this);
-
-                tvScore.setTextSize(textSize);
-                tvNames.setTextSize(textSize);
-                tvNat.setTextSize(textSize);
-                tvPos.setTextSize(textSize);
-                //tableRow.LayoutParams trParams = new TableRow.LayoutParams();
-                //trParams.column = 2;
-
-                tvPos.setPadding(10, 10, 10, 10);
-                tvPos.setGravity(Gravity.CENTER);
-                tvScore.setPadding(10, 10, 10, 10);
-                tvScore.setGravity(Gravity.CENTER);
-                tvNat.setPadding(10, 10, 10, 10);
-                tvNat.setGravity(Gravity.CENTER);
-                tvNames.setPadding(10, 10, 10, 10);
-                tvNames.setGravity(Gravity.CENTER);
-
-                tvPos.setText(position);
-                tableRow.addView(tvPos, 0);
-
-                tvNames.setText(name);
-                tableRow.addView(tvNames, 1);
-
-                tvNat.setText(nationality);
-                tableRow.addView(tvNat, 2);
-
-                tvScore.setText(score);
-                tableRow.addView(tvScore, 3);
-
-                tableLayout.addView(tableRow);
-                View v = new View(this);
-                v.setLayoutParams(new TableRow.LayoutParams(
-                        TableRow.LayoutParams.MATCH_PARENT, 1));
-                v.setBackgroundColor(Color.rgb(51, 51, 51));
-                tableLayout.addView(v);
+            score = new String[json.points.size()];
+            position = new String[json.position.size()];
+            name = new String[json.userName.size()];
+            nationality = new String[json.iocNationality.size()];
+            intNatIcon = new Integer[json.isoNationality.size()];
+            for (int i = 0; i < json.isoNationality.size(); i++) {
+                score[i] = json.points.get(i);
+                position[i] = json.position.get(i);
+                name[i] = json.userName.get(i);
+                nationality[i] = json.iocNationality.get(i);
+                natIcon.add(getDrawable(this, json.isoNationality.get(i).toLowerCase()));
+                intNatIcon[i] = natIcon.get(i);
             }
+
+            LeaderboardItems adapter = new LeaderboardItems(this, intNatIcon, position, name, score, nationality);
+
+            leaderboardList = (ListView) findViewById(R.id.leaderboard_list);
+            leaderboardList.setAdapter(adapter);
         }
+    }
 
-        scrollView.addView(tableLayout);
-
-        setContentView(scrollView);
+    public static int getDrawable(Context context, String name)
+    {
+        return context.getResources().getIdentifier(name,
+                "drawable", context.getPackageName());
     }
 
     @Override
@@ -173,6 +110,13 @@ public class Leaderboards extends Activity{
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.Logout) {
+            User user = new User(getApplicationContext());
+            user.logout();
+            Intent intent;
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
         if (id == R.id.Home) {
             Intent i = new Intent(Leaderboards.this, Home.class);
             startActivity(i);
@@ -193,5 +137,6 @@ public class Leaderboards extends Activity{
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
 

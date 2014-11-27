@@ -49,7 +49,7 @@ public class Home extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.live_event_list, menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(false); // disable the button
@@ -68,6 +68,12 @@ public class Home extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+        if (id == R.id.Logout) {
+            user.logout();
+            Intent intent;
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
         if (id == R.id.LiveEvents) {
             Intent i = new Intent(Home.this, LiveEventList.class);

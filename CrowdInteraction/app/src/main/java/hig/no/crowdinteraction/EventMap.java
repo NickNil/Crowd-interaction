@@ -234,12 +234,13 @@ public class EventMap extends FragmentActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        /*if (id == R.id.Logout) {
+        if (id == R.id.Logout) {
+            User user = new User(getApplicationContext());
             user.logout();
             Intent intent;
             intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        }*/
+        }
         if (id == R.id.Home) {
             Intent i = new Intent(EventMap.this, Home.class);
             startActivity(i);
