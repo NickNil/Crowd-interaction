@@ -17,8 +17,6 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +28,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -177,7 +176,7 @@ public class VoteActivity extends Activity {
         text = (TextView) findViewById(R.id.lastname);
         text.setText(athlete);
 
-        text = (TextView) findViewById(R.id.textView4);
+        text = (TextView) findViewById(R.id.points);
         text.setText(startingNumber);
 
         user = new User(getApplicationContext());

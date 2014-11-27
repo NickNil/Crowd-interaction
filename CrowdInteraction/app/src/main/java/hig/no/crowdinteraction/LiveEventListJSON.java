@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -118,13 +119,12 @@ public class LiveEventListJSON {
                         }
 
                     }
-                    else
-                    {
-                        responseError = true;
-                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                    responseError = true;
                 } catch (ClientProtocolException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
