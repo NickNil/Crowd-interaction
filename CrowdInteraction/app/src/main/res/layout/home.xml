@@ -28,7 +28,7 @@
         android:text="Total Score"
         android:id="@+id/totalScore"
         android:textColor="#FFFFFF"
-        android:textSize="40sp"
+        android:textSize="110sp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -72,5 +72,6 @@
         android:textSize="20sp"
         android:layout_alignBottom="@+id/flag"
         android:layout_toRightOf="@+id/flag"
-        android:paddingLeft="5dp" />
+        android:paddingLeft="5dp"
+        android:layout_marginBottom="9dp" />
 </RelativeLayout>

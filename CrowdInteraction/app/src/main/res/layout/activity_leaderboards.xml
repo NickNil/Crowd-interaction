@@ -19,7 +19,7 @@
         android:id="@+id/relativeLayout"
         android:weightSum="1">
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -28,12 +28,18 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="0.80"
+                android:layout_weight="0.54"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Competitor"
                 android:id="@+id/textView3"
                 android:gravity="center"
-                android:textColor="#0099CC" />
+                android:textColor="#0099CC"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/points"
+                android:layout_toStartOf="@+id/points"
+                android:paddingRight="50dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -41,9 +47,11 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Points"
                 android:id="@+id/points"
-                android:layout_marginTop="2dp"
-                android:textColor="#0099CC" />
-        </LinearLayout>
+                android:textColor="#0099CC"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
 
 

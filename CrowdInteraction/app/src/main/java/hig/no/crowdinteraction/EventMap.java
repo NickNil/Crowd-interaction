@@ -111,16 +111,21 @@ public class EventMap extends FragmentActivity {
                         JSONObject jsonObj = new JSONObject(jsonString);
                         JSONObject data = jsonObj.getJSONObject("data");
 
-                        String[] id = new String[]{"5464cdcc9c7684e324ff4ccb","54281393e4b0b7147c91f492","542a8c27a77c9e3cb8d63af2"};
+
+                        String[] id = new String[]{"542a8c27a77c9e3cb8d63af2", "54281393e4b0b7147c91f492", "5464cdcc9c7684e324ff4ccb"};
                         Double latitude, longitude;
                         final LatLng[] latLong = new LatLng[3];
                         final String[] eventNames = new String[3];
+                        final String[] uri = new String[3];
+                        final Integer[] icons = new Integer[3];
 
                         for(int i = 0; i<id.length; i++) {
                             JSONObject ID = data.getJSONObject(id[i]);
                             JSONObject eventData = ID.getJSONObject("event_data");
                             String eventName = eventData.getString("event_name");
                             eventNames[i] = eventName;
+                            uri[i]= "@drawable/" + ID.getString("event_type");
+                            icons[i]= getResources().getIdentifier(uri[i],null,getPackageName());
 
                             final JSONObject location = eventData.getJSONObject("event_location");
                             Log.i("location", location.toString());
@@ -130,7 +135,7 @@ public class EventMap extends FragmentActivity {
                         }
 
 
-                        final Integer[] icons = new Integer[]{ R.drawable.figure_skating, R.drawable.ski_jump, R.drawable.snowboard};
+                        //final Integer[] icons = new Integer[]{ R.drawable.figure_skating, R.drawable.ski_jump, R.drawable.snowboard};
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -208,7 +213,7 @@ public class EventMap extends FragmentActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.event_list, menu);
+        getMenuInflater().inflate(R.menu.map, menu);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(false); // disable the button

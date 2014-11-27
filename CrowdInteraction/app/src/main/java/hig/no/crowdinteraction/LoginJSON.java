@@ -193,7 +193,6 @@ public class LoginJSON extends Activity{
 
             while ((rLine = rd.readLine()) != null) {
                 answer.append(rLine);
-                Log.i("LoginResponse2", rLine);
             }
 
         } catch (Exception e) {

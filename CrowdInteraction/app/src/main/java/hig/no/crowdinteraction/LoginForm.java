@@ -48,14 +48,18 @@ public class LoginForm extends Activity {
                     json.sendJson(phoneNumber.getText().toString(),
                             code.getText().toString());
 
-                    Intent intent = new Intent(LoginForm.this, Home.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(LoginForm.this, Home.class);
+                    //startActivity(intent);
 
-                    if (regid != "" && regid != null) {
+                    if (!user.GetMongoId().equals("") && !user.GetMongoId().equals(null) ) {
 
-                    Log.i("regID in regthred", regid);
                     Intent intent2 = new Intent(LoginForm.this, Home.class);
                     startActivity(intent2);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),
+                                "You are not a registered user. Please register first!",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             }
