@@ -44,6 +44,8 @@ public class Home extends Activity {
 
         score.sendJson(user.GetMongoId());
         scoreView.setText(user.GetHighscore());
+        Log.i("user score",user.GetHighscore());
+
 
     }
     @Override

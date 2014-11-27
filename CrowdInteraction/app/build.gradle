@@ -1,21 +1,31 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        CrowdInteractionConfig {
+            keyAlias 'crowdinteraction'
+            keyPassword 'crowdinteraction'
+            storeFile file('C:/Users/Mimoza/Documents/keystore.jks')
+            storePassword 'crowdinteraction'
+        }
+    }
     compileSdkVersion 21
-    buildToolsVersion "20.0.0"
-
+    buildToolsVersion '20.0.0'
     defaultConfig {
-        applicationId "hig.no.crowdinteraction"
+        applicationId 'hig.no.crowdinteraction'
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
     }
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.CrowdInteractionConfig
         }
+    }
+    productFlavors {
     }
 }
 
