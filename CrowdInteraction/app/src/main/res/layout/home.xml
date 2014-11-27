@@ -28,7 +28,6 @@
         android:text="Total Score"
         android:id="@+id/totalScore"
         android:textColor="#FFFFFF"
-        android:textSize="80sp"
         android:textSize="110sp"
         android:gravity="center_vertical|center_horizontal"
         android:layout_centerVertical="true"
