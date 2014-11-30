@@ -1,20 +1,29 @@
 <?php
 
-
+/*!
+* @class Score
+* @brief Score is used to add scores from judges in database
+*/
 class Score
 {
 
 	private $database;
 	private $event_id;
 	private $judges_scores = array();
-	private $athelete_id;
+	private $athlete_id;
 
-	function __construct($db, $id, $scores, $athelete_id)
+	/**
+	* @param object $db MongoConnection
+	* @param object $id Event MongoId
+	* @param array $scores Array of all scores from judges
+	* @param string $athlete_id Athlete starting number
+	*/
+	function __construct($db, $id, $scores, $athlete_id)
 	{
 		$this->database = $db;
 		$this->event_id = $id;
 		$this->judges_scores = $scores;
-		$this->athelete_id = $athelete_id;
+		$this->athlete_id = $athlete_id;
 	}
 
 
@@ -35,13 +44,13 @@ class Score
 		// collection not empty -> Update
 		if ($result != NULL)
 		{
-			$data->score = array("athelete_nr" => $this->athelete_id, "judge_scores" => $judges_scores);
+			$data->score = array("athelete_nr" => $this->athlete_id, "judge_scores" => $judges_scores);
 			return $score->update($criteria, array('$push' => $data));
 		}
 		else
 		{
 			$data->_id = new MongoId($this->event_id);
-			$data->score = array(array("athelete_nr" => $this->athelete_id, "judge_scores" => $judges_scores));
+			$data->score = array(array("athelete_nr" => $this->athlete_id, "judge_scores" => $judges_scores));
 			return $score->insert($data);
 		}
 

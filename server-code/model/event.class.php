@@ -1,5 +1,9 @@
 <?php
 
+/*!
+* @class Event
+* @brief Event is used create an event and store it in database
+*/
 class Event {
 
 	private $database;
@@ -12,13 +16,22 @@ class Event {
 	private $event_location;
 
 
+	/**
+	* @param object $db MongoConnection
+	*/
 	function __construct($db)
 	{
 		$this->database = $db;
 		$this->event_id = 0;
 	}
 
-
+	/**
+	* @param string $name Event name
+	* @param string $date Event date
+	* @param string $name Event gender (men/women)
+	* @param string $type Event type
+	* @param array $location Event location
+	*/
 	function set_event_info($name, $date, $gender, $type, $location)
 	{
 
@@ -38,19 +51,26 @@ class Event {
 		}
 	}
 
-
+	/**
+	* @param string $id Starting number
+	* @param string $name Athlete name
+	* @param array $nationality Array with ioc and iso nationalities
+	*/
 	function add_athelete($id, $name, $nationality)
 	{
 		array_push($this->atheletes, array("athelete_starting_nr" => $id, "athelete_name" => $name, "nationality" => $nationality));
 	}
 
 
+	/**
+	* @return Array of athletes
+	*/
 	function atheletes()
 	{
 			return $this->atheletes;
 	}
 
-
+	/*
 	private function insert_athelete_in_event($event_id, $count, $starting_nr, $name)
 	{
 	  $events = $this->database->event;
@@ -77,10 +97,7 @@ class Event {
 		{
     		echo "Starting number is already taken";
 		}
-
-
-
-	}
+	}*/
 
 
 	function update_event($id)
@@ -103,7 +120,9 @@ class Event {
 		return $this->database->lastError();
 	}
 
-
+	/**
+	* @brief Function stored event in database
+	*/
 	function insert_event()
 	{
 		$data = new stdClass;

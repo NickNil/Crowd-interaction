@@ -13,6 +13,5 @@ define("ID", "id");
 define("STARTING_NUMBER", "start_number");
 define("PLATFORM", "platform");
 define("SCORE", "score");
-define("EVENT_ID", "event_id");
 define("USER_MONGO_ID", "user_mongo_id");
 ?>

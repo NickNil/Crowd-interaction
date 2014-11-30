@@ -1,5 +1,9 @@
 <?php
 
+/*!
+* @class ScoreCalculation
+* @brief ScoreCalculation is used to calculate scores from users
+*/
 class ScoreCalculation
 {
 	/**
