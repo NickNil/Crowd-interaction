@@ -2,6 +2,7 @@ package hig.no.crowdinteraction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,22 +12,42 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class LoginForm extends Activity {
 
     User user;
+    PostDataJSON post;
+    EditText phoneNumber;
+    EditText code;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_form);
         user = new User(getApplicationContext());
+        post = new PostDataJSON(getApplicationContext());
 
         Button login = (Button) findViewById(R.id.loginButton);
         Button register = (Button) findViewById(R.id.registerButton2);
-        Button leaderboard = (Button) findViewById(R.id.leaderboardButton);
 
-        final EditText phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
-        final EditText code = (EditText) findViewById(R.id.codeInput);
+        phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
+        code = (EditText) findViewById(R.id.codeInput);
         final String regid;
         regid = user.GetGmcId();
 
@@ -44,20 +65,16 @@ public class LoginForm extends Activity {
                 }
                 else
                 {
-                    LoginJSON json = new LoginJSON(getApplicationContext());
+                   new LoginTask().execute();
+                    //LoginJSON json = new LoginJSON(getApplicationContext());
 
-                    json.sendJson(phoneNumber.getText().toString(),
-                            code.getText().toString());
+                    //json.sendJson(phoneNumber.getText().toString(),
+                      //      code.getText().toString());
 
                     //Intent intent = new Intent(LoginForm.this, Home.class);
                     //startActivity(intent);
 
-                    if (regid != "" && regid != null) {
 
-                    Log.i("regID in regthred", regid);
-                    Intent intent2 = new Intent(LoginForm.this, Home.class);
-                    startActivity(intent2);
-                    }
                 }
             }
         });
@@ -69,15 +86,6 @@ public class LoginForm extends Activity {
                 CountryCodesJSON json = new CountryCodesJSON(getApplicationContext());
                 json.sendJson();
                 Intent i = new Intent(LoginForm.this, Register_user.class);
-                startActivity(i);
-            }
-        });
-
-        leaderboard.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Intent i = new Intent(LoginForm.this, EventList.class);
                 startActivity(i);
             }
         });
@@ -103,5 +111,161 @@ public class LoginForm extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private class LoginTask extends AsyncTask <Void, Void, JSONObject>{
+
+        @Override
+        protected JSONObject doInBackground(Void... params) {
+
+            String SERVER_URL = "http://ci.harnys.net";
+            HttpClient client = new DefaultHttpClient();
+            HttpResponse response;
+            JSONObject data = null;
+
+            try {
+
+                HttpPost httpPost = new HttpPost(SERVER_URL + "/api/login");
+
+                Log.i("URL", SERVER_URL + "/api/login");
+
+
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+                //BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
+                //nameValuePairs.add(pair);
+                BasicNameValuePair pair = new BasicNameValuePair("phone_number", phoneNumber.getText().toString());
+                nameValuePairs.add(pair);
+                pair = new BasicNameValuePair("passcode", code.getText().toString());
+                nameValuePairs.add(pair);
+
+
+                response = post.sendJson(client, httpPost, nameValuePairs);
+
+
+                if (response != null) {
+
+                    HttpEntity entity;
+                    entity = response.getEntity();
+
+                    InputStream in = entity.getContent();//response.getEntity().getContent(); //Get the data in the entity
+                    StatusLine statusLine = response.getStatusLine();
+                    int statusCode = statusLine.getStatusCode();
+                    Log.i("HTTP Status", Integer.toString(statusCode));
+
+                    String jsonString = post.inputStreamToString(in);
+                    in.close();
+
+                    jsonString = jsonString.replace("[","");
+                    jsonString = jsonString.replace("]","");
+                    Log.i("LoginResponse", jsonString);
+
+
+
+                    JSONObject jsonObj = new JSONObject(jsonString);
+
+                    data = jsonObj;
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject jsonObject) {
+            super.onPostExecute(jsonObject);
+
+            JSONObject data = null;
+            if(jsonObject != null){
+
+                try {
+
+                    data = jsonObject.getJSONObject("data");
+                    Log.i("data", data.toString());
+                    String id = data.getString("id");
+                    Log.i("id",id);
+
+                    if (id.equals("0")) {
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast toast = Toast.makeText(getApplicationContext(), "The phone number and code don't match. Please double-check and try again.", Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        });
+                    }
+                    else{
+
+                        JSONObject name = data.getJSONObject("name");
+                        user.SetPhoneNumber(phoneNumber.getText().toString());
+                        user.SetName(name.getString("firstname"), name.getString("lastname"));
+
+                        JSONObject nationality = data.getJSONObject("nationality");
+                        //user.SetNationality(data.getString("nationality"));
+                        user.SetIoc(nationality.getString("ioc"));
+                        user.SetIso(nationality.getString("iso"));
+                        user.SetGmcId(data.getString("regid"));
+                        user.SetMongoId(id);
+                        user.SetHighscore(data.getString("highscore"));
+
+                        Intent intent = new Intent(getApplicationContext(),Home.class);
+                        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                    }
+                    if (!user.GetMongoId().equals("") && !user.GetMongoId().equals(null) )
+                    {
+
+                        Intent intent2 = new Intent(LoginForm.this, Home.class);
+                        startActivity(intent2);
+                    }
+
+                    else if (user.GetMongoId().equals("") && user.GetMongoId().equals(null))
+                    {
+                        Toast.makeText(getApplicationContext(),
+                                "You are not a registered user. Please register first!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                            /*{
+                                "param":"l",
+                                    "data":{
+                                "id":"545219809c76847e198b4570",
+                                        "nationality":{
+                                    "iso":"AL",
+                                            "ioc":"ALB"
+                                },
+                                "highscore":0,
+                                        "name":{
+                                    "firstname":"Bjarne",
+                                            "lastname":"Betjent"
+                                },
+                                "regid":"REGIDBJARNE1337"
+                            }
+                            }*/
+
+                            /*{"param":"l","data":
+                                {"id":"545239c29c76842a1e8b4568",
+                                "nationality":"Norge",
+                                "name":{"firstname":"Harry","lastname":"Nystad"},
+                                "regid":"APA91bFv_6fAq_SuyFubPrJcDxfktd8YmlzX4gxEEhOahUlOVmKvIu8Y60PDFBuosZiducUxAQva0JWLGxDFXKHOb2bhRlFCILB1jvCIPC6Vz9E5knOmELJQ5M3sQXqX0HOtc8uVWEbtGLme7E4-W2fBKXzdC1th76HJXOezTd5dJB13rGuzRuQ"}}]
+                            */
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+            else
+            {
+                Toast toast = Toast.makeText(getApplicationContext(), "Oops! Something went WRONG!",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
     }
 }

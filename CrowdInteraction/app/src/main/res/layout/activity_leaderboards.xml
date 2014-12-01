@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +8,60 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="hig.no.crowdinteraction.Leaderboards">
+    tools:context="hig.no.crowdinteraction.Leaderboards"
+    android:weightSum="1">
 
-</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="33dp"
+        android:id="@+id/relativeLayout"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.93">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.54"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Competitor"
+                android:id="@+id/textView3"
+                android:gravity="center"
+                android:textColor="#0099CC"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@+id/points"
+                android:layout_toStartOf="@+id/points"
+                android:paddingRight="50dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="0"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Points"
+                android:id="@+id/points"
+                android:textColor="#0099CC"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leaderboard_list"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

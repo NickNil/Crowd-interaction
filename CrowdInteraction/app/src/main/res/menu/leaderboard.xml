@@ -25,13 +25,17 @@
         android:showAsAction="always|withText" />
     <item android:id="@+id/Leaderboard"
         android:title="@string/leaderboard"
-        android:icon="@drawable/olympic_medal"
+        android:icon="@drawable/olympic_medal_black"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
-    <item android:id="@+id/Settings"
-        android:title="@string/settings"
-        android:icon="@drawable/settings"
+    <item android:id="@+id/Map"
+        android:title="@string/map"
+        android:icon="@drawable/map_marker"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
+    <item android:id="@+id/Logout"
+        android:title="Log Out"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 
 </menu>

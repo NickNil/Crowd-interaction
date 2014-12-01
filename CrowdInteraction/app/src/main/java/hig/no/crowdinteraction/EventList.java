@@ -32,9 +32,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 
 
@@ -49,6 +53,8 @@ public class EventList extends Activity
     String SENDER_ID = "914623768180";
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
+    Activity activity = this;
+    ListView EventList;
 
 
 
@@ -71,7 +77,6 @@ public class EventList extends Activity
         post = new PostDataJSON (getApplicationContext());
 
         new EventListTask().execute();
-       // test();
     }
 
     @Override
@@ -105,7 +110,8 @@ public class EventList extends Activity
             startActivity(intent);
         }
         if (id == R.id.Home) {
-            //Intent i = new Intent(EventList.this, Home.class);
+            Intent i = new Intent(EventList.this, Home.class);
+            startActivity(i);
         }
         if (id == R.id.Leaderboard)
         {
@@ -117,8 +123,9 @@ public class EventList extends Activity
             Intent i = new Intent(EventList.this, LiveEventList.class);
             startActivity(i);
         }
-        if (id == R.id.Settings) {
-            //Intent i = new Intent(EventList.this, Settings.class);
+        if (id == R.id.Map) {
+            Intent i = new Intent(EventList.this, EventMap.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -129,11 +136,12 @@ public class EventList extends Activity
         protected JSONObject doInBackground(Void... params)
         {
             String jsonString = null;
+            JSONObject event_data = null;
 
 
             HttpClient client = new DefaultHttpClient();
             HttpResponse response;
-            HttpPost httpPost = new HttpPost(SERVER_URL + "/api/live");
+            HttpPost httpPost = new HttpPost(SERVER_URL + "/api/events");
            // HttpPost httpPost = new HttpPost(SERVER_URL + "/api/events/1");
             // Log.i("URL", SERVER_URL + "/api/events");
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -156,9 +164,6 @@ public class EventList extends Activity
                     Log.i("HTTP Status", Integer.toString(statusCode));
 
                     jsonString = post.inputStreamToString(in);
-                    //jsonString = jsonString.replace("[", "");
-                    //jsonString = jsonString.replace("]", "");
-                   // jsonString = jsonString.replace("\\", "");
                     Log.i("LoginResponse", jsonString);
 
                     in.close();
@@ -167,7 +172,7 @@ public class EventList extends Activity
                     e.printStackTrace();
                 }
 
-                JSONObject event_data = null;
+
 
                 if (jsonString != "")
                 {
@@ -181,117 +186,67 @@ public class EventList extends Activity
                         e.printStackTrace();
                     }
                 }
-
-                return event_data;
             }
-            else
-            {
-                return null;
-            }
-
-
-
+            return event_data;
         }
-        protected void onPostExecute(final JSONObject event_data)
+        protected void onPostExecute(final JSONObject eventData)
         {
+            JSONObject data = null;
+            String[] name;
+            String[] time;
+            String[] mongoID;
 
-            if (event_data != null)
+            if (eventData != null)
             {
-                LinearLayout view = (LinearLayout) findViewById(R.id.topView);
-                TextView event = null;
-
-                eventJSON = event_data;
-
                 try {
-                    jsonArray = eventJSON.getJSONArray("data");
+                    data = eventData.getJSONObject("data");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 JSONObject temp = null;
+                temp = data;
                 // Defined Array values to show in ListView
 
-                int numberOfObjects = jsonArray.length();
+                int numberOfObjects = data.length();
+
+                name = new String[numberOfObjects];
+                time = new String[numberOfObjects];
+                mongoID = new String[numberOfObjects];
+                Iterator keys = data.keys();
 
 
-                for (int i = 0; i < numberOfObjects; i++) {
+                for (int i = 0; i < numberOfObjects; i++)
+                {
                     try {
-                        temp = jsonArray.getJSONObject(i);
+                        mongoID[i] = keys.toString();
+                        temp =  data.getJSONObject(keys.next().toString());
+                        time[i] = temp.getString("event_date");
+                        //Date tempDate =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.GERMANY).parse(time[i]);
 
-                        event = new TextView(getApplicationContext());
-                        String eventID = temp.getString("_id");
-                        event.setTag(eventID);
+                        Date tempDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(time[i]);
+                        time[i] = new SimpleDateFormat("dd.MMMM yyyy \nHH.mm").format(tempDate);
 
+                        temp = temp.getJSONObject("event_data");
+                        name[i] = temp.getString("event_name");
 
-                        event.setText(temp.getString("event_name"));
-
-                        view.addView(event);
-
-                    } catch (JSONException e) {
+                    } catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 }
-
-                if (event != null) {
-                    event.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(getApplicationContext(), VoteActivity.class);
-
-                            Iterator<String> eventIterator;
-                            eventIterator = eventJSON.keys();
-                            JSONObject temp = null;
-
-                            try {
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    temp = jsonArray.getJSONObject(i);
-
-                                    if (temp.getString("_id") == v.getTag())
-                                    {
-                                        intent.putExtra("name", temp.getString("event_name"));
-                                        intent.putExtra("id", temp.getString("_id"));
-
-                                        intent.putExtra("athleteNR", temp.getJSONObject("current_athlete").getString("number"));
-                                        intent.putExtra("athlete", temp.getJSONObject("current_athlete").getString("name"));
-
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            startActivity(intent);
-                        }
-                    });
-                }
+                EventListItems adapter = new EventListItems(activity, mongoID, name ,time);
+                EventList = (ListView) findViewById(R.id.EventList);
+                EventList.setAdapter(adapter);
             }
             else
             {
-                Toast toast = Toast.makeText(getApplicationContext(), "no response from server",
+                Toast toast = Toast.makeText(getApplicationContext(), "Opsi! Something is WRONG!",
                         Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
-    }
-
-    public void test()
-    {
-        NotificationManager mNotificationManager = null;
-        NotificationCompat.Builder NotifyBuilder;
-
-        mNotificationManager = (NotificationManager)
-                this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        // Vibrate for 500 milliseconds
-        v.vibrate(500);
-        // Sets an ID for the notification, so it can be updated*/
-
-        NotifyBuilder = new NotificationCompat.Builder(this)
-                .setContentTitle("Test notification")
-                .setContentText("Test")
-                .setSmallIcon(R.drawable.ic_launcher);
-
-       mNotificationManager.notify(
-                1,
-                NotifyBuilder.build());
     }
 }

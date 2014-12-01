@@ -232,6 +232,23 @@ public class PostDataJSON extends Activity{
         return response;
     }
 
+    protected HttpResponse sendJson(HttpClient client,HttpPost post)
+    {
+        HttpResponse response = null;
+        try
+        {
+
+            response = client.execute(post);
+
+            return response;
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
     protected String inputStreamToString(InputStream is) {
         String rLine;
         StringBuilder answer = new StringBuilder();

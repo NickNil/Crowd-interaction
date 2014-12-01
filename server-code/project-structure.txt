@@ -1,0 +1,54 @@
+.
+├── api_keys.php
+├── app-api
+│   ├── add_user_score.php
+│   ├── constants.php
+│   ├── countries.php
+│   ├── country-codes.json
+│   ├── current_athlete.php
+│   ├── events.php
+│   ├── ioc.json
+│   ├── keys.php
+│   ├── leaderboard.php
+│   ├── login.php
+│   ├── meta.php
+│   ├── register-new.php
+│   ├── register.php
+│   └── user_score.php
+├── bootstrap
+├── gfx
+│   └── flag
+├── index.php
+├── model
+│   ├── event.class.php
+│   ├── mongoconnection.php
+│   ├── score.class.php
+│   └── user.class.php
+├── push
+│   ├── android
+│   │   ├── androidPush.php
+│   │   └── gmc.php
+│   └── ios
+│       ├── ck.pem
+│       ├── live.php
+│       ├── new_athlete_push.php
+│       ├── push_score.php
+├── tests
+│   ├── add_score.api-test.php
+│   ├── event-test.php
+│   ├── event.class-test.php
+│   ├── iospush-test.php
+│   ├── login.api-test.php
+│   ├── register.api-test.php
+│   └── user.class-test.php
+└── view
+    ├── admin_change_status.php
+    ├── admin_edit_event.php
+    ├── admin_new_event.php
+    ├── admin_next_athlete.php
+    ├── event.php
+    ├── score.php
+    ├── score_calculation.php
+    ├── user.php
+    ├── user_scores_for_event.php
+    └── view_score.php

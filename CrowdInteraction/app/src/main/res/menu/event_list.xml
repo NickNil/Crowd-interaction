@@ -17,7 +17,7 @@
         android:showAsAction="always|withText" />
     <item android:id="@+id/Events"
         android:title="@string/events"
-        android:icon="@drawable/olympic_rings"
+        android:icon="@drawable/olympic_rings_black"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
     <item android:id="@+id/Leaderboard"
@@ -25,9 +25,9 @@
         android:icon="@drawable/olympic_medal"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
-    <item android:id="@+id/Settings"
-        android:title="@string/settings"
-        android:icon="@drawable/settings"
+    <item android:id="@+id/Map"
+        android:title="@string/map"
+        android:icon="@drawable/map_marker"
         android:orderInCategory="100"
         android:showAsAction="always|withText" />
     <item android:id="@+id/Logout"

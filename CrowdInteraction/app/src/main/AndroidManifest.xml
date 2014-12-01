@@ -14,10 +14,16 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <permission
-        android:name="com.example.gcm.permission.C2D_MESSAGE"
+        android:name="hig.no.crowdinteraction.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.example.gcm.permission.C2D_MESSAGE" />
+    <uses-permission android:name="hig.no.crowdinteraction.permission.C2D_MESSAGE" />
+
+
+    <!-- requirement for OpenGL ES version 2 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +32,7 @@
         android:theme="@style/AppTheme" >
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAo819TiU_zcVtkV5UuSH5kOip5T-SuH14" />
+            android:value="AIzaSyCLlP-IS4f5pYzK_n3wrpe2s7_nEAeqcMU" />
 
         <activity
             android:name="hig.no.crowdinteraction.MainActivity"
@@ -55,24 +61,22 @@
         <activity
             android:name="hig.no.crowdinteraction.EventList"
             android:label="@string/title_activity_event_list" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="hig.no.crowdinteraction.MainActivity" />
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.VoteActivity"
             android:label="@string/title_activity_vote"
-            android:parentActivityName="hig.no.crowdinteraction.EventList" >
+            android:parentActivityName="hig.no.crowdinteraction.LiveEventList" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hig.no.crowdinteraction.LiveEventList" />
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.Leaderboards"
-            android:label="@string/title_activity_leaderboard"
-            android:parentActivityName="hig.no.crowdinteraction.EventList" >
+            android:label="@string/title_activity_leaderboard">
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.LiveEventList"
-            android:label="@string/title_activity_live_event_list"
-            android:parentActivityName="hig.no.crowdinteraction.MainActivity" >
+            android:label="@string/title_activity_live_event_list">
         </activity>
         <activity
             android:name="hig.no.crowdinteraction.Nationality"
@@ -88,28 +92,23 @@
             android:label="Home" >
         </activity>
 
+
         <receiver
-            android:name="hig.no.crowdinteraction.GcmBroadcastReceiver"
+            android:name=".GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
                 <category android:name="hig.no.crowdinteraction" />
             </intent-filter>
         </receiver>
 
-        <service android:name="hig.no.crowdinteraction.GCMIntentService" />
 
-        <uses-library android:name="android.test.runner" />
-
-        <!-- requirement for OpenGL ES version 2 -->
-        <uses-feature
-            android:glEsVersion="0x00020000"
-            android:required="true" />
+        <service android:name=".GcmIntentService" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <uses-library android:name="android.test.runner" />
 
     </application>
 

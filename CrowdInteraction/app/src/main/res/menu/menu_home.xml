@@ -2,4 +2,33 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context="hig.no.crowdinteraction.Home">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" android:showAsAction="never" />
+    <item android:id="@+id/Home"
+        android:title="@string/home"
+        android:icon="@drawable/home_black"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText" />
+    <item android:id="@+id/LiveEvents"
+        android:title="@string/live"
+        android:icon="@drawable/law"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText" />
+    <item android:id="@+id/Events"
+        android:title="@string/events"
+        android:icon="@drawable/olympic_rings"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText" />
+    <item android:id="@+id/Leaderboard"
+        android:title="@string/leaderboard"
+        android:icon="@drawable/olympic_medal"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText" />
+    <item android:id="@+id/Map"
+        android:title="@string/map"
+        android:icon="@drawable/map_marker"
+        android:orderInCategory="100"
+        android:showAsAction="always|withText" />
+    <item android:id="@+id/Logout"
+        android:title="Log Out"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
 </menu>

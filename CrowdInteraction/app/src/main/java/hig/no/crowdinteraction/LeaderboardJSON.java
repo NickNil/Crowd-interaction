@@ -3,6 +3,7 @@ package hig.no.crowdinteraction;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+import android.content.Intent;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -26,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -36,9 +38,16 @@ import java.util.regex.Pattern;
 public class LeaderboardJSON {
     Context context;
     ArrayList<User> userList = new ArrayList<User>();
+    ArrayList<String> isoNationality = new ArrayList<String>();
+    ArrayList<String> position = new ArrayList<String>();
+    ArrayList<String> userName = new ArrayList<String>();
+    ArrayList<String> points = new ArrayList<String>();
+    ArrayList<String> iocNationality = new ArrayList<String>();
+    Boolean responseError = false;
 
-    LeaderboardJSON()
+    LeaderboardJSON(Context appContext)
     {
+        context = appContext;
     }
 
     String SENDER_ID = "914623768180";
@@ -56,7 +65,6 @@ public class LeaderboardJSON {
                 JSONObject user;
                 JSONObject nationality;
                 JSONObject name;
-                User player;
 
 
                 try {
@@ -70,7 +78,8 @@ public class LeaderboardJSON {
                     post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                     response = client.execute(post);
 
-                    if (response != null) {
+                    if (response != null)
+                    {
 
                         HttpEntity entity;
                         entity = response.getEntity();
@@ -81,6 +90,7 @@ public class LeaderboardJSON {
                         Log.i("HTTP Status", Integer.toString(statusCode));
 
                         String jsonString = inputStreamToString(in);
+                        Log.i("jsonstring", jsonString);
                         jsonString = jsonString.replaceFirst(Pattern.quote("["), "");
                         //int lastIndex = jsonString.lastIndexOf("]");
                         //jsonString = new StringBuilder(jsonString).replace(lastIndex-1, lastIndex,"}").toString();
@@ -100,28 +110,16 @@ public class LeaderboardJSON {
 
                         for (int i=0; i<jsonArray.length(); i++)
                         {
-                            player = new User();
                             user = jsonArray.getJSONObject(i).getJSONObject("user");
                             nationality = user.getJSONObject("nationality");
                             name = user.getJSONObject("name");
 
-                            player.name = new String[]{name.getString("firstname"), name.getString("lastname")};
-                            player.nationality = nationality.getString("ioc");
-                            player.position = Integer.parseInt(jsonArray.getJSONObject(i).getString("standing"));
-                            player.score = Integer.parseInt(user.getString("highscore"));
-
-                            userList.add(player);
+                            userName.add(name.getString("firstname") + " " + name.getString("lastname"));
+                            iocNationality.add(nationality.getString("ioc"));
+                            isoNationality.add(nationality.getString("iso"));
+                            position.add(jsonArray.getJSONObject(i).getString("standing"));
+                            points.add(user.getString("highscore"));
                         }
-
-                        System.out.println("name:" + userList.get(0).GetName()[0] + " " + userList.get(0).GetName()[1]);
-                        System.out.println("nat:" + userList.get(0).GetNationality());
-                        System.out.println("pos:" + userList.get(0).GetPosition());
-                        System.out.println("score:" + userList.get(0).GetScore());
-
-                        System.out.println("name:" + userList.get(1).GetName()[0] + " " + userList.get(0).GetName()[1]);
-                        System.out.println("nat:" + userList.get(1).GetNationality());
-                        System.out.println("pos:" + userList.get(1).GetPosition());
-                        System.out.println("score:" + userList.get(1).GetScore());
 
 
 
@@ -140,13 +138,17 @@ public class LeaderboardJSON {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
-                } catch (ClientProtocolException e) {
+                } catch (UnknownHostException e){
+                    e.printStackTrace();
+                    responseError = true;
+                }catch (ClientProtocolException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
 
         };

@@ -32,6 +32,7 @@ public class LiveEventList extends Activity{
     String[] athleteName;
     String[] iocNationality;
     String[] number;
+    String[] eventType;
     ArrayList<Integer> eventIcon = new ArrayList<Integer>();
     ArrayList<Integer> natIcon = new ArrayList<Integer>();
     Integer[] intEventIcon;
@@ -43,12 +44,12 @@ public class LiveEventList extends Activity{
         setContentView(R.layout.activity_live_event_list);
 
         LiveEventListJSON json = new LiveEventListJSON();
-        if (json.responseError = true)
+        json.sendJson();
+        if (json.responseError == true)
         {
             Toast.makeText(this, "No response from server", Toast.LENGTH_SHORT).show();
         }
         else {
-            json.sendJson();
 
             //creating string arrays for the adapter.
             eventName = new String[json.eventName.size()];
@@ -56,6 +57,7 @@ public class LiveEventList extends Activity{
             athleteName = new String[json.athleteName.size()];
             iocNationality = new String[json.iocNationality.size()];
             number = new String[json.number.size()];
+            eventType = new String[json.eventType.size()];
             intEventIcon = new Integer[json.eventType.size()];
             intNatIcon = new Integer[json.isoNationality.size()];
 
@@ -65,12 +67,13 @@ public class LiveEventList extends Activity{
                 eventName[i] = json.eventName.get(i);
                 Mongoid[i] = json.mongoID.get(i);
                 athleteName[i] = json.athleteName.get(i);
+                eventType[i] = json.eventType.get(i);
                 iocNationality[i] = json.iocNationality.get(i);
                 number[i] = json.number.get(i);
                 intEventIcon[i] = eventIcon.get(i);
                 intNatIcon[i] = natIcon.get(i);
             }
-            System.out.println(json.isoNationality.get(0));
+
 
             LiveEventListItems adapter = new LiveEventListItems(this, Mongoid, eventName, iocNationality, number,
                     athleteName, intNatIcon, intEventIcon);
@@ -87,6 +90,7 @@ public class LiveEventList extends Activity{
                     intent.putExtra("id", Mongoid[position]);
                     intent.putExtra("athleteNR", number[position]);
                     intent.putExtra("athlete", athleteName[position]);
+                    intent.putExtra("eventType", eventType[position]);
                     intent.putExtra("EventIcon", intEventIcon[position]);
                     intent.putExtra("NatIcon", intNatIcon[position]);
 
@@ -120,8 +124,16 @@ public class LiveEventList extends Activity{
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.Logout) {
+            User user = new User(getApplicationContext());
+            user.logout();
+            Intent intent;
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
         if (id == R.id.Home) {
-            //Intent i = new Intent(LiveEventList.this, Home.class);
+            Intent i = new Intent(LiveEventList.this, Home.class);
+            startActivity(i);
         }
         if (id == R.id.Leaderboard)
         {
@@ -133,8 +145,9 @@ public class LiveEventList extends Activity{
             Intent i = new Intent(LiveEventList.this, EventList.class);
             startActivity(i);
         }
-        if (id == R.id.Settings) {
-            //Intent i = new Intent(LiveEventList.this, Settings.class);
+        if (id == R.id.Map) {
+            Intent i = new Intent(LiveEventList.this, EventMap.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -144,5 +157,4 @@ public class LiveEventList extends Activity{
         return context.getResources().getIdentifier(name,
                 "drawable", context.getPackageName());
     }
-
 }

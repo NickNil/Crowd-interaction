@@ -25,7 +25,7 @@
     <string name="live">Live</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="events">Events</string>
-    <string name="settings">Settings</string>
+    <string name="map">Map</string>
 
     <string-array name="sovereignStates">
         <item>Afghanistan</item>
