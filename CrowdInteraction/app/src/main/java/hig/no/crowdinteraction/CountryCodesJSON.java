@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by Mimoza on 11/14/2014.
+ * Class used to get all the countries and their codes from the server and save them in the SQLite database
  */
 public class CountryCodesJSON {
 
@@ -42,9 +43,7 @@ public class CountryCodesJSON {
     }
 
     String SENDER_ID = "914623768180";
-    String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
-    public static final String PROPERTY_REG_ID = "registration_id";
     Toast toast;
 
     protected void sendJson() {

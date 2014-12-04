@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by Mimoza on 11/14/2014.
+ * Class that creates a table CountryCodes, with the ID, country name, ioc and iso codes as columns in the SQLite database
  */
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
@@ -36,6 +37,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         // SQL statement to create ioc codes table
@@ -48,6 +50,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Method to add countries to the table CountryCodes
+     */
     public void addCountry(IOCandISOcodes iocCodes){
 
         // 1. get reference to writable DB
@@ -73,7 +78,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // 4. close
         db.close();
     }
-
+    /**
+     * Method that gets all the countries from the table CountryCodes, used to show the countries in the nationality list
+     */
     public List<IOCandISOcodes> getAllCountries() {
         List<IOCandISOcodes> codesList = new LinkedList<IOCandISOcodes>();
 
@@ -105,6 +112,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return codesList;
     }
 
+    /**
+     * Method to get codes based on the id
+     */
     public IOCandISOcodes getCodes(int id){
 
         // 1. get reference to readable DB

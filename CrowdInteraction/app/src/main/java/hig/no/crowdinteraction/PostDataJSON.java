@@ -54,6 +54,19 @@ public class PostDataJSON extends Activity{
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
 
+
+    /**
+     * Register the user based on the parameters
+     * @param firstname     user's first name
+     * @param lastname      user's last name
+     * @param ioc           user's country ioc code
+     * @param iso           user's country iso code
+     * @param phoneNumber   user's phone number
+     * @param passcode      user's passcode
+     *
+     * If the user registers correctly, the login screen shows, if not, he gets notified that the registration went wrong
+     */
+
     protected void sendJson(final String firstname, final String lastname, final String ioc, final String iso,
                             final String phoneNumber, final String passcode) {
 
