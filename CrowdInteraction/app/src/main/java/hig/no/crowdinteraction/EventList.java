@@ -45,7 +45,7 @@ import java.util.Locale;
 
 /**
  * Fetches information from the server about the events and displays them in a list
- * No sorting is done on the list. The fist event that is in the json respons from the server is
+ * No sorting is done on the list. The first event that is in the json respons from the server is
  * the first event that is displayed
  *
 */
