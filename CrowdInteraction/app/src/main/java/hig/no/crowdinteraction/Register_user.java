@@ -14,7 +14,10 @@ import android.widget.Toast;
 
 import java.util.List;
 
-
+/**
+ * Class used to register the user; the user has to fill in all the required data, First name, Last name, Nationality
+ * Phone number and Code. Sends the data to the server using the PostDataJSON class
+ */
 public class Register_user extends Activity {
 
 

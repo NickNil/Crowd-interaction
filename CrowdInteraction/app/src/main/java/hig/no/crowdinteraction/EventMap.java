@@ -59,6 +59,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by Mimoza on 11/19/2014.
+ * Sets the map with the event locations using the data from the server
  */
 public class EventMap extends FragmentActivity {
 
