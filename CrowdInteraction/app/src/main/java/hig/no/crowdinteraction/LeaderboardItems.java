@@ -19,6 +19,15 @@ public class LeaderboardItems extends ArrayAdapter<String> {
     private final String[] points;
     private final String[] nationality;
 
+    /**
+     * Constructor that gets data from the Leaderboards class.
+     * @param context       the context of the application
+     * @param natIcon       Array containing ids of the drawable files containing flag icons
+     * @param position      Array containing leaderboard positions
+     * @param name          Array containing names of users on the leaderboard
+     * @param points        Array containing the points of the users
+     * @param nationality   Array containing the nationalities of the users
+     */
     public LeaderboardItems(Activity context, Integer[] natIcon, String[] position, String[] name,
                             String[] points, String[] nationality) {
         super(context, R.layout.leaderboard_items, name);
@@ -30,15 +39,18 @@ public class LeaderboardItems extends ArrayAdapter<String> {
         this.nationality = nationality;
     }
 
+    /**
+     * overrides the getview function of the arrayAdapter in order to return a custom listview
+     * row instead of a regular one.
+     * @param index     the current row index
+     * @param view
+     * @param parent
+     * @return          the custom listview row
+     */
     @Override
     public View getView(int index, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        System.out.println(name.length);
-        if (name.length > 0)
-            System.out.println(name[0] + " : " + name[1]);
-        System.out.println(points.length);
-        if (points.length > 0)
-            System.out.println(points[0] + " : " + points[1]);
+
         View rowView= inflater.inflate(R.layout.leaderboard_items, null, true);
         TextView tvPos = (TextView) rowView.findViewById(R.id.position);
         TextView tvNat = (TextView) rowView.findViewById(R.id.nationality);
