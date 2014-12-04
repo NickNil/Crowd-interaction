@@ -2,6 +2,7 @@ package hig.no.crowdinteraction;
 
 /**
  * Created by Mimoza on 11/14/2014.
+ * Class to handle nationalities, country name, ioc and iso codes
  */
 public class IOCandISOcodes {
 

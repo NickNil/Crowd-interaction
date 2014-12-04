@@ -28,7 +28,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Before users can use the application they have to log in and this class sets the login screen and when the user has
+ * the filled his credentials and tries to log in, this class uses the LoginTask class checks if the credentials are correct
+ * and sends the user to the home screen
+ * */
 public class LoginForm extends Activity {
 
     User user;
@@ -48,8 +52,7 @@ public class LoginForm extends Activity {
 
         phoneNumber = (EditText) findViewById(R.id.phoneNumberInput);
         code = (EditText) findViewById(R.id.codeInput);
-        final String regid;
-        regid = user.GetGmcId();
+        
 
         login.setOnClickListener(new View.OnClickListener()
         {
@@ -112,6 +115,12 @@ public class LoginForm extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /*
+    * Checks with the server if the data sent from the user complies with the data registered in the server database, in case they do
+    * then the user can log in to the app, his data are saved to in the shared preferences using the User class,
+    * and if the data doesn't comply with the server then the user get a notification that the credentials he has given don't match
+    */
     private class LoginTask extends AsyncTask <Void, Void, JSONObject>{
 
         @Override
@@ -262,7 +271,7 @@ public class LoginForm extends Activity {
             }
             else
             {
-                Toast toast = Toast.makeText(getApplicationContext(), "Oops! Something went WRONG!",
+                Toast toast = Toast.makeText(getApplicationContext(), "Oops! Something went WRONG! Please check your internet connection and try again.",
                         Toast.LENGTH_SHORT);
                 toast.show();
             }

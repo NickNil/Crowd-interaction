@@ -15,6 +15,9 @@ import java.util.List;
 
 /**
  * Created by Mimoza on 11/15/2014.
+ * Nationality class gets the list of the nationalities with their iso codes and country names from the SQLite database
+ * and uses the iso code to set the flags in the nationality list and the country name for each flag so that users can pick
+ * their nationalities from the list
  */
 public class Nationality extends Activity {
 

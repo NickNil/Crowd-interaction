@@ -15,14 +15,10 @@ import android.widget.TextView;
 public class LoginFormFunctionalTest extends ActivityInstrumentationTestCase2 <LoginForm>{
 
 
-    String [] phoneNumbers = {"","1568894","41415252" };
-    String [] codes = {"","15616", "1337"};
-    //public static final String phoneNumber = "4 1 4 1 5 2 5 2 ENTER ";
-    //public static final String code = "1 3 3 7 ENTER ";
     private LoginForm activity;
     EditText phoneNumber, code;
     Button login;
-    int i;
+    User user;
 
     public LoginFormFunctionalTest(){
         super(LoginForm.class);
@@ -36,44 +32,94 @@ public class LoginFormFunctionalTest extends ActivityInstrumentationTestCase2 <L
         phoneNumber = (EditText)activity.findViewById(R.id.phoneNumberInput);
         code = (EditText)activity.findViewById(R.id.codeInput);
         login = (Button)activity.findViewById(R.id.loginButton);
+        user = new User(getActivity());
     }
-    public void testStartSecondActivity() throws Throwable {
 
+    /**
+     * Tests if the user can log in with wrong credentials
+     * Assure the user can't start the following acitivity
+     */
+    public void testLoginWrongCreds() throws Throwable{
+        final String phoneNr = "2", passcode = "4";
 
-        for(i = 0; i < phoneNumbers.length; i++) {
-
-            runTestOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    phoneNumber.setText(phoneNumbers[i]);
-                    code.setText(codes[i]);
-                }
-            });
-            TouchUtils.clickView(this, login);
-            this.sendKeys(KeyEvent.KEYCODE_BACK);
-
-            // add monitor to check for the second activity
-            Instrumentation.ActivityMonitor loginMonitor =
-                    getInstrumentation().
-                            addMonitor(EventList.class.getName(), null, false);
-            // wait 10 seconds for the start of the activity
-            EventList startedActivity = (EventList) loginMonitor.waitForActivityWithTimeout(10000);
-
-            //sendKeys(phoneNumbers[i]);
-            //sendKeys(codes[i]);
-            //sendKeys("ENTER");
-            //sendKeys(KeyEvent.KEYCODE_BACK);
-
-            if (phoneNumbers[i].equals("41415252")&& codes[i].equals("1337")){
-                    TouchUtils.clickView(this, login);
-                    assertNotNull("Activity is null", startedActivity);
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                phoneNumber.setText(phoneNr);
+                code.setText(passcode);
             }
-            else{
-                    TouchUtils.clickView(this, login);
-                    assertNull("Activity is not null", startedActivity);
-            }
+        });
 
-        }
+        TouchUtils.clickView(this, login);
+        this.sendKeys(KeyEvent.KEYCODE_BACK);
+
+        // add monitor to check for the second activity
+        Instrumentation.ActivityMonitor loginMonitor =
+                getInstrumentation().
+                        addMonitor(EventList.class.getName(), null, false);
+        // wait 2 seconds for the start of the activity
+        EventList startedActivity = (EventList) loginMonitor.waitForActivityWithTimeout(2000);
+        assertNull("Activity is not null", startedActivity);
+        sendKeys(KeyEvent.KEYCODE_BACK);
+
+    }
+
+    /**
+     * Tests if the user can log in with empty credentials
+     * Assure the user can't start the following acitivity
+     */
+    public void testLoginEmptyCreds() throws Throwable{
+        final String phoneNr = "", passcode = "";
+
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                phoneNumber.setText(phoneNr);
+                code.setText(passcode);
+            }
+        });
+
+        TouchUtils.clickView(this, login);
+        this.sendKeys(KeyEvent.KEYCODE_BACK);
+
+        // add monitor to check for the second activity
+        Instrumentation.ActivityMonitor loginMonitor =
+                getInstrumentation().
+                        addMonitor(EventList.class.getName(), null, false);
+        // wait 2 seconds for the start of the activity
+        EventList startedActivity = (EventList) loginMonitor.waitForActivityWithTimeout(2000);
+        assertNull("Activity is not null", startedActivity);
+        sendKeys(KeyEvent.KEYCODE_BACK);
+
+    }
+
+    /**
+     * Tests if the user can log in with correct credentials
+     * Assure that the acitivity following the login starts correctly
+     */
+    public void testLoginCorrectCreds() throws Throwable{
+        final String phoneNr = "12358", passcode = "12358";
+
+        runTestOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                phoneNumber.setText(phoneNr);
+                code.setText(passcode);
+            }
+        });
+
+        TouchUtils.clickView(this, login);
+        this.sendKeys(KeyEvent.KEYCODE_BACK);
+
+        // add monitor to check for the second activity
+        Instrumentation.ActivityMonitor loginMonitor =
+                getInstrumentation().
+                        addMonitor(EventList.class.getName(), null, false);
+        // wait 2 seconds for the start of the activity
+        EventList startedActivity = (EventList) loginMonitor.waitForActivityWithTimeout(2000);
+        assertNull("Activity is null", startedActivity);
+        user.logout();
+        sendKeys(KeyEvent.KEYCODE_BACK);
 
 
     }

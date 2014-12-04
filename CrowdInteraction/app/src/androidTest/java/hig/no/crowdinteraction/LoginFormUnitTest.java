@@ -23,6 +23,9 @@ public class LoginFormUnitTest extends ActivityUnitTestCase<LoginForm> {
         activity = getActivity();
     }
 
+    /**
+     * Tests the layout, if the buttons have the correct labels
+     */
     public void testLayout() {
 
         loginButtonID = R.id.loginButton;
@@ -36,6 +39,9 @@ public class LoginFormUnitTest extends ActivityUnitTestCase<LoginForm> {
         assertEquals("Incorrect label of the button", "Register", register.getText());
     }
 
+    /**
+     * Tests the triggered intents when the buttons are clicked
+     */
     public void testIntentTriggerViaOnClick() {
 
         loginButtonID = R.id.loginButton;
@@ -44,9 +50,10 @@ public class LoginFormUnitTest extends ActivityUnitTestCase<LoginForm> {
 
         login.performClick();
 
-        // Check the intent which was started
+        // Check the intent which was started, the user should not be able to start another activity without having the proper
+        //credentials, just by clicking the login button
         Intent triggeredIntent = getStartedActivityIntent();
-        assertNotNull("Intent was null", triggeredIntent);
+        assertNull("Intent was not null", triggeredIntent);
 
         registerButtonID = R.id.registerButton2;
         Button register = (Button) activity.findViewById(registerButtonID);
