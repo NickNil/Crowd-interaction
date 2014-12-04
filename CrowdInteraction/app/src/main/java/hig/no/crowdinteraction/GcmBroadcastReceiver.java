@@ -7,7 +7,8 @@ import android.content.Intent;
 import android.support.v4.content.WakefulBroadcastReceiver;
 
 /**
- * Created by Harnys on 19.11.2014.
+ * From Google Cloud messaging tutorial <p>
+ * Wakes up the phone and GcmIntentService to handel the information that is received
  */
 public class GcmBroadcastReceiver extends WakefulBroadcastReceiver
 {

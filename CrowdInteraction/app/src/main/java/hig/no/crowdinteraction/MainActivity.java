@@ -17,6 +17,11 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
+/**
+ * Splash screen, checks if user is logged in. if he/she is the app sends the user to the Home activity
+ * or else it sends the user to the login activiity
+ */
+
 public class MainActivity extends Activity {
 
     private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -42,8 +47,14 @@ public class MainActivity extends Activity {
         context = getApplicationContext();
         user = new User(getApplicationContext());
 
+
+
         if (checkPlayServices())
         {
+            /**
+             * If the user is loged in the user gets the home screen
+             * else the user gets the login screen
+             */
             if (user.GetGmcId() != "")
             {
                 intent = new Intent(this, Home.class);

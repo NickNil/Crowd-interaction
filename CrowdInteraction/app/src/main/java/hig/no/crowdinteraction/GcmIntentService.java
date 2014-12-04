@@ -1,12 +1,6 @@
 package hig.no.crowdinteraction;
 
-/**
- Add a comment to this line
- * Created by Harnys on 26.10.2014.
- */
 
-
-import android.app.Dialog;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -18,6 +12,12 @@ import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+
+/**
+ * Code borrowed from "Pathfinder" bachelor thesis and changes to fit this project <p>
+ * takes the information that is sent from the server and creates a notification
+ *
+ */
 public class GcmIntentService extends IntentService
 {
     public static final String PROPERTY_REG_ID = "registration_id";
