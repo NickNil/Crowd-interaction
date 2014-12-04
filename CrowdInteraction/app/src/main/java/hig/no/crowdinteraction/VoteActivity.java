@@ -39,7 +39,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Displayes a screen with information about a athlete and enable the user to vote on that athlete
+ * Uses information that is passed along from live event list
+ */
 public class VoteActivity extends Activity {
 
 

@@ -5,7 +5,9 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 /**
- * Created by Harry on 30.10.2014.
+ * Created by Harry on 30.10.2014. <p>
+ * a class that is called if user information is need, and stores new user information to the shard
+ * preferences
  */
 public class User
 {
@@ -40,6 +42,9 @@ public class User
         context = appContext;
     }
 
+    /**
+     * Deletes the user information from shard preferences
+     */
     public void logout()
     {
         gmcID = "";
@@ -65,41 +70,80 @@ public class User
         editor.commit();
     }
 
+    /**
+     *
+     * @return Users Google cloud messaging ID
+     */
     protected String GetGmcId()
     {
         return gmcID;
     }
+
+    /**
+     *
+     * @return Users database ID
+     */
     protected String GetMongoId()
     {
       return mongoID;
     }
+
+    /**
+     *
+     * @return Users name {first name, sir name}
+     */
     protected String[] GetName()
     {
         return name;
     }
+
+    /**
+     *
+     * @return Users Nationality
+     */
     protected String GetNationality()
     {
         return nationality;
     }
+    /**
+     *
+     * @return Users nationality's short name
+     */
     protected String GetIoc()
     {
         return ioc;
     }
+    /**
+     *
+     * @return Users nationality's flag
+     */
     protected String GetIso()
     {
         return iso;
     }
-
+    /**
+     *
+     * @return Users phone number
+     */
     protected String GetPhoneNumber()
     {
         return phoneNumber;
     }
+    /**
+     *
+     * @return Users highscore
+     */
     protected String GetHighscore()
     {
         return highscore;
     }
-    //
 
+    ///////////////////////////////////////////////////////////
+
+    /**
+     * Stores the Google cloud messaging ID to shard prefaces
+     * @param id Google cloud messaging ID
+     */
     protected void SetGmcId(String id)
     {
         gmcID = id;
@@ -108,6 +152,10 @@ public class User
         editor.commit();
     }
 
+    /**
+     * Stores the database ID to shard prefaces
+     * @param id database ID
+     */
     protected void SetMongoId(String id)
     {
         mongoID = id;
@@ -116,6 +164,11 @@ public class User
         editor.commit();
     }
 
+    /**
+     * Stores the users name to shard prefaces
+     * @param fName Users first name
+     * @param lName Users sir name
+     */
     protected void SetName(String fName, String lName)
     {
         name = new String[] {fName, lName};
@@ -124,6 +177,11 @@ public class User
         editor.putString("lastName",lName);
         editor.commit();
     }
+
+    /**
+     * Stores the users nationality to shard prefaces
+     * @param newNationality User Nationality
+     */
     protected void SetNationality(String newNationality)
     {
         nationality = newNationality;
@@ -131,6 +189,11 @@ public class User
         editor.putString("Nationality",nationality);
         editor.commit();
     }
+
+    /**
+     * stores the users national code to shard prefaces
+     * @param newIoc national code
+     */
     protected void SetIoc(String newIoc)
     {
         ioc = newIoc;
@@ -138,6 +201,11 @@ public class User
         editor.putString("ioc",ioc);
         editor.commit();
     }
+
+    /**
+     * stores the users national code for flag to shard prefaces
+     * @param newIso national code for flag
+     */
     protected void SetIso(String newIso)
     {
         iso = newIso;
@@ -145,6 +213,11 @@ public class User
         editor.putString("iso",iso);
         editor.commit();
     }
+
+    /**
+     * stores the users  phone number to shard prefaces
+     * @param newPhoneNumber Phone number
+     */
     protected void SetPhoneNumber(String newPhoneNumber)
     {
         phoneNumber = newPhoneNumber;
@@ -152,6 +225,11 @@ public class User
         editor.putString("PhoneNumber",phoneNumber);
         editor.commit();
     }
+
+    /**
+     * stores the users highscore to shard prefaces
+     * @param newHighscore
+     */
     protected void SetHighscore(String newHighscore)
     {
         highscore = newHighscore;
