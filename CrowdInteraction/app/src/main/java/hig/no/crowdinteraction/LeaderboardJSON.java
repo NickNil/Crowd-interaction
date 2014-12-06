@@ -2,10 +2,6 @@ package hig.no.crowdinteraction;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
-import android.content.Intent;
-
-import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -20,7 +16,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,7 +32,6 @@ import java.util.regex.Pattern;
  */
 public class LeaderboardJSON {
     Context context;
-    ArrayList<User> userList = new ArrayList<User>();
     ArrayList<String> isoNationality = new ArrayList<String>();
     ArrayList<String> position = new ArrayList<String>();
     ArrayList<String> userName = new ArrayList<String>();
@@ -54,6 +48,10 @@ public class LeaderboardJSON {
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
 
+    /**
+     * gets the leaderboard data from the server using a thread and distributes it into different
+     * ArrayLists for the Leaderboard class to use.
+     */
     protected void sendJson() {
 
         Thread t = new Thread() {
@@ -161,6 +159,11 @@ public class LeaderboardJSON {
         System.out.println("test");
     }
 
+    /**
+     * parses the inputstream into a readable String
+     * @param   is  the inputstream from the server
+     * @return      the parsed String
+     */
     private String inputStreamToString(InputStream is) {
         String rLine;
         StringBuilder answer = new StringBuilder();

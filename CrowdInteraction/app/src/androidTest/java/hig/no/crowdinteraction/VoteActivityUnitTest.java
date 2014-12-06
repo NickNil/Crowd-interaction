@@ -20,7 +20,7 @@ public class VoteActivityUnitTest extends ActivityUnitTestCase <VoteActivity> {
         super(VoteActivity.class);
     }
 
-    protected void setUp() throws Exception{
+    /*protected void setUp() throws Exception{
         super.setUp();
         Intent intent = new Intent(getInstrumentation().getTargetContext(),LoginForm.class);
         startActivity(intent, null, null);
@@ -48,5 +48,5 @@ public class VoteActivityUnitTest extends ActivityUnitTestCase <VoteActivity> {
     public void testCurrent(){
         np.setValue(0);
         assertEquals(np.getValue(),0);
-    }
+    }*/
 }

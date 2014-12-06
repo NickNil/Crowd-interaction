@@ -53,6 +53,20 @@ public class PostDataJSON extends Activity{
     String SENDER_ID = "914623768180";
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
+
+
+    /**
+     * Register the user based on the parameters
+     * @param firstname     user's first name
+     * @param lastname      user's last name
+     * @param ioc           user's country ioc code
+     * @param iso           user's country iso code
+     * @param phoneNumber   user's phone number
+     * @param passcode      user's passcode
+     *
+     * If the user registers correctly, the login screen shows, if not, he gets notified that the registration went wrong
+     */
+
     protected void sendJson(final String firstname, final String lastname, final String ioc, final String iso,
                             final String phoneNumber, final String passcode) {
 
@@ -157,63 +171,6 @@ public class PostDataJSON extends Activity{
             }
         }; t.start();
     }
-
-    protected void vote(final String vote)
-    {
-        final JSONObject[] event_data = new JSONObject[1];
-        Thread t = new Thread()
-        {
-            public void run()
-            {
-
-                HttpClient client = new DefaultHttpClient();
-                HttpResponse response;
-                try {
-                    HttpPost post = new HttpPost(SERVER_URL + "/api/vote");
-
-                    // Log.i("URL", SERVER_URL + "/api/events");
-
-                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-
-                    BasicNameValuePair pair = new BasicNameValuePair("api_key", SERVER_API_KEY);
-                    nameValuePairs.add(pair);
-                    pair = new BasicNameValuePair("userid", user.GetMongoId());
-                    nameValuePairs.add(pair);
-                    pair = new BasicNameValuePair("vote", vote);
-                    nameValuePairs.add(pair);
-
-
-                    response = sendJson(client, post, nameValuePairs);
-
-                    if (response != null)
-                    {
-
-                        InputStream in = response.getEntity().getContent(); //Get the data in the entity
-                        StatusLine statusLine = response.getStatusLine();
-                        int statusCode = statusLine.getStatusCode();
-                        Log.i("HTTP Status", Integer.toString(statusCode));
-                        Log.i("Response", inputStreamToString(in));
-
-                        /*String jsonString = inputStreamToString(in);
-                        jsonString = jsonString.replace("[","");
-                        jsonString = jsonString.replace("]","");
-                        Log.i("LoginResponse", jsonString);
-
-                        in.close();
-
-                        JSONObject jsonObj = new JSONObject(jsonString);
-                        jsonObj = jsonObj.getJSONObject("data");
-                        event_data[0] = jsonObj;*/
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }; t.start();
-    }
-
 
     protected HttpResponse sendJson(HttpClient client,HttpPost post, List<NameValuePair> nameValuePairs)
     {

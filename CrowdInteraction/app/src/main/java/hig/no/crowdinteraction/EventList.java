@@ -43,10 +43,13 @@ import java.util.Locale;
 
 
 
-/*
-* the listview is an adaption of this
-* http://androidexample.com/Create_A_Simple_Listview_-_Android_Example/index.php?view=article_discription&aid=65&aaid=90
+/**
+ * Fetches information from the server about the events and displays them in a list
+ * No sorting is done on the list. The first event that is in the json respons from the server is
+ * the first event that is displayed
+ *
 */
+
 
 public class EventList extends Activity
 {
@@ -129,9 +132,18 @@ public class EventList extends Activity
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     *  Fetches a event data, and creats a list
+     */
     private class  EventListTask extends AsyncTask<Void, Void, JSONObject>
     {
 
+        /**
+         *
+         * @param params
+         * @return returns a json object to onPostExecute method
+         */
         @Override
         protected JSONObject doInBackground(Void... params)
         {

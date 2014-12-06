@@ -9,7 +9,7 @@ import android.widget.Button;
  */
 public class Register_userUnitTest extends ActivityUnitTestCase <Register_user> {
 
-        private int registerButtonID;
+        private int registerButtonID, nationalityButtonID;
         private Register_user activity;
 
         public Register_userUnitTest(){
@@ -23,13 +23,20 @@ public class Register_userUnitTest extends ActivityUnitTestCase <Register_user> 
             activity = getActivity();
         }
 
+        /**
+          * Tests the layout, if the buttons have the correct labels
+        */
         public void testLayout(){
 
             registerButtonID = R.id.registerButton;
             assertNotNull(activity.findViewById(registerButtonID));
             Button register = (Button) activity.findViewById(registerButtonID);
             assertEquals("Incorrect label of the button", "Register", register.getText());
-        }
 
+            nationalityButtonID = R.id.nationalityButton;
+            assertNotNull(activity.findViewById(nationalityButtonID));
+            Button nationality = (Button) activity.findViewById(nationalityButtonID);
+            assertEquals("Incorrect label of the button", "Nationality", nationality.getText());
+        }
 
 }

@@ -2,37 +2,27 @@ package hig.no.crowdinteraction;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Created by Nicklas on 11.11.2014.
  */
 public class Leaderboards extends Activity{
+    /**
+     * Calls the LeaderboardJSON class in order to get leaderboard data from the server database
+     * then displays this data in a listview using the LeaderboardItems adapter.
+     * @param savedInstanceState The state of the application
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +36,6 @@ public class Leaderboards extends Activity{
         String[] nationality;
         ArrayList<Integer> natIcon = new ArrayList<Integer>();
         Integer[] intNatIcon;
-
-        ScrollView scrollView = new ScrollView(this);
-
-        TableLayout tableLayout = new TableLayout(this);
 
         LeaderboardJSON json = new LeaderboardJSON(getApplicationContext());
         json.sendJson();
@@ -81,12 +67,25 @@ public class Leaderboards extends Activity{
         }
     }
 
+    /**
+     * Returns the id of a drawable file in order to dynamically load an image from
+     * a drawable file.
+     * @param context   the context of the application
+     * @param name      the name of the relevant drawable file, without extension.
+     * @return          the id of the relevant drawable file.
+     */
     public static int getDrawable(Context context, String name)
     {
         return context.getResources().getIdentifier(name,
                 "drawable", context.getPackageName());
     }
 
+    /**
+     * Inflates the options menu and adds items to the actionbar then removes everything that is
+     * not custom actionbar buttons.
+     * @param menu  the menu being added to the actionbar.
+     * @return      returns true when the actionbar is completed.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -101,6 +100,11 @@ public class Leaderboards extends Activity{
         return true;
     }
 
+    /**
+     * Handles what happens when a specific button on the actionbar is clicked.
+     * @param item  the id of a the actionbar button that was clicked
+     * @return      the onOptionmenuSelected(item) function of the superclass
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

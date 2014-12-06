@@ -54,6 +54,10 @@ public class LiveEventListJSON {
     String SERVER_API_KEY = "G4zVKwwpEwsk20WEeLzqMNRt2A8Q3Lze";
     String SERVER_URL = "http://ci.harnys.net";
 
+    /**
+     * gets the live event data from the server using a thread and distributes it into different
+     * ArrayLists for the LiveEventList class to use.
+     */
     protected void sendJson() {
 
         Thread t = new Thread() {
@@ -143,6 +147,11 @@ public class LiveEventListJSON {
         }
     }
 
+    /**
+     * parses the inputstream into a readable String
+     * @param   is  the inputstream from the server
+     * @return      the parsed String
+     */
     private String inputStreamToString(InputStream is) {
         String rLine;
         StringBuilder answer = new StringBuilder();

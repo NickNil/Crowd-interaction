@@ -26,7 +26,7 @@ public class VoteActivityFunctionalityTest extends ActivityInstrumentationTestCa
         activity = getActivity();
     }
 
-    public void testLayoutComponents() throws Exception {
+    /*public void testLayoutComponents() throws Exception {
 
         // add monitor to check for the activity
         Instrumentation.ActivityMonitor voteMonitor =
@@ -66,5 +66,5 @@ public class VoteActivityFunctionalityTest extends ActivityInstrumentationTestCa
         NumberPicker scorePicker = (NumberPicker) voteActivity.findViewById(R.id.scorePicker);
         ViewAsserts.assertOnScreen(voteActivity.getWindow().getDecorView(), scorePicker);
 
-    }
+    }*/
 }

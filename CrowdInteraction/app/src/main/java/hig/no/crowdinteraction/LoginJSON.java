@@ -27,6 +27,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @deprecated this class is no longer in use
+ */
 public class LoginJSON extends Activity{
     Context context;
     User user;

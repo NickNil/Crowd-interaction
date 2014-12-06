@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by Mimoza on 11/26/2014.
+ * @deprecated is no longer in use
  */
 public class UserScore {
     Context context;

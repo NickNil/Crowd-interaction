@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,11 +34,12 @@ import java.util.regex.Pattern;
 
 /**
  * Created by Mimoza on 11/26/2014.
+ * Sets the personalized home screen (with user name, nationality flag and highscore) of the application that the user
+ * sees after he/she logs in
  */
 public class Home extends Activity {
 
     User user;
-    UserScore score;
     PostDataJSON post;
     TextView scoreView;
 
@@ -47,11 +50,11 @@ public class Home extends Activity {
 
         user = new User(getApplicationContext());
         post = new PostDataJSON(getApplicationContext());
-        score = new UserScore(getApplicationContext());
 
         String [] firstnameLastname = user.GetName();
         TextView username = (TextView)findViewById(R.id.username);
         username.setText(firstnameLastname[0] + " " + firstnameLastname[1]);
+
 
         scoreView = (TextView) findViewById(R.id.totalScore);
         scoreView.setText(user.GetHighscore());
@@ -84,7 +87,6 @@ public class Home extends Activity {
         //score.sendJson(user.GetMongoId());
         //scoreView.setText(user.GetHighscore());
         //Log.i("user score",user.GetHighscore());
-
 
     }
     @Override
@@ -137,24 +139,9 @@ public class Home extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-   /* private void  scorecPopup ()
-    {
-        // Sets up the custom dialog
-        final Dialog scorepopup = new Dialog(getApplicationContext());
-        scorepopup.setContentView(R.layout.scorepopup);
-        scorepopup.setTitle("Pleas wait");
-
-        Button done = (Button) scorepopup.findViewById(R.id.button1);
-        done.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                scorepopup.dismiss();
-            }
-        });
-        scorepopup.show();
-
-    }*/
+    /**
+     * Class that is used to check the score of the user whenever he scores additional points and his highscore changes
+     */
    private class HomeTask extends AsyncTask<Void, Void, JSONObject>{
 
        String SERVER_URL = "http://ci.harnys.net";
@@ -217,21 +204,19 @@ public class Home extends Activity {
                    data = jsonObject.getJSONObject("data");
                    Log.i("data", data.toString());
                    highscore = data.getString("highscore");
-                   Log.i("highscore", highscore);
                    user.SetHighscore(highscore);
+
+                   scoreView.setText(highscore);
+                   Log.i("user score from async task",user.GetHighscore());
 
                } catch (JSONException e) {
                    e.printStackTrace();
                }
 
-
-               scoreView.setText(highscore);
-               Log.i("user score from async task",user.GetHighscore());
-
            }
            else
            {
-               Toast toast = Toast.makeText(getApplicationContext(), "Opsi! Something is WRONG!",
+               Toast toast = Toast.makeText(getApplicationContext(), "Opsi! Something is WRONG! Please check your internet connection and try again",
                        Toast.LENGTH_SHORT);
                toast.show();
            }

@@ -38,6 +38,11 @@ public class LiveEventList extends Activity{
     Integer[] intEventIcon;
     Integer[] intNatIcon;
 
+    /**
+     * Calls the LiveEventListJSON class in order to get Live event data from the server database
+     * then displays this data in a listview using the LiveEventListItems adapter.
+     * @param savedInstanceState The state of the application
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +106,12 @@ public class LiveEventList extends Activity{
         }
     }
 
+    /**
+     * Inflates the options menu and adds items to the actionbar then removes everything that is
+     * not custom actionbar buttons.
+     * @param menu  the menu being added to the actionbar.
+     * @return      returns true when the actionbar is completed.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -115,6 +126,11 @@ public class LiveEventList extends Activity{
         return true;
     }
 
+    /**
+     * Handles what happens when a specific button on the actionbar is clicked.
+     * @param item  the id of a the actionbar button that was clicked
+     * @return      the onOptionmenuSelected(item) function of the superclass
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

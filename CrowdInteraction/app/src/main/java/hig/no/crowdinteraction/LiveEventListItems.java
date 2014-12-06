@@ -21,6 +21,17 @@ public class LiveEventListItems extends ArrayAdapter<String>{
     private final Integer[] natIcon;
     private final Integer[] eventIcon;
 
+    /**
+     * Constructor that gets data from the LiveEventList class.
+     * @param context       the context of the application
+     * @param id            Array containing the mongoId
+     * @param eventName     Array containing the name of the events
+     * @param nationality   Array containing the nationalities of the athletes
+     * @param number        Array containing the numbers of the athletes
+     * @param athleteName   Array containing the names of the athletes
+     * @param natIcon       Array containing ids of the drawable files containing flag icons
+     * @param eventIcon     Array containing ids of the drawable files containing the event icons
+     */
     public LiveEventListItems(Activity context,String [] id, String [] eventName, String [] nationality, String [] number, String [] athleteName, Integer[] natIcon, Integer[] eventIcon) {
         super(context, R.layout.live_event_list_items, eventName);
         this.context = context;
@@ -33,6 +44,14 @@ public class LiveEventListItems extends ArrayAdapter<String>{
         this.eventIcon = eventIcon;
     }
 
+    /**
+     * overrides the getview function of the arrayAdapter in order to return a custom listview
+     * row instead of a regular one.
+     * @param position  the current row index
+     * @param view
+     * @param parent
+     * @return          The custom listview row
+     */
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
